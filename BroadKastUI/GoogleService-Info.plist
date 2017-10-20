@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>799848808388-047f5rlm6tc3jfvar23nglo1r8vminhb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.799848808388-047f5rlm6tc3jfvar23nglo1r8vminhb</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAJuaJ3rqCEm59jLUdgd3rcrG_BbqihXwc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>799848808388</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>COSC-4355.BroadKast</string>
+	<key>PROJECT_ID</key>
+	<string>broadkast-a88bb</string>
+	<key>STORAGE_BUCKET</key>
+	<string>broadkast-a88bb.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:799848808388:ios:243ac2c8b4f2fb70</string>
+	<key>DATABASE_URL</key>
+	<string>https://broadkast-a88bb.firebaseio.com</string>
+</dict>
+</plist>
