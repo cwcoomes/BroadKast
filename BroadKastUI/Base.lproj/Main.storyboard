@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -152,21 +152,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R97-qH-TUp">
-                                <rect key="frame" x="180" y="236" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4EV-rj-57h">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4EV-rj-57h" firstAttribute="top" secondItem="wq2-Mi-wSG" secondAttribute="top" id="7iK-Jo-mub"/>
+                            <constraint firstItem="4EV-rj-57h" firstAttribute="leading" secondItem="wq2-Mi-wSG" secondAttribute="leading" id="GeK-TR-eeV"/>
+                            <constraint firstItem="4EV-rj-57h" firstAttribute="bottom" secondItem="wq2-Mi-wSG" secondAttribute="bottom" id="QXW-jA-p54"/>
+                            <constraint firstItem="4EV-rj-57h" firstAttribute="trailing" secondItem="wq2-Mi-wSG" secondAttribute="trailing" id="gOk-p3-4Nf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="wq2-Mi-wSG"/>
                     </view>
+                    <connections>
+                        <outlet property="map" destination="4EV-rj-57h" id="YDx-6t-pWI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYx-24-UGs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3321" y="161"/>
+            <point key="canvasLocation" x="3320.8000000000002" y="160.56971514242881"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="LJS-go-4YN">

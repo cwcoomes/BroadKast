@@ -1,5 +1,5 @@
 //
-//  createViewController.swift
+//  RegisterViewController.swift
 //  BroadKastUI
 //
 //  Created by Ubicomp4 on 10/19/17.
@@ -7,9 +7,21 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
-class createViewController: UIViewController {
 
+class RegisterViewController: UIViewController {
+
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBAction func registerButton(_ sender: Any) {
+        Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
+            // ...
+        }
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

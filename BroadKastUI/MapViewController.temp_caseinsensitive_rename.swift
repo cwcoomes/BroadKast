@@ -1,5 +1,5 @@
 //
-//  mapViewController.swift
+//  MapViewController.swift
 //  BroadKastUI
 //
 //  Created by Ubicomp4 on 10/19/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class mapViewController: UIViewController {
+class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
