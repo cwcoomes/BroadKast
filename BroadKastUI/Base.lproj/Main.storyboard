@@ -61,8 +61,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="broadkastlogo1" translatesAutoresizingMaskIntoConstraints="NO" id="90F-E8-vOH">
+                                <rect key="frame" x="68" y="70" width="239" height="98"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.46912799831820251" green="0.62350325901444104" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="90F-E8-vOH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="68" id="MOn-w4-2At"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="90F-E8-vOH" secondAttribute="trailing" constant="68" id="hlS-l8-ZaW"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="Kwc-by-HSh"/>
@@ -267,4 +274,7 @@
             <point key="canvasLocation" x="1538" y="54"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="broadkastlogo1" width="265" height="47"/>
+    </resources>
 </document>
