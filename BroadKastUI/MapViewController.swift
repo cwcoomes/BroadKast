@@ -1,5 +1,5 @@
 //
-//  MapViewController.swift
+//  mapViewController.swift
 //  BroadKastUI
 //
 //  Created by Ubicomp4 on 10/19/17.
@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class mapViewController: UIViewController, CLLocationManagerDelegate {
 
     
     // Map

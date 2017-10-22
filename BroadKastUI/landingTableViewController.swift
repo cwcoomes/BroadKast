@@ -1,5 +1,5 @@
 //
-//  LandingTableViewController.swift
+//  landingTableViewController.swift
 //  BroadKastUI
 //
 //  Created by Ubicomp4 on 10/19/17.
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class LandingTableViewController: UITableViewController {
+class landingTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

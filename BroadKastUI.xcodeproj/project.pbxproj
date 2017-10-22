@@ -15,9 +15,9 @@
 		DE78BD4F1F990D6F00127778 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE78BD4D1F990D6F00127778 /* Main.storyboard */; };
 		DE78BD511F990D6F00127778 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE78BD501F990D6F00127778 /* Assets.xcassets */; };
 		DE78BD541F990D6F00127778 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE78BD521F990D6F00127778 /* LaunchScreen.storyboard */; };
-		DE78BD5C1F990E9B00127778 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD5B1F990E9B00127778 /* RegisterViewController.swift */; };
-		DE78BD601F990EC800127778 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD5F1F990EC800127778 /* CreateViewController.swift */; };
-		DE78BD621F990F2300127778 /* LandingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD611F990F2300127778 /* LandingTableViewController.swift */; };
+		DE78BD5C1F990E9B00127778 /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD5B1F990E9B00127778 /* registerViewController.swift */; };
+		DE78BD601F990EC800127778 /* createViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD5F1F990EC800127778 /* createViewController.swift */; };
+		DE78BD621F990F2300127778 /* landingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD611F990F2300127778 /* landingTableViewController.swift */; };
 		DE78BD641F990F6C00127778 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD631F990F6C00127778 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,9 +34,9 @@
 		DE78BD501F990D6F00127778 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE78BD531F990D6F00127778 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE78BD551F990D6F00127778 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DE78BD5B1F990E9B00127778 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		DE78BD5F1F990EC800127778 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
-		DE78BD611F990F2300127778 /* LandingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingTableViewController.swift; sourceTree = "<group>"; };
+		DE78BD5B1F990E9B00127778 /* registerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
+		DE78BD5F1F990EC800127778 /* createViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createViewController.swift; sourceTree = "<group>"; };
+		DE78BD611F990F2300127778 /* landingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = landingTableViewController.swift; sourceTree = "<group>"; };
 		DE78BD631F990F6C00127778 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,9 +99,9 @@
 				DE78BD501F990D6F00127778 /* Assets.xcassets */,
 				DE78BD521F990D6F00127778 /* LaunchScreen.storyboard */,
 				DE78BD551F990D6F00127778 /* Info.plist */,
-				DE78BD5B1F990E9B00127778 /* RegisterViewController.swift */,
-				DE78BD5F1F990EC800127778 /* CreateViewController.swift */,
-				DE78BD611F990F2300127778 /* LandingTableViewController.swift */,
+				DE78BD5B1F990E9B00127778 /* registerViewController.swift */,
+				DE78BD5F1F990EC800127778 /* createViewController.swift */,
+				DE78BD611F990F2300127778 /* landingTableViewController.swift */,
 				DE78BD631F990F6C00127778 /* MapViewController.swift */,
 			);
 			path = BroadKastUI;
@@ -243,12 +243,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE78BD5C1F990E9B00127778 /* RegisterViewController.swift in Sources */,
-				DE78BD601F990EC800127778 /* CreateViewController.swift in Sources */,
+				DE78BD5C1F990E9B00127778 /* registerViewController.swift in Sources */,
+				DE78BD601F990EC800127778 /* createViewController.swift in Sources */,
 				DE78BD4C1F990D6F00127778 /* ViewController.swift in Sources */,
 				DE78BD641F990F6C00127778 /* MapViewController.swift in Sources */,
 				DE78BD4A1F990D6E00127778 /* AppDelegate.swift in Sources */,
-				DE78BD621F990F2300127778 /* LandingTableViewController.swift in Sources */,
+				DE78BD621F990F2300127778 /* landingTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
