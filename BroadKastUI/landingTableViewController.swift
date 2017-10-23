@@ -12,7 +12,7 @@ import FirebaseAuth
 import SwipeCellKit
 
 class landingTableViewController: UITableViewController {
-    var options = ["CreateKast", "CustomKast","Map","People", "Pictures", "Settings"]
+    var options = ["CreateKast", "CustomKast","Map", "People", "Pictures", "Settings", "Logout"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,11 +59,11 @@ class landingTableViewController: UITableViewController {
         {
             performSegue(withIdentifier: "landing2create", sender: self)
         }
-        else if(indexPath.row == 1)
+        else if(indexPath.row == 2)
         {
             performSegue(withIdentifier: "landing2map", sender: self)
         }
-        else if(indexPath.row == 2)
+        else if(indexPath.row == 6)
         {
             let firebaseAuth = Auth.auth()
             do {
