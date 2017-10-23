@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import SwipeCellKit
 
 class landingTableViewController: UITableViewController {
-
+    var options = ["CreateKast", "CustomKast","Map","People", "Pictures", "Settings"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,35 +38,22 @@ class landingTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
-    }
+        return options.count    }
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
         // Configure the cell...
         // cell.textLabel.text = contacts(indexPath.row)
-        let lblName = cell.viewWithTag(1) as! UILabel
-        if(indexPath.row == 0)
-        {
-            lblName.text = "Create"
-        }
-        else if(indexPath.row == 1)
-        {
-            lblName.text = "Map"
-        }
-        else if(indexPath.row == 2)
-        {
-            lblName.text = "Logout"
-        }
-        
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! MainKast
+        cell.cellLabel.text = options[indexPath.row]
+        cell.delegate = self
         
         return cell
        
     }
+    
+    //Index click options
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(indexPath.row == 0)
         {
@@ -134,4 +123,26 @@ class landingTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension landingTableViewController : SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+        }
+        
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete")
+        
+        return [deleteAction]
+    }
+}
+
+
+class MainKast: SwipeTableViewCell {
+    
+    @IBOutlet weak var cellLabel: UILabel!
+    
 }
