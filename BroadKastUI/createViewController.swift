@@ -9,28 +9,32 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import CoreLocation
+import AddressBookUI
 
 
 struct Data{
     var long: Double
     var lat: Double
     init(){
-        long = 0.0
-        lat = 0.0
+        long = 50
+        lat = 50
     }
 }
 
 struct Kast{
     var title: String
+    var user: String
     var description: String
     var longitude: Double
     var latitude: Double
     let ref: DatabaseReference?
-    init( t: String,d:String ,lo:Double,la:Double){
+    init( t: String,d:String ,lo:Double,la:Double, us: String){
         self.title = t
         self.description = d
         self.longitude = lo
         self.latitude = la
+        self.user = us
         self.ref = nil
     }
     
@@ -41,6 +45,7 @@ struct Kast{
         description = snapshotValue["description"] as! String
         longitude = snapshotValue["longitude"] as! Double
         latitude = snapshotValue["latitude"] as! Double
+        user = snapshotValue["user"] as! String
         ref = snapshot.ref
     }
     
@@ -49,39 +54,106 @@ struct Kast{
             "title": title,
             "description": description,
             "longitude": longitude,
-            "latitude": latitude
+            "latitude": latitude,
+            "user": user
         ]
     }
 }
-class createViewController: UIViewController {
+
+class createViewController: UIViewController, UITextViewDelegate {
     var data = Data()
     let rootRef = Database.database().reference()
     let kastRef = Database.database().reference(withPath: "Kast")
+    let user = Auth.auth().currentUser
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
+    @IBOutlet weak var streetAdd2: UITextField!
+    @IBOutlet weak var streetAdd1: UITextField!
+    @IBOutlet weak var city: UITextField!
+    @IBOutlet weak var zip: UITextField!
+    @IBOutlet weak var state: UITextField!
+    
     @IBAction func pickLocationButton(_ sender: Any) {
         performSegue(withIdentifier: "create2drop", sender: self)
         
     }
     
     @IBAction func createButton(_ sender: Any) {
+      
+        var long: Double = 0.0
+        var lat: Double = 0.0
+        let address = "\(streetAdd1.text!), \(city.text!), \(state.text!) \(zip.text!) "
         
-        let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat)
+        let geoCoder = CLGeocoder()
+            geoCoder.geocodeAddressString(address) { (placemarks, error) in
+                guard
+                    let placemarks = placemarks,
+                    let location = placemarks.first?.location
+                    else {
+                        // handle no location found
+                        return
+                }
+                
+                // Use your location
+                
+               
+                
+                lat = location.coordinate.latitude
+                long = location.coordinate.longitude
+                
+                print(lat)
+                print(long)
+        }
         
-        let kastItemRef = self.kastRef.child(kastItem.title)
         
+        print(lat)
+        print(long)
+          
         
-       
-        
-        kastItemRef.setValue(kastItem.toAnyObject())
-        
-        
+        if(streetAdd1.text != "")
+        {
+            //let address = "\(streetAdd1.text!), \(city.text!), \(state.text!) \(zip.text!) "
+            
+            
+            print(lat)
+            print(long)
+            
+            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: long, la: lat, us: (user?.uid)!)
+            print(kastItem.latitude)
+            print(kastItem.longitude)
+            
+            let kastItemRef = self.kastRef.child(kastItem.title)
+            
+            kastItemRef.setValue(kastItem.toAnyObject())
+            
+            self.navigationController?.popViewController(animated: true)
+        }
+        else{
+            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!)
+            
+            let kastItemRef = self.kastRef.child(kastItem.title)
+            
+            kastItemRef.setValue(kastItem.toAnyObject())
+            
+            self.navigationController?.popViewController(animated: true)
+        }
         
     }
+    
+    
+    
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let maxtext: Int = 140
+        
+        return descriptionField.text.characters.count + (text.characters.count - range.length) <= maxtext
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        descriptionField.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -89,6 +161,7 @@ class createViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     
 
