@@ -85,6 +85,8 @@ class createViewController: UIViewController, UITextViewDelegate {
         var lat: Double = 0.0
         let address = "\(streetAdd1.text!), \(city.text!), \(state.text!) \(zip.text!) "
         
+        //this code bloke doesn't execute when location is picked from the map,
+        //nor does it execute when the address is entered
         let geoCoder = CLGeocoder()
             geoCoder.geocodeAddressString(address) { (placemarks, error) in
                 guard
@@ -95,10 +97,6 @@ class createViewController: UIViewController, UITextViewDelegate {
                         return
                 }
                 
-                // Use your location
-                
-               
-                
                 lat = location.coordinate.latitude
                 long = location.coordinate.longitude
                 
@@ -106,30 +104,27 @@ class createViewController: UIViewController, UITextViewDelegate {
                 print(long)
         }
         
-        
+        //output is initialized value when pick location is used for coordinates 
         print(lat)
         print(long)
-          
         
+        //the else block works correctly
         if(streetAdd1.text != "")
         {
             //let address = "\(streetAdd1.text!), \(city.text!), \(state.text!) \(zip.text!) "
-            
             
             print(lat)
             print(long)
             
             let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: long, la: lat, us: (user?.uid)!)
-            print(kastItem.latitude)
-            print(kastItem.longitude)
             
             let kastItemRef = self.kastRef.child(kastItem.title)
             
             kastItemRef.setValue(kastItem.toAnyObject())
             
             self.navigationController?.popViewController(animated: true)
-        }
-        else{
+            
+        } else {
             let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!)
             
             let kastItemRef = self.kastRef.child(kastItem.title)
@@ -138,11 +133,7 @@ class createViewController: UIViewController, UITextViewDelegate {
             
             self.navigationController?.popViewController(animated: true)
         }
-        
     }
-    
-    
-    
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let maxtext: Int = 140
@@ -161,8 +152,6 @@ class createViewController: UIViewController, UITextViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
     
 
     /*

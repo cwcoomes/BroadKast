@@ -13,8 +13,9 @@ import Firebase
 import FirebaseDatabase
 
 extension DropPinViewController{
+    //data is passed to createViewController from here
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        (viewController as? createViewController)?.data = data // Here you pass the to your original view controller
+        (viewController as? createViewController)?.data = data
     }
 }
 
@@ -72,12 +73,12 @@ class DropPinViewController: UIViewController, UINavigationControllerDelegate, C
     }
     
     
-    
+    /*
     func saveCurrentLocation(_ center: CLLocationCoordinate2D)
     {
         myLocation = center
     }
-    
+    */
     
    
     
@@ -94,6 +95,7 @@ class DropPinViewController: UIViewController, UINavigationControllerDelegate, C
         addLongPressGesture()
        
     }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         let location = locations[0]
