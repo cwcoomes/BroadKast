@@ -128,6 +128,8 @@ class DropPinViewController: UIViewController, UINavigationControllerDelegate, C
         
         // Shows blue dot on map
         self.map.showsUserLocation = true
+        
+        manager.stopUpdatingLocation()
     }
 
     override func didReceiveMemoryWarning() {

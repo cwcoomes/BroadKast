@@ -32,8 +32,9 @@ class mapViewController: UIViewController, CLLocationManagerDelegate {
         
         // Shows blue dot on map
         self.map.showsUserLocation = true
+      
     }
-    
+ 
     // viewDidLoad function
     override func viewDidLoad()
     {
