@@ -68,7 +68,25 @@ class DropPinViewController: UIViewController, UINavigationControllerDelegate, C
        
         data.lat = annot.coordinate.latitude
         data.long = annot.coordinate.longitude
-        print("\(annot.coordinate.latitude)    \(annot.coordinate.longitude)")
+        
+        
+        let loc = CLLocation(latitude: data.lat, longitude: data.long)
+        CLGeocoder().reverseGeocodeLocation(loc) { (placemark, error) in
+            if error != nil {
+                print("THERE WAS ERROR")
+            }
+            else {
+                if let place = placemark?[0] {
+                    self.data.streetAddress = place.subThoroughfare! + " " + place.thoroughfare!
+                    self.data.city = place.locality!
+                    self.data.stateCode = place.administrativeArea!
+                    self.data.zip = place.postalCode!
+                    }
+                }
+            }
+        
+        
+        //print("\(annot.coordinate.latitude)    \(annot.coordinate.longitude)")
         
     }
     

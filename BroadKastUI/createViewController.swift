@@ -16,9 +16,17 @@ import AddressBookUI
 struct Data{
     var long: Double
     var lat: Double
+    var streetAddress: String
+    var city: String
+    var zip: String
+    var stateCode: String
     init(){
         long = 50
         lat = 50
+        streetAddress = ""
+        city = ""
+        zip = ""
+        stateCode = ""
     }
 }
 
@@ -65,6 +73,7 @@ class createViewController: UIViewController, UITextViewDelegate {
     let rootRef = Database.database().reference()
     let kastRef = Database.database().reference(withPath: "Kast")
     let user = Auth.auth().currentUser
+    var locationSelected = false
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
@@ -75,6 +84,7 @@ class createViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var state: UITextField!
     
     @IBAction func pickLocationButton(_ sender: Any) {
+        locationSelected = true
         performSegue(withIdentifier: "create2drop", sender: self)
         
     }
@@ -85,15 +95,8 @@ class createViewController: UIViewController, UITextViewDelegate {
         var lat: Double = 0.0
         
         
-        //this code bloke doesn't execute when location is picked from the map,
-        //nor does it execute when the address is entered
         
-        
-        //output is initialized value when pick location is used for coordinates 
-       
-        
-        //the else block works correctly
-        if(streetAdd1.text != "")
+        if(locationSelected == false)
         {
             let address = "\(streetAdd1.text!), \(city.text!), \(state.text!) \(zip.text!) "
             let geoCoder = CLGeocoder()
@@ -153,7 +156,12 @@ class createViewController: UIViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        streetAdd1.text = data.streetAddress
+        city.text = data.city
+        state.text = data.stateCode
+        zip.text = data.zip
+    }
     /*
     // MARK: - Navigation
 
