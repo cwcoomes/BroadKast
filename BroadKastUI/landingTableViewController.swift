@@ -141,6 +141,7 @@ extension landingTableViewController : SwipeTableViewCellDelegate {
 }
 
 
+
 class MainKast: SwipeTableViewCell {
     
     @IBOutlet weak var cellLabel: UILabel!

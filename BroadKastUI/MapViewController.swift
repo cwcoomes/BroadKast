@@ -30,6 +30,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate {
         // Sets the map region
         map.setRegion(region, animated: true)
         
+        
+        
         // Shows blue dot on map
         self.map.showsUserLocation = true
       
