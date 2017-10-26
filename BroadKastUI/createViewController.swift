@@ -83,11 +83,20 @@ class createViewController: UIViewController, UITextViewDelegate {
       
         var long: Double = 0.0
         var lat: Double = 0.0
-        let address = "\(streetAdd1.text!), \(city.text!), \(state.text!) \(zip.text!) "
+        
         
         //this code bloke doesn't execute when location is picked from the map,
         //nor does it execute when the address is entered
-        let geoCoder = CLGeocoder()
+        
+        
+        //output is initialized value when pick location is used for coordinates 
+       
+        
+        //the else block works correctly
+        if(streetAdd1.text != "")
+        {
+            let address = "\(streetAdd1.text!), \(city.text!), \(state.text!) \(zip.text!) "
+            let geoCoder = CLGeocoder()
             geoCoder.geocodeAddressString(address) { (placemarks, error) in
                 guard
                     let placemarks = placemarks,
@@ -100,29 +109,20 @@ class createViewController: UIViewController, UITextViewDelegate {
                 lat = location.coordinate.latitude
                 long = location.coordinate.longitude
                 
-                print(lat)
-                print(long)
-        }
-        
-        //output is initialized value when pick location is used for coordinates 
-        print(lat)
-        print(long)
-        
-        //the else block works correctly
-        if(streetAdd1.text != "")
-        {
-            //let address = "\(streetAdd1.text!), \(city.text!), \(state.text!) \(zip.text!) "
+                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.uid)!)
+                
+                let kastItemRef = self.kastRef.child(kastItem.title)
+                
+                kastItemRef.setValue(kastItem.toAnyObject())
+                
+                self.navigationController?.popViewController(animated: true)
+               
+            }
             
-            print(lat)
-            print(long)
             
-            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: long, la: lat, us: (user?.uid)!)
             
-            let kastItemRef = self.kastRef.child(kastItem.title)
             
-            kastItemRef.setValue(kastItem.toAnyObject())
-            
-            self.navigationController?.popViewController(animated: true)
+           
             
         } else {
             let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!)
