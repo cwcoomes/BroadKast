@@ -29,6 +29,7 @@
 		3D4906F48E33D9D8A7539097 /* Pods_BroadKastUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BroadKastUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6AE6C5C1F9B42C50065200A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BCCB3BD51F9A03EE007DB995 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CFC548A91FA519F200C8A986 /* BroadKastTestLogo 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BroadKastTestLogo 2.png"; path = "../../../../Downloads/BroadKastTestLogo 2.png"; sourceTree = "<group>"; };
 		DE2277A31F9E461B00558EB3 /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 		DE2277A51F9E486B00558EB3 /* DropPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropPinViewController.swift; sourceTree = "<group>"; };
 		DE78BD461F990D6E00127778 /* BroadKastUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BroadKastUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +102,7 @@
 				DE78BD4B1F990D6F00127778 /* ViewController.swift */,
 				DE78BD4D1F990D6F00127778 /* Main.storyboard */,
 				DE78BD501F990D6F00127778 /* Assets.xcassets */,
+				CFC548A91FA519F200C8A986 /* BroadKastTestLogo 2.png */,
 				DE78BD521F990D6F00127778 /* LaunchScreen.storyboard */,
 				DE78BD551F990D6F00127778 /* Info.plist */,
 				DE78BD5B1F990E9B00127778 /* registerViewController.swift */,
