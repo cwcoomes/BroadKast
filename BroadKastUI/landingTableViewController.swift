@@ -129,14 +129,55 @@ extension landingTableViewController : SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
         
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+        let testAction1 = SwipeAction(style: .destructive, title: "BIG") { action, indexPath in
+            // handle action by updating model with deletion
+        }
+        let testAction2 = SwipeAction(style: .default, title: "Filters") { action, indexPath in
+            // handle action by updating model with deletion
+        }
+        let testAction3 = SwipeAction(style: .default, title: "History") { action, indexPath in
+            // handle action by updating model with deletion
+        }
+        let testAction4 = SwipeAction(style: .default, title: "Pictures") { action, indexPath in
+            // handle action by updating model with deletion
+        }
+        let testAction5 = SwipeAction(style: .default, title: "Favorite") { action, indexPath in
             // handle action by updating model with deletion
         }
         
         // customize the action appearance
-        deleteAction.image = UIImage(named: "delete")
+        testAction1.image = UIImage(named: "QuickActions_Message")
+        testAction2.image = UIImage(named: "icons8-tasklist")
+        testAction3.image = UIImage(named: "icons8-past")
+        testAction4.image = UIImage(named: "icons8-camera")
+        testAction5.image = UIImage(named: "icons8-heart")
+        testAction1.backgroundColor = UIColor.yellow
+        testAction2.backgroundColor = UIColor.purple
+        testAction3.backgroundColor = UIColor.green
+        testAction4.backgroundColor = UIColor.orange
+        testAction5.backgroundColor = UIColor.gray
         
-        return [deleteAction]
+        switch indexPath.row {
+        case 0:
+            testAction1.backgroundColor = UIColor.red
+            return [testAction1, testAction2]
+        case 1:
+            testAction1.backgroundColor = UIColor.orange
+            return [testAction3]
+        case 2:
+            
+            return [testAction5, testAction3, testAction2]
+        case 3:
+            testAction1.backgroundColor = UIColor.green
+            return [testAction5]
+        case 4:
+            testAction1.backgroundColor = UIColor.blue
+        case 5:
+            return []
+        default:
+            return []
+        }
+        return []
     }
 }
 
