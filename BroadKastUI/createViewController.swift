@@ -36,13 +36,15 @@ struct Kast{
     var description: String
     var longitude: Double
     var latitude: Double
+    var kastTag: String
     let ref: DatabaseReference?
-    init( t: String,d:String ,lo:Double,la:Double, us: String){
+    init( t: String,d:String ,lo:Double,la:Double, us: String, kt: String){
         self.title = t
         self.description = d
         self.longitude = lo
         self.latitude = la
         self.user = us
+        self.kastTag = kt
         self.ref = nil
     }
     
@@ -54,6 +56,7 @@ struct Kast{
         longitude = snapshotValue["longitude"] as! Double
         latitude = snapshotValue["latitude"] as! Double
         user = snapshotValue["user"] as! String
+        kastTag = snapshotValue["kastTag"] as! String
         ref = snapshot.ref
     }
     
@@ -63,17 +66,22 @@ struct Kast{
             "description": description,
             "longitude": longitude,
             "latitude": latitude,
-            "user": user
+            "user": user,
+            "kastTag": kastTag
         ]
     }
 }
 
-class createViewController: UIViewController, UITextViewDelegate {
+class createViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+    
     var data = Data()
     let rootRef = Database.database().reference()
     let kastRef = Database.database().reference(withPath: "Kast")
     let user = Auth.auth().currentUser
     var locationSelected = false
+    var tags = ["Study","Sport","Food","Party",
+               "Hang Out"]
+    
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
@@ -82,6 +90,8 @@ class createViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var city: UITextField!
     @IBOutlet weak var zip: UITextField!
     @IBOutlet weak var state: UITextField!
+    @IBOutlet weak var kastTag: UITextField!
+    @IBOutlet weak var dropDown: UIPickerView!
     
     @IBAction func pickLocationButton(_ sender: Any) {
         locationSelected = true
@@ -112,7 +122,7 @@ class createViewController: UIViewController, UITextViewDelegate {
                 lat = location.coordinate.latitude
                 long = location.coordinate.longitude
                 
-                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.uid)!)
+                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.uid)!, kt: self.kastTag.text!)
                 
                 let kastItemRef = self.kastRef.child(kastItem.title)
                 
@@ -128,7 +138,7 @@ class createViewController: UIViewController, UITextViewDelegate {
            
             
         } else {
-            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!)
+            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!, kt: kastTag.text!)
             
             let kastItemRef = self.kastRef.child(kastItem.title)
             
@@ -137,17 +147,17 @@ class createViewController: UIViewController, UITextViewDelegate {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
+    /*
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let maxtext: Int = 140
         
         return descriptionField.text.characters.count + (text.characters.count - range.length) <= maxtext
 
     }
-    
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
-        descriptionField.delegate = self
+        //descriptionField.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -161,6 +171,43 @@ class createViewController: UIViewController, UITextViewDelegate {
         city.text = data.city
         state.text = data.stateCode
         zip.text = data.zip
+    }
+    
+    
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int{
+        return 1
+        
+    }
+    
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        
+        return tags.count
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        self.view.endEditing(true)
+        return tags[row]
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        self.kastTag.text = self.tags[row]
+        self.dropDown.isHidden = true
+        
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if textField == self.kastTag {
+            self.dropDown.isHidden = false
+            //if you dont want the users to se the keyboard type:
+            
+            textField.endEditing(true)
+        }
+        
     }
     /*
     // MARK: - Navigation
