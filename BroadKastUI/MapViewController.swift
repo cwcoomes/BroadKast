@@ -22,10 +22,14 @@ class mapViewController: UIViewController, CLLocationManagerDelegate {
     {
         let location = locations[0]
         
-        // Zooms in on the user's location
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
-        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+        // How far we want to zoom in
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.1, 0.1)
+        
+        // Region we want to be zoomed in on
+        let userLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        
+        // Sets the map region to user's location
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(userLocation, span)
         
         // Sets the map region
         map.setRegion(region, animated: true)
@@ -46,6 +50,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+        
+        
     }
     
     // didReceiveMemoryWarning function
