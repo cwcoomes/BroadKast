@@ -18,6 +18,32 @@ class mapViewController: UIViewController, CLLocationManagerDelegate {
     
     let manager = CLLocationManager()
     
+    /* class CityLocation: NSObject, MKAnnotation {
+        var title: String?
+        var coordinate: CLLocationCoordinate2D
+        
+        
+        init(title: String, coordinate: CLLocationCoordinate2D) {
+            self.title = title
+            self.coordinate = coordinate
+        }
+    } */
+    struct EventData {
+        var long: Double
+        var lat: Double
+        var title: String
+    }
+    
+    class EventLocation: NSObject, MKAnnotation {
+        var title: String?
+        var coordinate: CLLocationCoordinate2D
+        
+        init(title: String, coordinate: CLLocationCoordinate2D) {
+            self.title = title
+            self.coordinate = coordinate
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         let location = locations[0]
@@ -34,8 +60,6 @@ class mapViewController: UIViewController, CLLocationManagerDelegate {
         // Sets the map region
         map.setRegion(region, animated: true)
         
-        
-        
         // Shows blue dot on map
         self.map.showsUserLocation = true
       
@@ -51,6 +75,46 @@ class mapViewController: UIViewController, CLLocationManagerDelegate {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
+        // TODO:
+            // Create array of EventData structs holding Firebase event data
+        var events: [EventData] = []
+        var eventLocations: [EventLocation] = []
+            // Populate array up to 10 using coordinates and titles
+        var i: Int = 0
+        
+        eventLocations[i] = EventLocation(title: events[i].title, coordinate: CLLocationCoordinate2D(latitude: events[i].lat, longitude: events[i].long))
+        map.addAnnotation(eventLocations[i])
+        
+        
+        /* let delhi = CityLocation(title: "Delhi", coordinate: CLLocationCoordinate2D(latitude: 28.619570, longitude: 77.088104))
+        let kashmir = CityLocation(title: "Kahmir", coordinate: CLLocationCoordinate2D(latitude: 34.1490875, longitude: 74.0789389))
+        let gujrat = CityLocation(title: "Gujrat", coordinate: CLLocationCoordinate2D(latitude: 22.258652, longitude: 71.1923805))
+        let kerala = CityLocation(title: "Kerala", coordinate: CLLocationCoordinate2D(latitude: 9.931233, longitude:76.267303))*/
+        
+        
+
+        /* map.addAnnotation(delhi)
+        map.addAnnotation(kashmir)
+        map.addAnnotation(gujrat)
+        map.addAnnotation(kerala)*/
+        
+       
+        
+       
+        
+        // BEGIN LOOP
+        
+        
+        
+        
+        
+       // let annotation = MKPointAnnotation()
+       
+    
+        /* annotation.coordinate = eventLocation
+        annotation.title = events[i].title
+        
+        map.addAnnotation(annotation) */
         
     }
     
