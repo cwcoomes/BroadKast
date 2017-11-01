@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6V-db-lai">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6V-db-lai">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -135,7 +135,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ecw-OM-w6b" id="FHM-h0-j68">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="74.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="74.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyA-2a-yL7">
@@ -460,6 +460,19 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L6f-uo-etF">
+                                <rect key="frame" x="25" y="220" width="325" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="WhI-ab-ln2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Email and Password Requirements">
+                                    <color key="titleColor" red="0.1215686275" green="0.47843137250000001" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="requirements:" destination="Xvf-eg-RdJ" eventType="touchUpInside" id="6Hi-c9-veF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.74901960784313726" green="0.85882352941176465" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -467,10 +480,13 @@
                             <constraint firstItem="U1C-f2-zGS" firstAttribute="centerX" secondItem="gu1-th-MIj" secondAttribute="centerX" id="FKt-kZ-wKv"/>
                             <constraint firstItem="mOd-up-Ie4" firstAttribute="top" secondItem="U1C-f2-zGS" secondAttribute="bottom" constant="181" id="Grm-hD-Tgj"/>
                             <constraint firstItem="U1C-f2-zGS" firstAttribute="leading" secondItem="PCq-xG-6lh" secondAttribute="leading" constant="25" id="cGs-cN-ehb"/>
+                            <constraint firstItem="L6f-uo-etF" firstAttribute="top" secondItem="U1C-f2-zGS" secondAttribute="bottom" constant="8" symbolic="YES" id="fPB-jf-NHF"/>
+                            <constraint firstItem="L6f-uo-etF" firstAttribute="leading" secondItem="U1C-f2-zGS" secondAttribute="leading" id="jkf-HO-wOU"/>
                             <constraint firstItem="PCq-xG-6lh" firstAttribute="trailing" secondItem="mOd-up-Ie4" secondAttribute="trailing" constant="25" id="kJ1-ob-wed"/>
                             <constraint firstItem="mOd-up-Ie4" firstAttribute="leading" secondItem="PCq-xG-6lh" secondAttribute="leading" constant="25" id="ked-mp-54e"/>
                             <constraint firstItem="U1C-f2-zGS" firstAttribute="top" secondItem="PCq-xG-6lh" secondAttribute="top" constant="80" id="t07-YT-kPq"/>
                             <constraint firstItem="mOd-up-Ie4" firstAttribute="centerX" secondItem="gu1-th-MIj" secondAttribute="centerX" id="wwJ-Gg-OAN"/>
+                            <constraint firstItem="L6f-uo-etF" firstAttribute="trailing" secondItem="U1C-f2-zGS" secondAttribute="trailing" id="ypJ-d9-YAZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PCq-xG-6lh"/>
                     </view>

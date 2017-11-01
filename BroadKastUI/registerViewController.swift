@@ -15,12 +15,66 @@ class registerViewController: UIViewController {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    @IBAction func registerButton(_ sender: Any) {
-        Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
-            // ...
-        }
-        self.navigationController?.popViewController(animated: true)
+    
+    @IBAction func requirements(_ sender: Any) {
+        let alert = UIAlertController(title: "Requirements: " , message: "Email must be valid and working. Password must have ten characters with at least one uppercase, one number, and one symbol.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
+    
+    @IBAction func registerButton(_ sender: Any) {
+        if(validateEmail(email: emailField) && validatePassword(password: passwordField)){
+            
+            Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in }
+            
+            self.navigationController?.popViewController(animated: true)
+            
+        } else {
+            
+            let alert = UIAlertController(title: "Requirements: " , message: "Email must be valid and working. Password must have ten characters with at least one uppercase, one number, and one symbol.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func validateEmail(email: UITextField) -> Bool {
+        
+        //determines if user input contains whitespaces before or after email and trims them from email
+        guard let trimEmail = email.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+            return false
+        }
+        
+        //check if the email conforms to nsdatadetector email link type
+        guard let dataDetector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else {
+            return false
+        }
+        
+        //if email was trimmed, new character range is created range i
+        let range = NSMakeRange(0, NSString(string: trimEmail).length)
+        
+        let matchAll = dataDetector.matches(in: trimEmail, options: [], range: range)
+        
+        //condition checks if email meets previous conditions and returns true
+        if ((matchAll.count == 1) && (matchAll.first?.url?.absoluteString.contains("mailto:") == true))
+        {
+            email.text! = trimEmail
+            return true
+        }
+        return false
+    }
+    
+    func validatePassword(password: UITextField) -> Bool {
+        
+        //use nspredicate and regex for password requirements to see if user input matches
+        let pwTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{10,}")
+        
+        return pwTest.evaluate(with: password.text!)
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
