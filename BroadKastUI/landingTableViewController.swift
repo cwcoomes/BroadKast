@@ -49,6 +49,13 @@ class landingTableViewController: UITableViewController {
         cell.cellLabel.text = options[indexPath.row]
         cell.delegate = self
         
+        switch indexPath.row {
+        case 0, 1, 2, 3:
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        default:
+            break
+        }
+        
         return cell
        
     }
@@ -147,33 +154,31 @@ extension landingTableViewController : SwipeTableViewCellDelegate {
         
         // customize the action appearance
         testAction1.image = UIImage(named: "QuickActions_Message")
-        testAction2.image = UIImage(named: "icons8-tasklist")
-        testAction3.image = UIImage(named: "icons8-past")
-        testAction4.image = UIImage(named: "icons8-camera")
-        testAction5.image = UIImage(named: "icons8-heart")
+        testAction2.image = UIImage(named: "icons8-tasklist-2")
+        testAction3.image = UIImage(named: "icons8-past-2")
+        testAction4.image = UIImage(named: "icons8-camera-2")
+        testAction5.image = UIImage(named: "icons8-heart-2")
+        
         testAction1.backgroundColor = UIColor.yellow
         testAction2.backgroundColor = UIColor.purple
-        testAction3.backgroundColor = UIColor.green
-        testAction4.backgroundColor = UIColor.orange
-        testAction5.backgroundColor = UIColor.gray
+        testAction3.backgroundColor = UIColor.blue
+        testAction4.backgroundColor = UIColor.clear
+        testAction5.backgroundColor = UIColor.magenta
         
         switch indexPath.row {
         case 0:
+            
             testAction1.backgroundColor = UIColor.red
             return [testAction1, testAction2]
         case 1:
             testAction1.backgroundColor = UIColor.orange
             return [testAction3]
         case 2:
-            
             return [testAction5, testAction3, testAction2]
         case 3:
-            testAction1.backgroundColor = UIColor.green
             return [testAction5]
         case 4:
             testAction1.backgroundColor = UIColor.blue
-        case 5:
-            return []
         default:
             return []
         }
