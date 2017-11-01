@@ -25,12 +25,30 @@ class registerViewController: UIViewController {
     }
     
     @IBAction func registerButton(_ sender: Any) {
+        
         if(validateEmail(email: emailField) && validatePassword(password: passwordField)){
             
-            Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in }
-            
-            self.navigationController?.popViewController(animated: true)
-            
+            Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
+                
+                if error != nil {
+                    
+                    if let errCode = AuthErrorCode(rawValue: error!._code) {
+                        
+                        switch errCode {
+                        case .emailAlreadyInUse:
+                            let alert = UIAlertController(title: "Error: " , message: "Account already exists.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        default:
+                            let alert = UIAlertController(title: "Error: " , message: "Contact admin, something went wrong.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
         } else {
             
             let alert = UIAlertController(title: "Requirements: " , message: "Email must be valid and working. Password must have ten characters with at least one uppercase, one number, and one symbol.", preferredStyle: .alert)
@@ -70,7 +88,7 @@ class registerViewController: UIViewController {
     func validatePassword(password: UITextField) -> Bool {
         
         //use nspredicate and regex for password requirements to see if user input matches
-        let pwTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{10,}")
+        let pwTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{10,64}$")
         
         return pwTest.evaluate(with: password.text!)
     }
