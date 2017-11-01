@@ -75,9 +75,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
       
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        annotateMap()
-    }
+   
     
     // viewDidLoad function
     override func viewDidLoad()
@@ -90,23 +88,19 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
-        
-        
-        
-        
-        /* var i = 0
-        var events = retrieveDataEvents()
-        print(events[i])
-        var eventLocations: [EventLocation] = []
        
-        events.forEach { (event) in
-            //if i < 10 {
+        var events = retrieveDataEvents()
+      
+        var eventLocations: [EventLocation] = []
+      
+     
+        for i in 0..<(events.count-1) {
+            
                 eventLocations[i] = EventLocation(title: events[i].title, coordinate: CLLocationCoordinate2D(latitude: events[i].latitude, longitude: events[i].longitude))
-                map.addAnnotation(eventLocations[i].pointAnnotation)
-                i = i+1
+            map.addAnnotation(eventLocations[i].pointAnnotation.coordinate as! MKAnnotation)
             //}
             //return
-        } */
+        }
         
     }
     
@@ -117,7 +111,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    func annotateMap()
+    func retrieveDataEvents() -> [EventData]
     {
         var events = [EventData]()
         
@@ -165,19 +159,9 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
             print("PRINTING THE LOCATION ARRAY")
             print(events)
         })
+        return events
+       
         
-        // Using data from Firebase, create and post annotations to the map
-        var i = 0
-        var eventLocations: [EventLocation] = []
-        
-        events.forEach { (event) in
-            if i < 10 {
-                eventLocations[i] = EventLocation(title: events[i].title, coordinate: CLLocationCoordinate2D(latitude: events[i].latitude, longitude: events[i].longitude))
-                map.addAnnotation(eventLocations[i].pointAnnotation)
-                i = i+1
-            }
-            
-        }
     }
     
 
