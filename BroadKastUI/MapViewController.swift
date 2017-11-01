@@ -48,20 +48,21 @@ class EventLocation: NSObject, MKAnnotation {
 
 var events = [EventData]()
 
-class mapViewController: UIViewController, CLLocationManagerDelegate
+class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
 {
     // Map
     
     @IBOutlet weak var map: MKMapView!
     
     let manager = CLLocationManager()
+    var clickedEvent = EventData()
     
    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         let location = locations[0]
         
         // How far we want to zoom in
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.1, 0.1)
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
         
         // Region we want to be zoomed in on
         let userLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
@@ -73,7 +74,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
         map.setRegion(region, animated: true)
         
         // Shows blue dot on map
-        self.map.showsUserLocation = true
+//        self.map.showsUserLocation = true
         //stop updating location
         manager.stopUpdatingLocation()
       
@@ -86,7 +87,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
     {
         super.viewDidLoad()
        
-
+        map.delegate = self
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
@@ -111,7 +112,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
                 
                 let annotation = MKPointAnnotation()
                 annotation.title = event.title
-                annotation.subtitle = event.description
+               // annotation.subtitle = event.description
                 annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
                 
                 DispatchQueue.main.async
@@ -131,7 +132,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
     
     func retrieveDataEvents()
     {
-        
+        events = [EventData]()
         
         //Declare/initialize the dictionary of data, essentially the bulk of the json
         var dataDict:[String: Any] = [:]
@@ -183,7 +184,62 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
         
     }
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Pin")
+        
+        
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
+        }
+        else {
+            annotationView!.annotation = annotation
+        }
+        
+        annotationView?.canShowCallout = true
+        annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        
+        
+        /*
+        if let title = annotation.title ?? "empty" {
+            if title != "My Location" {
+                annotationView?.canShowCallout = true
+                annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            }
+            else {
+                annotationView!.tintColor = UIColor.green
+            }
+        }
+        */
+        
+        return annotationView
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
+    {
+        guard let annotation = view.annotation else
+        {
+            return
+        }
+        
+        events.forEach { (event) in
+            if annotation.title as? String == event.title
+            {
+                clickedEvent = event
+            }
+        }
+        performSegue(withIdentifier: "map2details", sender: self)
+        
+    }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if(segue.identifier == "map2details")
+        {
+            let dvc = segue.destination as! EventDetailsViewController
+            dvc.eventToView = clickedEvent
+        }
+    }
     /*
     // MARK: - Navigation
 

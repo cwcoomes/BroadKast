@@ -77,7 +77,17 @@ class DropPinViewController: UIViewController, UINavigationControllerDelegate, C
             }
             else {
                 if let place = placemark?[0] {
-                    self.data.streetAddress = place.subThoroughfare! + " " + place.thoroughfare!
+                    if(place.subThoroughfare != nil)
+                    {
+                        self.data.streetAddress = place.subThoroughfare!
+                    }
+                    
+                    self.data.streetAddress += " "
+                    if(place.thoroughfare != nil)
+                    {
+                         self.data.streetAddress += place.thoroughfare!
+                    }
+                    
                     self.data.city = place.locality!
                     self.data.stateCode = place.administrativeArea!
                     self.data.zip = place.postalCode!

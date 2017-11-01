@@ -11,6 +11,7 @@
 		A6AE6C5D1F9B42DB0065200A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6AE6C5C1F9B42C50065200A /* CoreLocation.framework */; };
 		A6C3F1BA1FA90920007BE355 /* FilterSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C3F1B91FA90920007BE355 /* FilterSelectionViewController.swift */; };
 		BCCB3BD61F9A03EE007DB995 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCCB3BD51F9A03EE007DB995 /* GoogleService-Info.plist */; };
+		DE1381471FAA5036007BD5EB /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1381461FAA5036007BD5EB /* EventDetailsViewController.swift */; };
 		DE2277A41F9E461B00558EB3 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2277A31F9E461B00558EB3 /* MyButton.swift */; };
 		DE2277A61F9E486B00558EB3 /* DropPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2277A51F9E486B00558EB3 /* DropPinViewController.swift */; };
 		DE78BD4A1F990D6E00127778 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD491F990D6E00127778 /* AppDelegate.swift */; };
@@ -32,6 +33,7 @@
 		A6C3F1B91FA90920007BE355 /* FilterSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectionViewController.swift; sourceTree = "<group>"; };
 		BCCB3BD51F9A03EE007DB995 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFC548A91FA519F200C8A986 /* BroadKastTestLogo 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BroadKastTestLogo 2.png"; path = "../../../../Downloads/BroadKastTestLogo 2.png"; sourceTree = "<group>"; };
+		DE1381461FAA5036007BD5EB /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		DE2277A31F9E461B00558EB3 /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 		DE2277A51F9E486B00558EB3 /* DropPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropPinViewController.swift; sourceTree = "<group>"; };
 		DE78BD461F990D6E00127778 /* BroadKastUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BroadKastUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 				DE2277A51F9E486B00558EB3 /* DropPinViewController.swift */,
 				DE2277A31F9E461B00558EB3 /* MyButton.swift */,
 				A6C3F1B91FA90920007BE355 /* FilterSelectionViewController.swift */,
+				DE1381461FAA5036007BD5EB /* EventDetailsViewController.swift */,
 			);
 			path = BroadKastUI;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				DE2277A41F9E461B00558EB3 /* MyButton.swift in Sources */,
 				DE78BD601F990EC800127778 /* createViewController.swift in Sources */,
 				DE78BD4C1F990D6F00127778 /* ViewController.swift in Sources */,
+				DE1381471FAA5036007BD5EB /* EventDetailsViewController.swift in Sources */,
 				DE78BD641F990F6C00127778 /* MapViewController.swift in Sources */,
 				DE78BD4A1F990D6E00127778 /* AppDelegate.swift in Sources */,
 				DE78BD621F990F2300127778 /* landingTableViewController.swift in Sources */,
