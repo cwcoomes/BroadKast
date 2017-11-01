@@ -46,6 +46,8 @@ class EventLocation: NSObject, MKAnnotation {
     }
 }
 
+var events = [EventData]()
+
 class mapViewController: UIViewController, CLLocationManagerDelegate
 {
     // Map
@@ -72,6 +74,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
         
         // Shows blue dot on map
         self.map.showsUserLocation = true
+        //stop updating location
+        manager.stopUpdatingLocation()
       
     }
     
@@ -88,22 +92,36 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
+       NotificationCenter.default.addObserver(self, selector: #selector(mapViewController.addAnnotations), name: Notification.Name("weDone"), object: nil)
+        
+        retrieveDataEvents()
+        //adding an oberserver to wait until the retrieveDataEvents finishes
+        
+        
+        
+        
        
-        var events = retrieveDataEvents()
-      
-        var eventLocations: [EventLocation] = []
-      
-     
-        for i in 0..<(events.count-1) {
-            
-                eventLocations[i] = EventLocation(title: events[i].title, coordinate: CLLocationCoordinate2D(latitude: events[i].latitude, longitude: events[i].longitude))
-            map.addAnnotation(eventLocations[i].pointAnnotation.coordinate as! MKAnnotation)
-            //}
-            //return
+        
+    }
+    @objc func addAnnotations()
+    {
+        print("size of events when adding annotaionts: \(events.count)")
+        events.forEach
+            { (event) in
+                
+                let annotation = MKPointAnnotation()
+                annotation.title = event.title
+                annotation.subtitle = event.description
+                annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                
+                DispatchQueue.main.async
+                    {
+                        self.map.addAnnotation(annotation)
+                }
+                
         }
         
     }
-    
     // didReceiveMemoryWarning function
     override func didReceiveMemoryWarning()
     {
@@ -111,9 +129,9 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    func retrieveDataEvents() -> [EventData]
+    func retrieveDataEvents()
     {
-        var events = [EventData]()
+        
         
         //Declare/initialize the dictionary of data, essentially the bulk of the json
         var dataDict:[String: Any] = [:]
@@ -126,14 +144,13 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
             
             //For every Kast, start extraction the information
             dataDict.forEach({ (kast) in
-                print(kast.value)
+               
                 let kastOfInformation = kast.value as! [String:Any]
-                print(kastOfInformation)
+                
                 
                 //Put every field of the kast into the struct
                 kastOfInformation.forEach({ (item) in
-                    print("Item + key Value")
-                    print(item.key, item.value)
+                    
                     
                     //Place every member into the struct
                     switch(item.key as String)
@@ -155,11 +172,13 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
                     }
                 })
                 events.append(temporaryLocation)
+                print("events count: \(events.count)")
             })
-            print("PRINTING THE LOCATION ARRAY")
-            print(events)
+            print("sending notification")
+            NotificationCenter.default.post(name: Notification.Name("weDone"), object: nil)
         })
-        return events
+        
+       
        
         
     }
