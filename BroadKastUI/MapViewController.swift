@@ -9,10 +9,29 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
-class mapViewController: UIViewController, CLLocationManagerDelegate {
+struct EventData : Codable {
+    var description : String
+    var KastTag : String
+    var latitude : Double
+    var longitude : Double
+    var title : String
+    var user : String
+    init() {
+        description = ""
+        KastTag = ""
+        title = ""
+        user = ""
+        latitude = 0
+        longitude = 0
+    }
+}
 
-    
+class mapViewController: UIViewController, CLLocationManagerDelegate
+{
     // Map
     @IBOutlet weak var map: MKMapView!
     
@@ -28,11 +47,6 @@ class mapViewController: UIViewController, CLLocationManagerDelegate {
             self.coordinate = coordinate
         }
     } */
-    struct EventData {
-        var long: Double
-        var lat: Double
-        var title: String
-    }
     
     class EventLocation: NSObject, MKAnnotation {
         var title: String?
@@ -75,28 +89,23 @@ class mapViewController: UIViewController, CLLocationManagerDelegate {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
-        // TODO:
-            // Create array of EventData structs holding Firebase event data
-        var events: [EventData] = []
-        var eventLocations: [EventLocation] = []
-            // Populate array up to 10 using coordinates and titles
-        var i: Int = 0
+        var events = retrieveDataEvents()
+    
         
-        eventLocations[i] = EventLocation(title: events[i].title, coordinate: CLLocationCoordinate2D(latitude: events[i].lat, longitude: events[i].long))
-        map.addAnnotation(eventLocations[i])
-        
-        
-        /* let delhi = CityLocation(title: "Delhi", coordinate: CLLocationCoordinate2D(latitude: 28.619570, longitude: 77.088104))
-        let kashmir = CityLocation(title: "Kahmir", coordinate: CLLocationCoordinate2D(latitude: 34.1490875, longitude: 74.0789389))
-        let gujrat = CityLocation(title: "Gujrat", coordinate: CLLocationCoordinate2D(latitude: 22.258652, longitude: 71.1923805))
-        let kerala = CityLocation(title: "Kerala", coordinate: CLLocationCoordinate2D(latitude: 9.931233, longitude:76.267303))*/
-        
-        
-
-        /* map.addAnnotation(delhi)
-        map.addAnnotation(kashmir)
-        map.addAnnotation(gujrat)
-        map.addAnnotation(kerala)*/
+//        var eventLocations: [EventLocation] = []
+//
+//        eventLocations[i] = EventLocation(title: events[i].title, coordinate: CLLocationCoordinate2D(latitude: events[i].lat, longitude: events[i].long))
+//        map.addAnnotation(eventLocations[i])
+//
+//        let delhi = CityLocation(title: "Delhi", coordinate: CLLocationCoordinate2D(latitude: 28.619570, longitude: 77.088104))
+//        let kashmir = CityLocation(title: "Kahmir", coordinate: CLLocationCoordinate2D(latitude: 34.1490875, longitude: 74.0789389))
+//        let gujrat = CityLocation(title: "Gujrat", coordinate: CLLocationCoordinate2D(latitude: 22.258652, longitude: 71.1923805))
+//        let kerala = CityLocation(title: "Kerala", coordinate: CLLocationCoordinate2D(latitude: 9.931233, longitude:76.267303))*/
+//
+//        map.addAnnotation(delhi)
+//        map.addAnnotation(kashmir)
+//        map.addAnnotation(gujrat)
+//        map.addAnnotation(kerala)
         
        
         
@@ -123,6 +132,58 @@ class mapViewController: UIViewController, CLLocationManagerDelegate {
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func retrieveDataEvents() -> [EventData]
+    {
+        var events = [EventData]()
+        
+        //Declare/initialize the dictionary of data, essentially the bulk of the json
+        var dataDict:[String: Any] = [:]
+        
+        
+        //reference the database and start pulling individual kasts
+        Database.database().reference().child("Kast").observe(.value, with: { snapshot in
+            dataDict = snapshot.value as! [String: Any]
+            var temporaryLocation = EventData.init()
+            
+            //For every Kast, start extraction the information
+            dataDict.forEach({ (kast) in
+                print(kast.value)
+                let kastOfInformation = kast.value as! [String:Any]
+                print(kastOfInformation)
+                
+                //Put every field of the kast into the struct
+                kastOfInformation.forEach({ (item) in
+                    print("Item + key Value")
+                    print(item.key, item.value)
+                    
+                    //Place every member into the struct
+                    switch(item.key as String)
+                    {
+                    case "description" :
+                        temporaryLocation.description = item.value as! String
+                    case "kastTag" :
+                        temporaryLocation.KastTag = item.value as! String
+                    case "latitude":
+                        temporaryLocation.latitude = item.value as! Double
+                    case "longitude":
+                        temporaryLocation.longitude = item.value as! Double
+                    case "title" :
+                        temporaryLocation.title = item.value as! String
+                    case "user":
+                        temporaryLocation.user = item.value as! String
+                    default:
+                        print(item.key + " does not contain anything ERROR")
+                    }
+                })
+                events.append(temporaryLocation)
+            })
+            print("PRINTING THE LOCATION ARRAY")
+            print(events)
+        })
+        
+        return events
     }
     
 
