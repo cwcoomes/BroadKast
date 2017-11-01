@@ -12,6 +12,7 @@ import CoreLocation
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import Foundation
 
 struct EventData : Codable {
     var description : String
@@ -30,35 +31,30 @@ struct EventData : Codable {
     }
 }
 
+class EventLocation: NSObject, MKAnnotation {
+    var title: String?
+    var subtitle: String?
+    var coordinate: CLLocationCoordinate2D
+    let pointAnnotation = MKPointAnnotation()
+    
+    
+    init(title: String, coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.subtitle = " "
+        self.coordinate = coordinate
+        pointAnnotation.coordinate = self.coordinate
+    }
+}
+
 class mapViewController: UIViewController, CLLocationManagerDelegate
 {
     // Map
+    
     @IBOutlet weak var map: MKMapView!
     
     let manager = CLLocationManager()
     
-    /* class CityLocation: NSObject, MKAnnotation {
-        var title: String?
-        var coordinate: CLLocationCoordinate2D
-        
-        
-        init(title: String, coordinate: CLLocationCoordinate2D) {
-            self.title = title
-            self.coordinate = coordinate
-        }
-    } */
-    
-    class EventLocation: NSObject, MKAnnotation {
-        var title: String?
-        var coordinate: CLLocationCoordinate2D
-        
-        init(title: String, coordinate: CLLocationCoordinate2D) {
-            self.title = title
-            self.coordinate = coordinate
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         let location = locations[0]
         
@@ -78,52 +74,39 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
         self.map.showsUserLocation = true
       
     }
- 
+    
+    override func viewDidAppear(_ animated: Bool) {
+        annotateMap()
+    }
+    
     // viewDidLoad function
     override func viewDidLoad()
     {
         super.viewDidLoad()
+       
 
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
+        
+        
+        
+        
+        /* var i = 0
         var events = retrieveDataEvents()
-    
-        
-//        var eventLocations: [EventLocation] = []
-//
-//        eventLocations[i] = EventLocation(title: events[i].title, coordinate: CLLocationCoordinate2D(latitude: events[i].lat, longitude: events[i].long))
-//        map.addAnnotation(eventLocations[i])
-//
-//        let delhi = CityLocation(title: "Delhi", coordinate: CLLocationCoordinate2D(latitude: 28.619570, longitude: 77.088104))
-//        let kashmir = CityLocation(title: "Kahmir", coordinate: CLLocationCoordinate2D(latitude: 34.1490875, longitude: 74.0789389))
-//        let gujrat = CityLocation(title: "Gujrat", coordinate: CLLocationCoordinate2D(latitude: 22.258652, longitude: 71.1923805))
-//        let kerala = CityLocation(title: "Kerala", coordinate: CLLocationCoordinate2D(latitude: 9.931233, longitude:76.267303))*/
-//
-//        map.addAnnotation(delhi)
-//        map.addAnnotation(kashmir)
-//        map.addAnnotation(gujrat)
-//        map.addAnnotation(kerala)
-        
+        print(events[i])
+        var eventLocations: [EventLocation] = []
        
-        
-       
-        
-        // BEGIN LOOP
-        
-        
-        
-        
-        
-       // let annotation = MKPointAnnotation()
-       
-    
-        /* annotation.coordinate = eventLocation
-        annotation.title = events[i].title
-        
-        map.addAnnotation(annotation) */
+        events.forEach { (event) in
+            //if i < 10 {
+                eventLocations[i] = EventLocation(title: events[i].title, coordinate: CLLocationCoordinate2D(latitude: events[i].latitude, longitude: events[i].longitude))
+                map.addAnnotation(eventLocations[i].pointAnnotation)
+                i = i+1
+            //}
+            //return
+        } */
         
     }
     
@@ -134,7 +117,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    func retrieveDataEvents() -> [EventData]
+    func annotateMap()
     {
         var events = [EventData]()
         
@@ -183,7 +166,18 @@ class mapViewController: UIViewController, CLLocationManagerDelegate
             print(events)
         })
         
-        return events
+        // Using data from Firebase, create and post annotations to the map
+        var i = 0
+        var eventLocations: [EventLocation] = []
+        
+        events.forEach { (event) in
+            if i < 10 {
+                eventLocations[i] = EventLocation(title: events[i].title, coordinate: CLLocationCoordinate2D(latitude: events[i].latitude, longitude: events[i].longitude))
+                map.addAnnotation(eventLocations[i].pointAnnotation)
+                i = i+1
+            }
+            
+        }
     }
     
 
