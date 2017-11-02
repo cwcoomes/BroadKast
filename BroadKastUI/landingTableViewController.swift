@@ -12,7 +12,7 @@ import FirebaseAuth
 import SwipeCellKit
 
 class landingTableViewController: UITableViewController {
-    var options = ["CreateKast", "CustomKast","Map", "People", "Pictures", "Settings", "Logout"]
+    var options = ["CreateKast", "MyKasts","Map", "People", "Pictures", "Settings", "Logout"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

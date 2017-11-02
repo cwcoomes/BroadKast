@@ -31,20 +31,7 @@ struct EventData : Codable {
     }
 }
 
-class EventLocation: NSObject, MKAnnotation {
-    var title: String?
-    var subtitle: String?
-    var coordinate: CLLocationCoordinate2D
-    let pointAnnotation = MKPointAnnotation()
-    
-    
-    init(title: String, coordinate: CLLocationCoordinate2D) {
-        self.title = title
-        self.subtitle = " "
-        self.coordinate = coordinate
-        pointAnnotation.coordinate = self.coordinate
-    }
-}
+
 
 var events = [EventData]()
 
@@ -199,17 +186,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         
         
-        /*
-        if let title = annotation.title ?? "empty" {
-            if title != "My Location" {
-                annotationView?.canShowCallout = true
-                annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            }
-            else {
-                annotationView!.tintColor = UIColor.green
-            }
-        }
-        */
+        
         
         return annotationView
     }
