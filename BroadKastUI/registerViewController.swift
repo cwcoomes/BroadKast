@@ -96,6 +96,8 @@ class registerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailField.delegate = self
+        passwordField.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -104,6 +106,8 @@ class registerViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
 
     /*
@@ -116,4 +120,12 @@ class registerViewController: UIViewController {
     }
     */
 
+}
+
+// Ensures that pressing "Return" closes keyboard
+extension registerViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

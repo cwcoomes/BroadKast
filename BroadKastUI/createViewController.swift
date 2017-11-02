@@ -157,6 +157,15 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
  */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        titleField.delegate = self
+        streetAdd2.delegate = self
+        streetAdd1.delegate = self
+        city.delegate = self
+        zip.delegate = self
+        state.delegate = self
+      
+        
         //descriptionField.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -209,6 +218,8 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
         
     }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -219,4 +230,12 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     */
 
+}
+
+// Ensures that pressing "Return" closes keyboard
+extension createViewController {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
