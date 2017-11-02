@@ -154,7 +154,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         return descriptionField.text.characters.count + (text.characters.count - range.length) <= maxtext
 
     }
-    */
+ */
     override func viewDidLoad() {
         super.viewDidLoad()
         //descriptionField.delegate = self
