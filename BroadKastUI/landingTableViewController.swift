@@ -159,26 +159,23 @@ extension landingTableViewController : SwipeTableViewCellDelegate {
         testAction4.image = UIImage(named: "icons8-camera-2")
         testAction5.image = UIImage(named: "icons8-heart-2")
         
-        testAction1.backgroundColor = UIColor.yellow
-        testAction2.backgroundColor = UIColor.purple
-        testAction3.backgroundColor = UIColor.blue
-        testAction4.backgroundColor = UIColor.clear
-        testAction5.backgroundColor = UIColor.magenta
+        testAction1.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        testAction2.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        testAction3.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        testAction4.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        testAction5.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
         
         switch indexPath.row {
         case 0:
-            
-            testAction1.backgroundColor = UIColor.red
             return [testAction1, testAction2]
         case 1:
-            testAction1.backgroundColor = UIColor.orange
             return [testAction3]
         case 2:
             return [testAction5, testAction3, testAction2]
         case 3:
-            return [testAction5]
+            return [testAction4]
         case 4:
-            testAction1.backgroundColor = UIColor.blue
+            break
         default:
             return []
         }
