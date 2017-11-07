@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
+
+//struct that we store in the database
 struct UserInformation{
     var username: String
     var uid: String
@@ -45,6 +47,7 @@ class registerViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
+    //userref will be used to store user in database
     let userRef = Database.database().reference(withPath: "Users")
     
     
@@ -78,17 +81,19 @@ class registerViewController: UIViewController {
                         }
                     }
                 } else {
-                    
+                    //Creating the user in our database so we have a connection to the username
                     let userID = Auth.auth().currentUser!.uid
-                    
+                    let userItemRef = self.userRef.child(userID)
                     let userItem = UserInformation(us: self.usernameField.text!, ui: userID )
-                    
-                    
-                    self.userRef.setValue(userItem.toAnyObject())
+                    userItemRef.setValue(userItem.toAnyObject())
                     
                     self.navigationController?.popViewController(animated: true)
                 }
             }
+            
+           
+            
+            
         } else {
             
             let alert = UIAlertController(title: "Requirements: " , message: "Email must be valid and working. Password must have ten characters with at least one uppercase, one number, and one symbol.", preferredStyle: .alert)

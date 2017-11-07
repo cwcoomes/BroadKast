@@ -37,7 +37,9 @@ struct Kast{
     var longitude: Double
     var latitude: Double
     var kastTag: String
+    var timeStamp: NSDate
     let ref: DatabaseReference?
+    
     init( t: String,d:String ,lo:Double,la:Double, us: String, kt: String){
         self.title = t
         self.description = d
@@ -45,9 +47,10 @@ struct Kast{
         self.latitude = la
         self.user = us
         self.kastTag = kt
+        self.timeStamp = NSDate()
         self.ref = nil
     }
-    
+  
     init(snapshot: DataSnapshot) {
       //  title = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
@@ -57,6 +60,7 @@ struct Kast{
         latitude = snapshotValue["latitude"] as! Double
         user = snapshotValue["user"] as! String
         kastTag = snapshotValue["kastTag"] as! String
+        timeStamp = snapshotValue["timeStamp"] as! NSDate
         ref = snapshot.ref
     }
     
@@ -67,7 +71,8 @@ struct Kast{
             "longitude": longitude,
             "latitude": latitude,
             "user": user,
-            "kastTag": kastTag
+            "kastTag": kastTag,
+            "timeStamp": ServerValue.timestamp()
         ]
     }
 }
@@ -127,6 +132,8 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 
                 
                 self.kastRef.childByAutoId().setValue(kastItem.toAnyObject())
+                
+                
                 
                 self.navigationController?.popViewController(animated: true)
                

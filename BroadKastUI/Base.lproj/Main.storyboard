@@ -164,11 +164,79 @@
                         <segue destination="1yZ-OO-xIt" kind="show" identifier="landing2create" id="5ah-d2-h7l"/>
                         <segue destination="p4N-N7-PJt" kind="show" identifier="landing2map" id="4BU-gV-7x0"/>
                         <segue destination="Y6V-db-lai" kind="presentation" identifier="landing2login" id="Wxp-2C-sAb"/>
+                        <segue destination="oGl-YE-ptI" kind="show" identifier="landing2contacts" id="uEl-xv-Xhi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9RP-Ha-WIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2543" y="-176"/>
+        </scene>
+        <!--Contacts View Controller-->
+        <scene sceneID="LML-Xa-kms">
+            <objects>
+                <tableViewController id="oGl-YE-ptI" customClass="ContactsViewController" customModule="BroadKastUI" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qoE-fq-eGu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="NMx-Ak-DTY">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NMx-Ak-DTY" id="agp-F7-Em7">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oGl-YE-ptI" id="gLf-ue-Wkh"/>
+                            <outlet property="delegate" destination="oGl-YE-ptI" id="6xw-l2-zgy"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="KLO-Y9-ITQ" kind="show" identifier="contacts2add" id="6TJ-h7-kFF"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ndn-y4-ZMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2542" y="-1224"/>
+        </scene>
+        <!--Add View Controller-->
+        <scene sceneID="Z8Q-1m-gGX">
+            <objects>
+                <viewController id="KLO-Y9-ITQ" customClass="AddViewController" customModule="BroadKastUI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IS7-4T-PuL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="friend" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1bg-jd-9YI">
+                                <rect key="frame" x="79" y="318" width="203" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="LOg-Ai-zEw"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="l2j-RB-hKa">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="5LV-Jq-ha8">
+                            <connections>
+                                <action selector="saveButton:" destination="KLO-Y9-ITQ" id="tC6-Rl-luI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="friendsUsernameField" destination="1bg-jd-9YI" id="MAt-Sd-wAY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zE9-SH-wxE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3518" y="-1225"/>
         </scene>
         <!--Create View Controller-->
         <scene sceneID="wvv-c9-CGu">
