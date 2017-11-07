@@ -49,7 +49,7 @@ struct Kast{
     }
     
     init(snapshot: DataSnapshot) {
-        title = snapshot.key
+      //  title = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
         title = snapshotValue["title"] as! String
         description = snapshotValue["description"] as! String
@@ -124,9 +124,9 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 
                 let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.uid)!, kt: self.kastTag.text!)
                 
-                let kastItemRef = self.kastRef.child(kastItem.title)
                 
-                kastItemRef.setValue(kastItem.toAnyObject())
+                
+                self.kastRef.childByAutoId().setValue(kastItem.toAnyObject())
                 
                 self.navigationController?.popViewController(animated: true)
                
