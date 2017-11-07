@@ -10,11 +10,43 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
+struct UserInformation{
+    var username: String
+    var uid: String
+    let ref: DatabaseReference?
+    init( us: String, ui: String){
+        self.username = us
+        self.uid = ui
+       
+        self.ref = nil
+    }
+    
+    init(snapshot: DataSnapshot) {
+        uid = snapshot.key
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        username = snapshotValue["username"] as! String
+        uid = snapshotValue["uid"] as! String
+        ref = snapshot.ref
+    }
+    
+    func toAnyObject() -> Any {
+        return [
+            "username": username,
+            "uid": uid,
+            
+        ]
+    }
+}
+
+
 
 class registerViewController: UIViewController {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var usernameField: UITextField!
+    let userRef = Database.database().reference(withPath: "Users")
+    
     
     @IBAction func requirements(_ sender: Any) {
         let alert = UIAlertController(title: "Requirements: " , message: "Email must be valid and working. Password must have ten characters with at least one uppercase, one number, and one symbol.", preferredStyle: .alert)
@@ -46,6 +78,14 @@ class registerViewController: UIViewController {
                         }
                     }
                 } else {
+                    
+                    let userID = Auth.auth().currentUser!.uid
+                    
+                    let userItem = UserInformation(us: self.usernameField.text!, ui: userID )
+                    
+                    
+                    self.userRef.setValue(userItem.toAnyObject())
+                    
                     self.navigationController?.popViewController(animated: true)
                 }
             }

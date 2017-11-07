@@ -530,6 +530,13 @@
                                     <action selector="requirements:" destination="Xvf-eg-RdJ" eventType="touchUpInside" id="6Hi-c9-veF"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kKY-yz-cGP">
+                                <rect key="frame" x="25" y="106" width="325" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.74901960784313726" green="0.85882352941176465" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -550,11 +557,12 @@
                     <connections>
                         <outlet property="emailField" destination="M8e-yy-bZi" id="64h-AU-uSW"/>
                         <outlet property="passwordField" destination="NYO-GH-g77" id="p0C-uX-5yr"/>
+                        <outlet property="usernameField" destination="kKY-yz-cGP" id="qUV-V3-q8O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="prF-7j-tTU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="761" y="161"/>
+            <point key="canvasLocation" x="760.79999999999995" y="160.56971514242881"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kOX-gv-gBx">
