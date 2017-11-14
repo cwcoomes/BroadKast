@@ -7,27 +7,78 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
-class ContactsViewController: UITableViewController {
+struct User : Codable
+{
+    var uid : String
+    var username : String
+    var contactInfo = [String]()
+    init()
+    {
+        uid = ""
+        username = ""
+    }
+}
 
-    override func viewDidLoad() {
+class ContactsViewController: UITableViewController
+{
+    var users = [User]()
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
+        self.title = "Friends"
         let rightButtonItem = UIBarButtonItem.init(
             title: "+",
             style: .done,
             target: self,
             action: #selector(rightButtonAction)
         )
-            
-            
-        
         self.navigationItem.rightBarButtonItem = rightButtonItem
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        retrieveDataEvents()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        print("from view did load")
+        print(users)
+    }
+    
+    func retrieveDataEvents()
+    {
+        var dataDict:[String: Any] = [:]
+        Database.database().reference().child("Users").observe(.value, with: { snapshot in
+            dataDict = snapshot.value as! [String: Any]
+            var temporaryLocation = User.init()
+            
+            dataDict.forEach({ (user) in
+                let userInformation = user.value as! [String:Any]
+                userInformation.forEach({ (info) in
+                    switch(info.key as String)
+                    {
+                        case "uid" :
+                            temporaryLocation.uid = info.value as! String
+                        case "username" :
+                            temporaryLocation.username = info.value as! String
+                        case "contacts" :
+                            let contactInfo = info.value as! [String:Any]
+                            contactInfo.forEach({ (user) in temporaryLocation.contactInfo.append(user.key)})
+                        default:
+                            print(info.key + " does not contain anything ERROR")
+                    }
+                })
+                self.users.append(temporaryLocation)
+                    //print("users: \(users)")
+                print("user count: \(self.users.count)")
+                })
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+        print("sent notification")
     }
     
     @objc func rightButtonAction(sender: UIBarButtonItem)
@@ -35,32 +86,33 @@ class ContactsViewController: UITableViewController {
         performSegue(withIdentifier: "contacts2add", sender: self)
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+    override func numberOfSections(in tableView: UITableView) -> Int
+    {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return users.count
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+  
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "somethingelse", for: indexPath)
 
-        // Configure the cell...
+        cell.textLabel?.text = users[indexPath.row].username
+        print("Printing users")
+        //print(users[indexPath.row].username)
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

@@ -31,8 +31,6 @@ struct EventData : Codable {
     }
 }
 
-
-
 var events = [EventData]()
 
 class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
@@ -67,8 +65,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
       
     }
     
-   
-    
+
     // viewDidLoad function
     override func viewDidLoad()
     {
@@ -85,30 +82,21 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         retrieveDataEvents()
         //adding an oberserver to wait until the retrieveDataEvents finishes
         
-        
-        
-        
-       
-        
     }
     @objc func addAnnotations()
     {
         print("size of events when adding annotaionts: \(events.count)")
         events.forEach
-            { (event) in
-                
-                let annotation = MKPointAnnotation()
-                annotation.title = event.title
-               // annotation.subtitle = event.description
-                annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
-                
-                DispatchQueue.main.async
-                    {
-                        self.map.addAnnotation(annotation)
-                }
-                
+        { (event) in
+            let annotation = MKPointAnnotation()
+            annotation.title = event.title
+            annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+            
+            DispatchQueue.main.async
+            {
+                self.map.addAnnotation(annotation)
+            }
         }
-        
     }
     // didReceiveMemoryWarning function
     override func didReceiveMemoryWarning()
