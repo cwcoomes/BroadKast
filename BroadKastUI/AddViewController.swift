@@ -12,31 +12,27 @@ import FirebaseDatabase
 
 struct contact{
     var contactName: String
-    
     let ref: DatabaseReference?
-    init( cn: String){
+    
+    init( cn: String)
+    {
         self.contactName = cn
-        
-        
         self.ref = nil
     }
     
-    init(snapshot: DataSnapshot) {
+    init(snapshot: DataSnapshot)
+    {
         contactName = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
         contactName = snapshotValue["contactName"] as! String
         ref = snapshot.ref
     }
     
-    func toAnyObject() -> Any {
-        return [
-            contactName: true,
-                       
-        ]
+    func toAnyObject() -> Any
+    {
+        return [contactName: contactName]
     }
 }
-
-
 
 
 class AddViewController: UIViewController {
@@ -55,20 +51,16 @@ class AddViewController: UIViewController {
         let userID = Auth.auth().currentUser!.uid
         let userItemRef = self.userRef.child(userID)
         let friendsRef = userItemRef.child("contacts")
-       let contactItem = contact(cn: self.friendsUsernameField.text!)
-        let ref = friendsRef.child(byAppendingPath: contactItem.contactName )
+        let contactItem = contact(cn: self.friendsUsernameField.text!)
+        let ref = friendsRef.child(contactItem.contactName )
         
         
         //let contactItem = contact(cn: self.friendsUsernameField.text!)
         
         ref.setValue(contactItem.toAnyObject())
         
-        
-        
-        
-        
-     self.navigationController?.popViewController(animated: true)
-        
+        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
