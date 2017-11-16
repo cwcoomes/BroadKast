@@ -40,26 +40,16 @@ class AddViewController: UIViewController {
     
     
     @IBOutlet weak var friendsUsernameField: UITextField!
-    @IBAction func saveButton(_ sender: Any) {
-        //
-        //need to check if the username entered exists first
-        
-        //code here
-        
-        
+    @IBAction func saveButton(_ sender: Any)
+    {
       //insert code to save text field to friends
-        let userID = Auth.auth().currentUser!.uid
-        let userItemRef = self.userRef.child(userID)
+        let user = Auth.auth().currentUser!
+        let userItemRef = self.userRef.child(user.displayName!)
         let friendsRef = userItemRef.child("contacts")
         let contactItem = contact(cn: self.friendsUsernameField.text!)
-        let ref = friendsRef.child(contactItem.contactName )
-        
-        
-        //let contactItem = contact(cn: self.friendsUsernameField.text!)
-        
+        let ref = friendsRef.child(contactItem.contactName)
         ref.setValue(contactItem.toAnyObject())
         
-        self.navigationController?.popViewController(animated: true)
         self.navigationController?.popViewController(animated: true)
     }
     

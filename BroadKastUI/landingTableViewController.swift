@@ -17,6 +17,11 @@ class landingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        if let user = Auth.auth().currentUser
+        {
+        print(user.displayName)
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

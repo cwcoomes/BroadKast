@@ -24,7 +24,7 @@ struct UserInformation{
     }
     
     init(snapshot: DataSnapshot) {
-        uid = snapshot.key
+        username = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
         username = snapshotValue["username"] as! String
         uid = snapshotValue["uid"] as! String
@@ -81,9 +81,28 @@ class registerViewController: UIViewController {
                         }
                     }
                 } else {
+                    
+                    //updating user's display name
+                    let user = Auth.auth().currentUser
+                    if let user = user {
+                        let changeRequest = user.createProfileChangeRequest()
+                        
+                        changeRequest.displayName = self.usernameField.text!
+                        
+                    
+                        changeRequest.commitChanges { error in
+                        if let error = error {
+                            // An error happened.
+                        } else {
+                            // Profile updated.
+                        }
+                    }
+                    }
                     //Creating the user in our database so we have a connection to the username
                     let userID = Auth.auth().currentUser!.uid
-                    let userItemRef = self.userRef.child(userID)
+                    
+                    
+                    let userItemRef = self.userRef.child(self.usernameField.text!)
                     let userItem = UserInformation(us: self.usernameField.text!, ui: userID )
                     userItemRef.setValue(userItem.toAnyObject())
                     

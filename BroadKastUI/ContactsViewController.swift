@@ -19,7 +19,6 @@ class ContactsViewController: UITableViewController
     {
         super.viewDidLoad()
         users.removeAll()
-        self.tableView.reloadData()
 
         self.title = "Friends"
         let rightButtonItem = UIBarButtonItem.init(
@@ -36,13 +35,14 @@ class ContactsViewController: UITableViewController
     func retrieveDataEvents()
     {
         var dataDict:[String: Any] = [:]
-        let userID = Auth.auth().currentUser!.uid
+        let userID = Auth.auth().currentUser!.displayName
         users.removeAll()
         
         Database.database().reference().child("Users").observe(.value, with: { snapshot in
-            if (snapshot.hasChild(userID))
+            self.users.removeAll()
+            if (snapshot.hasChild(userID!))
             {
-                Database.database().reference().child("Users").child(userID).child("contacts").observe(.value, with: { snapshot in
+                Database.database().reference().child("Users").child(userID!).child("contacts").observe(.value, with: { snapshot in
                     if (snapshot.hasChildren())
                     {
                         dataDict = snapshot.value as! [String: Any]
