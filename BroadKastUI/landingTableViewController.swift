@@ -52,6 +52,26 @@ class landingTableViewController: UITableViewController {
         // cell.textLabel.text = contacts(indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! MainKast
         cell.cellLabel.text = options[indexPath.row]
+        
+        switch indexPath.row {
+        case 0:
+            cell.cellImage.image = UIImage(named: "icons8-plus-40")
+        case 1:
+            cell.cellImage.image = UIImage(named: "icons8-heart")
+        case 2:
+            cell.cellImage.image = UIImage(named: "worldwide_location")
+        case 3:
+            cell.cellImage.image = UIImage(named: "сontacts")
+        case 4:
+            cell.cellImage.image = UIImage(named: "icons8-camera")
+        case 5:
+            cell.cellImage.image = UIImage(named: "icons8-settings")
+        case 6:
+            cell.cellImage.image = UIImage(named: "exit")
+        default:
+            break
+        }
+        
         cell.delegate = self
         
         switch indexPath.row {
@@ -145,44 +165,44 @@ extension landingTableViewController : SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
         
-        let testAction1 = SwipeAction(style: .destructive, title: "BIG") { action, indexPath in
+        let QuickMapButton = SwipeAction(style: .default, title: "Quick Map") { action, indexPath in
             // handle action by updating model with deletion
         }
-        let testAction2 = SwipeAction(style: .default, title: "Filters") { action, indexPath in
+        let FilterButton = SwipeAction(style: .default, title: "Filter") { action, indexPath in
             // handle action by updating model with deletion
         }
-        let testAction3 = SwipeAction(style: .default, title: "History") { action, indexPath in
+        let RecentButton = SwipeAction(style: .default, title: "Recent") { action, indexPath in
             // handle action by updating model with deletion
         }
-        let testAction4 = SwipeAction(style: .default, title: "Pictures") { action, indexPath in
+        let AddFriendsButton = SwipeAction(style: .default, title: "Add Friends") { action, indexPath in
             // handle action by updating model with deletion
         }
-        let testAction5 = SwipeAction(style: .default, title: "Favorite") { action, indexPath in
+        let FavoriteButton = SwipeAction(style: .default, title: "Favorite") { action, indexPath in
             // handle action by updating model with deletion
         }
         
         // customize the action appearance
-        testAction1.image = UIImage(named: "QuickActions_Message")
-        testAction2.image = UIImage(named: "icons8-tasklist-2")
-        testAction3.image = UIImage(named: "icons8-past-2")
-        testAction4.image = UIImage(named: "icons8-camera-2")
-        testAction5.image = UIImage(named: "icons8-heart-2")
+        QuickMapButton.image = UIImage(named: "icons8-map")
+        FilterButton.image = UIImage(named: "icons8-tasklist-2")
+        RecentButton.image = UIImage(named: "icons8-past-2")
+        AddFriendsButton.image = UIImage(named: "icons8-add-user-male")
+        FavoriteButton.image = UIImage(named: "icons8-heart-2")
         
-        testAction1.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
-        testAction2.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
-        testAction3.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
-        testAction4.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
-        testAction5.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        QuickMapButton.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        FilterButton.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        RecentButton.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        AddFriendsButton.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        FavoriteButton.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
         
         switch indexPath.row {
         case 0:
-            return [testAction1, testAction2]
+            return [QuickMapButton]
         case 1:
-            return [testAction3]
+            return [RecentButton]
         case 2:
-            return [testAction5, testAction3, testAction2]
+            return [FilterButton]
         case 3:
-            return [testAction4]
+            return [AddFriendsButton]
         case 4:
             break
         default:
@@ -197,5 +217,6 @@ extension landingTableViewController : SwipeTableViewCellDelegate {
 class MainKast: SwipeTableViewCell {
     
     @IBOutlet weak var cellLabel: UILabel!
+    @IBOutlet weak var cellImage: UIImageView!
     
 }

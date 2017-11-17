@@ -138,8 +138,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xt9-4i-qyx">
+                                            <rect key="frame" x="26" y="17" width="40" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyA-2a-yL7">
-                                            <rect key="frame" x="94" y="19" width="187" height="36"/>
+                                            <rect key="frame" x="82" y="19" width="187" height="36"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                             <nil key="textColor"/>
@@ -150,6 +154,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.74901960779999999" green="0.85882352939999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <outlet property="cellImage" destination="Xt9-4i-qyx" id="1ZQ-Fk-v7K"/>
                                     <outlet property="cellLabel" destination="uyA-2a-yL7" id="OvA-Uo-a5q"/>
                                 </connections>
                             </tableViewCell>
@@ -169,7 +174,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9RP-Ha-WIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2543" y="-176"/>
+            <point key="canvasLocation" x="2541.5999999999999" y="-176.76161919040482"/>
         </scene>
         <!--Contacts View Controller-->
         <scene sceneID="LML-Xa-kms">
