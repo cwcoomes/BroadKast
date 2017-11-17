@@ -51,20 +51,19 @@ class ContactsViewController: UITableViewController
                             print("user count: \(self.users.count)")
                         })
                         
-                        DispatchQueue.main.async
-                        {
-                            self.tableView.reloadData()
-                        }
+                        DispatchQueue.main.async { self.tableView.reloadData() }
+                    }
+                    else
+                    {
+                        self.users.append("No Friends :( ")
+                        DispatchQueue.main.async { self.tableView.reloadData() }
                     }
                 })
             }
             else
             {
                 self.users.append("No Friends :( ")
-                DispatchQueue.main.async
-                {
-                    self.tableView.reloadData()
-                }
+                DispatchQueue.main.async { self.tableView.reloadData() }
             }
         })
         
@@ -97,6 +96,22 @@ class ContactsViewController: UITableViewController
         cell.textLabel?.text = users[indexPath.row]
         
         return cell
+    }
+    
+    func removeUserFromContactList(displayNameOfUserToRemove:String)
+    {
+        let userRef = Database.database().reference(withPath: "Users")
+        let user = Auth.auth().currentUser!
+        
+        userRef.child(user.displayName!).child("contacts").child(displayNameOfUserToRemove).removeValue(completionBlock: { (error, refer) in
+            if error != nil { print(error) }
+            else
+            {
+                print(refer)
+                print("Child Removed Correctly")
+            }
+        })
+        DispatchQueue.main.async { self.tableView.reloadData() }
     }
     
     /*
