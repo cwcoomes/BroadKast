@@ -10,11 +10,12 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-struct contact{
+struct contact
+{
     var contactName: String
     let ref: DatabaseReference?
     
-    init( cn: String)
+    init(cn:String)
     {
         self.contactName = cn
         self.ref = nil
@@ -36,54 +37,57 @@ struct contact{
 
 
 class AddViewController: UIViewController {
+    var userExists: Bool?
     let userRef = Database.database().reference(withPath: "Users")
-    
-    
     @IBOutlet weak var friendsUsernameField: UITextField!
     @IBAction func saveButton(_ sender: Any)
     {
         let user = Auth.auth().currentUser!
-        let userItemRef = self.userRef.child(user.displayName!)
-        let friendsRef = userItemRef.child("contacts")
+        let currentUser = self.userRef.child(user.displayName!)
+        let contactList = currentUser.child("contacts")
         let contactItem = contact(cn: self.friendsUsernameField.text!)
-        if (true) //need to check if the friend exists
-        {
-            let ref = friendsRef.child(contactItem.contactName)
-            ref.setValue(contactItem.toAnyObject())
-            print("user has been added")
-            //Alert the user that the friend has been added successfully
-        }
-        else
-        {
-            //Alert the user that the username does not exist
-            print("user does not exist")
-        }
+        
+        contactList.observe(.value, with: { snapshot in
+            if snapshot.hasChild(contactItem.contactName)
+            {
+                let alert = UIAlertController(title: "You're Already Friends! " , message: "Username is currently in your list of friends.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            else if (contactItem.contactName == user.displayName)
+            {
+                let alert = UIAlertController(title: "Oh no! " , message: "You cannot add yourself.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            else
+            {
+                self.userRef.observe(.value, with: { snapshot in
+                    if snapshot.hasChild(contactItem.contactName)
+                    {
+                        let newFriend = contactList.child(contactItem.contactName)
+                        newFriend.setValue(contactItem.toAnyObject())
+                        let alert = UIAlertController(title: "Added Friend" , message: "\(contactItem.contactName) has been added successfully!", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    else
+                    {
+                        let alert = UIAlertController(title: "Adding Friend Failed " , message: "Username does not exist in the database.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                })
+            }
+
+        })
         
         self.navigationController?.popViewController(animated: true)
     }
-    
-    func checkIfUserExistByUserDisplayName(userDisplayName:String) -> Bool
-    {
-        let userRef = Database.database().reference(withPath: "Users")
-        var userExists = false
-        
-        DispatchQueue.main.async
-        {
-            userRef.observe(.value, with: { snapshot in
-                if snapshot.hasChild(userDisplayName) {
-                    userExists = true
-                    print(snapshot)
-                }
-                else { print("User not found") }
-            })
-        }
-        
-        return userExists
-    }
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
