@@ -11,6 +11,8 @@ import UIKit
 class FilterSelectionViewController: UIViewController {
     
     // TODO: This class/view will show selectable filter options for the map.
+    var tags = ["Study","Sport","Food","Party",
+                "Hang Out"]
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -59,7 +59,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         map.setRegion(region, animated: true)
         
         // Shows blue dot on map
-//        self.map.showsUserLocation = true
+        self.map.showsUserLocation = true
+        
         //stop updating location
         manager.stopUpdatingLocation()
       
@@ -71,21 +72,30 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     {
         super.viewDidLoad()
        
+        // Filter option in navigation bar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(selectFilter))
+        
         map.delegate = self
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
-       NotificationCenter.default.addObserver(self, selector: #selector(mapViewController.addAnnotations), name: Notification.Name("weDone"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(mapViewController.addAnnotations), name: Notification.Name("weDone"), object: nil)
         
         retrieveDataEvents()
         //adding an oberserver to wait until the retrieveDataEvents finishes
         
     }
+    
+    @objc func selectFilter() {
+        performSegue(withIdentifier: "map2filter", sender: self)
+    }
+    
+    
     @objc func addAnnotations()
     {
-        print("size of events when adding annotaionts: \(events.count)")
+        print("size of events when adding annotations: \(events.count)")
         events.forEach
         { (event) in
             let annotation = MKPointAnnotation()
@@ -97,6 +107,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 self.map.addAnnotation(annotation)
             }
         }
+        
     }
     // didReceiveMemoryWarning function
     override func didReceiveMemoryWarning()
