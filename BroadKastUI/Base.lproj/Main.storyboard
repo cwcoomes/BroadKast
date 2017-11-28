@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -203,11 +203,75 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="KLO-Y9-ITQ" kind="show" identifier="contacts2add" id="6TJ-h7-kFF"/>
+                        <segue destination="qMs-tn-lhN" kind="show" identifier="contactsList2contactDetails" id="dsX-o4-XzV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ndn-y4-ZMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2541.5999999999999" y="-1224.737631184408"/>
+            <point key="canvasLocation" x="2588" y="-1226"/>
+        </scene>
+        <!--ContactDetails-->
+        <scene sceneID="z2n-pV-A7m">
+            <objects>
+                <viewController title="ContactDetails" id="qMs-tn-lhN" customClass="ContactDetailsViewController" customModule="BroadKastUI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I52-Hj-iI1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="30z-vA-k1b">
+                                <rect key="frame" x="50" y="186" width="275" height="20.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulh-4U-wWk">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="3kB-AP-eSi"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tc8-ux-m2C">
+                                <rect key="frame" x="50" y="367" width="275" height="61"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Kasts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Snm-7G-A4d">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Friends Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xf0-WE-5s6">
+                                        <rect key="frame" x="0.0" y="40.5" width="275" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qe0-AZ-PaW" firstAttribute="trailing" secondItem="30z-vA-k1b" secondAttribute="trailing" constant="50" id="BQf-GR-haH"/>
+                            <constraint firstItem="tc8-ux-m2C" firstAttribute="top" secondItem="30z-vA-k1b" secondAttribute="bottom" constant="160.5" id="HAi-tA-1ag"/>
+                            <constraint firstItem="30z-vA-k1b" firstAttribute="centerX" secondItem="I52-Hj-iI1" secondAttribute="centerX" id="Jyx-Dv-Yq5"/>
+                            <constraint firstItem="tc8-ux-m2C" firstAttribute="centerX" secondItem="I52-Hj-iI1" secondAttribute="centerX" id="L0h-nH-f5H"/>
+                            <constraint firstItem="tc8-ux-m2C" firstAttribute="leading" secondItem="qe0-AZ-PaW" secondAttribute="leading" constant="50" id="Lh1-x6-W0P"/>
+                            <constraint firstItem="30z-vA-k1b" firstAttribute="top" secondItem="qe0-AZ-PaW" secondAttribute="top" constant="122" id="MUA-Mm-wWe"/>
+                            <constraint firstItem="30z-vA-k1b" firstAttribute="leading" secondItem="qe0-AZ-PaW" secondAttribute="leading" constant="50" id="fRV-kZ-NaM"/>
+                            <constraint firstItem="qe0-AZ-PaW" firstAttribute="trailing" secondItem="tc8-ux-m2C" secondAttribute="trailing" constant="50" id="xSI-j6-EHy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qe0-AZ-PaW"/>
+                    </view>
+                    <connections>
+                        <outlet property="contactNameLabel" destination="Ulh-4U-wWk" id="HjL-eg-knf"/>
+                        <outlet property="numberOfFriendsLabel" destination="xf0-WE-5s6" id="Bwk-Ev-dJ9"/>
+                        <outlet property="numberOfKastsLabel" destination="Snm-7G-A4d" id="CEi-Nv-JxL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wpe-J7-T6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3527.1999999999998" y="-2012.7436281859073"/>
         </scene>
         <!--Add View Controller-->
         <scene sceneID="Z8Q-1m-gGX">
