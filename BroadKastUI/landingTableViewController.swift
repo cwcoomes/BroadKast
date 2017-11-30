@@ -91,6 +91,10 @@ class landingTableViewController: UITableViewController {
         {
             performSegue(withIdentifier: "landing2create", sender: self)
         }
+        else if(indexPath.row == 1)
+        {
+            performSegue(withIdentifier: "landing2myKast", sender: self)
+        }
         else if(indexPath.row == 2)
         {
             performSegue(withIdentifier: "landing2map", sender: self)
