@@ -180,6 +180,8 @@ extension landingTableViewController : SwipeTableViewCellDelegate {
         }
         let AddFriendsButton = SwipeAction(style: .default, title: "Add Friends") { action, indexPath in
             // handle action by updating model with deletion
+            self.performSegue(withIdentifier: "main2addFriends", sender: self)
+            
         }
         let FavoriteButton = SwipeAction(style: .default, title: "Favorite") { action, indexPath in
             // handle action by updating model with deletion

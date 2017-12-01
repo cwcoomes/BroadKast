@@ -171,6 +171,7 @@
                         <segue destination="Y6V-db-lai" kind="presentation" identifier="landing2login" id="Wxp-2C-sAb"/>
                         <segue destination="oGl-YE-ptI" kind="show" identifier="landing2contacts" id="uEl-xv-Xhi"/>
                         <segue destination="Oq0-w6-q7R" kind="show" identifier="landing2myKast" id="YDD-Eg-OQX"/>
+                        <segue destination="KLO-Y9-ITQ" kind="show" identifier="main2addFriends" id="L76-bw-aA8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9RP-Ha-WIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -782,4 +783,7 @@
     <resources>
         <image name="BroadKastBlueLogo1" width="634" height="642"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="L76-bw-aA8"/>
+    </inferredMetricsTieBreakers>
 </document>
