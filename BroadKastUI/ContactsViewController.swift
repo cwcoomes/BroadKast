@@ -93,9 +93,9 @@ class ContactsViewController: UITableViewController
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "somethingelse", for: indexPath)
-        cell.textLabel?.text = users[indexPath.row]
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "somethingelse") as! FriendCellRow
+        cell.FriendNameLabl.text = users[indexPath.row]
+        cell.delegate = self
         return cell
     }
     
@@ -162,3 +162,19 @@ class ContactsViewController: UITableViewController
     
 }
 
+extension ContactsViewController : SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let DeleteButton = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            self.removeUserFromContactList(displayNameOfUserToRemove: self.users[indexPath.row])
+        }
+        
+        return [DeleteButton]
+    }
+}
+
+class FriendCellRow: SwipeTableViewCell{
+    
+    @IBOutlet weak var FriendNameLabl: UILabel!
+}
