@@ -12,6 +12,7 @@
 		A6C3F1BA1FA90920007BE355 /* FilterSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C3F1B91FA90920007BE355 /* FilterSelectionViewController.swift */; };
 		BCCB3BD61F9A03EE007DB995 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCCB3BD51F9A03EE007DB995 /* GoogleService-Info.plist */; };
 		DE1381471FAA5036007BD5EB /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1381461FAA5036007BD5EB /* EventDetailsViewController.swift */; };
+		DE1F1E431FCDF54D00A2DC02 /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F1E421FCDF54D00A2DC02 /* ContactDetailsViewController.swift */; };
 		DE2277A41F9E461B00558EB3 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2277A31F9E461B00558EB3 /* MyButton.swift */; };
 		DE2277A61F9E486B00558EB3 /* DropPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2277A51F9E486B00558EB3 /* DropPinViewController.swift */; };
 		DE68689F1FD081CA006F2A3E /* MyKastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE68689E1FD081CA006F2A3E /* MyKastsViewController.swift */; };
@@ -37,6 +38,7 @@
 		BCCB3BD51F9A03EE007DB995 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFC548A91FA519F200C8A986 /* BroadKastTestLogo 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BroadKastTestLogo 2.png"; path = "../../../../Downloads/BroadKastTestLogo 2.png"; sourceTree = "<group>"; };
 		DE1381461FAA5036007BD5EB /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
+		DE1F1E421FCDF54D00A2DC02 /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
 		DE2277A31F9E461B00558EB3 /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 		DE2277A51F9E486B00558EB3 /* DropPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropPinViewController.swift; sourceTree = "<group>"; };
 		DE68689E1FD081CA006F2A3E /* MyKastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKastsViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				DE2277A31F9E461B00558EB3 /* MyButton.swift */,
 				A6C3F1B91FA90920007BE355 /* FilterSelectionViewController.swift */,
 				DE1381461FAA5036007BD5EB /* EventDetailsViewController.swift */,
+				DE1F1E421FCDF54D00A2DC02 /* ContactDetailsViewController.swift */,
 				DEA014541FB225E000F474B0 /* ContactsViewController.swift */,
 				DEA014561FB22A7500F474B0 /* AddViewController.swift */,
 				DE68689E1FD081CA006F2A3E /* MyKastsViewController.swift */,
@@ -280,6 +283,7 @@
 				DE78BD641F990F6C00127778 /* MapViewController.swift in Sources */,
 				DE68689F1FD081CA006F2A3E /* MyKastsViewController.swift in Sources */,
 				DE78BD4A1F990D6E00127778 /* AppDelegate.swift in Sources */,
+				DE1F1E431FCDF54D00A2DC02 /* ContactDetailsViewController.swift in Sources */,
 				DE78BD621F990F2300127778 /* landingTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,7 +20,7 @@ class landingTableViewController: UITableViewController {
         
         if let user = Auth.auth().currentUser
         {
-        print(user.displayName)
+            print(user.displayName as Any)
         }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

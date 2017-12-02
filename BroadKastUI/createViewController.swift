@@ -109,8 +109,6 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         var long: Double = 0.0
         var lat: Double = 0.0
         
-        
-        
         if(locationSelected == false)
         {
             let address = "\(streetAdd1.text!), \(city.text!), \(state.text!) \(zip.text!) "
@@ -127,7 +125,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 lat = location.coordinate.latitude
                 long = location.coordinate.longitude
                 
-                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.uid)!, kt: self.kastTag.text!)
+                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!)
                 
                 
                 

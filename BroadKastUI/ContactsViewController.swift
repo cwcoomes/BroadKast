@@ -15,13 +15,16 @@ import SwipeCellKit
 class ContactsViewController: UITableViewController
 {
     var users = [String]()
+    var selectedUserName = String()
+    var selectedUserNumberOfKasts = String()
+    var selectedUserNumberOfFriends = String()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         users.removeAll()
 
-        self.title = "Friends"
+        self.title = "Following"
         let rightButtonItem = UIBarButtonItem.init(
             title: "+",
             style: .done,
@@ -56,14 +59,14 @@ class ContactsViewController: UITableViewController
                     }
                     else
                     {
-                        self.users.append("No Friends :( ")
+                        self.users.append("Not following anyone.")
                         DispatchQueue.main.async { self.tableView.reloadData() }
                     }
                 })
             }
             else
             {
-                self.users.append("No Friends :( ")
+                self.users.append("Not following anyone.")
                 DispatchQueue.main.async { self.tableView.reloadData() }
             }
         })
@@ -90,7 +93,6 @@ class ContactsViewController: UITableViewController
         return users.count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "somethingelse") as! FriendCellRow
@@ -99,19 +101,27 @@ class ContactsViewController: UITableViewController
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        selectedUserName = users[indexPath.row]
+        performSegue(withIdentifier: "contactsList2contactDetails", sender: self)
+    }
+    
     func removeUserFromContactList(displayNameOfUserToRemove:String)
     {
         let userRef = Database.database().reference(withPath: "Users")
         let user = Auth.auth().currentUser!
         
         userRef.child(user.displayName!).child("contacts").child(displayNameOfUserToRemove).removeValue(completionBlock: { (error, refer) in
-            if error != nil { print(error) }
+            if error != nil { print(error as Any) }
             else
             {
                 print(refer)
                 print("Child Removed Correctly")
             }
         })
+        let updatedUsers = users.filter{$0 != displayNameOfUserToRemove}
+        users = updatedUsers
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
     
@@ -150,15 +160,19 @@ class ContactsViewController: UITableViewController
      }
      */
     
-    /*
+
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
+        if(segue.identifier == "contactsList2contactDetails")
+        {
+            let dvc = segue.destination as! ContactDetailsViewController
+            dvc.user = selectedUserName
+        }
      }
-     */
     
 }
 
