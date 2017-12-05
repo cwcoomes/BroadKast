@@ -74,7 +74,7 @@ class ContactDetailsViewController: UIViewController
         
         if(segue.identifier == "contactdetails2kastslist")
         {
-            let dvc = segue.destination as! ContactKastsViewController
+            let dvc = segue.destination as! ContactKastsTableViewController
             dvc.user = user
         }
 
