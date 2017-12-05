@@ -91,6 +91,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var tags = ["Study","Sport","Food","Party",
                "Hang Out"]
     var privacy = "Public"
+    let imagePick = UIImagePickerController()
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
@@ -118,6 +119,56 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         locationSelected = true
         performSegue(withIdentifier: "create2drop", sender: self)
         
+    }
+    
+    @IBAction func addPictures(_ sender: Any) {
+        
+        imageActionSheet()
+        
+    }
+    
+    func imageActionSheet() {
+        let alert = UIAlertController(title: "Select Image From", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Open Camera", comment: "Default action"), style: .default, handler: { _ in
+            self.openCamera()
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Open Gallery", comment: "Default action"), style: .default, handler: { _ in
+            self.loadImageFromGallery()
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func openCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePick.allowsEditing = false
+            imagePick.sourceType = .camera
+            imagePick.cameraCaptureMode = .photo
+            present(imagePick,animated: true,completion: nil)
+        }
+        else {
+            let alertVC = UIAlertController(title: "No Camera", message: "Sorry, this device has no camera", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style:.default, handler: nil)
+            alertVC.addAction(okAction)
+            present(alertVC, animated: true, completion: nil)
+        }
+    }
+    
+    func loadImageFromGallery() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            imagePick.allowsEditing = false
+            imagePick.sourceType = .photoLibrary
+            present(imagePick, animated: true, completion: nil)
+        }
+        else {
+            let alertVC = UIAlertController(title: "No Photo Library", message: "Sorry, this device does not have a supported photo library", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style:.default, handler: nil)
+            alertVC.addAction(okAction)
+            present(alertVC, animated: true, completion: nil)
+        }
     }
     
     @IBAction func createButton(_ sender: Any) {
