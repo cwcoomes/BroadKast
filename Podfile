@@ -8,6 +8,7 @@ target 'BroadKastUI' do
   pod ‘Firebase/Database’
   pod ‘Firebase/Auth’
   pod 'SwipeCellKit'
+  pod ‘Firebase/Storage’
 
 
   # Pods for BroadKastUI
