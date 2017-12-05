@@ -436,7 +436,7 @@
                                 </constraints>
                             </stackView>
                             <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ISr-Vs-pUL">
-                                <rect key="frame" x="86" y="410" width="254" height="139"/>
+                                <rect key="frame" x="117" y="418" width="242" height="139"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="1yZ-OO-xIt" id="zhr-wa-Ph1"/>
@@ -506,6 +506,20 @@
                                     <action selector="pickLocationButton:" destination="1yZ-OO-xIt" eventType="touchUpInside" id="NKn-3l-pK6"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ikq-y3-98U">
+                                <rect key="frame" x="119" y="484" width="242" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Duration:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEd-f6-BLO">
+                                <rect key="frame" x="18" y="484" width="93" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.74901960779999999" green="0.85882352939999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -544,6 +558,7 @@
                         <outlet property="city" destination="wpy-be-4tK" id="0dF-sJ-gRS"/>
                         <outlet property="descriptionField" destination="cCt-1Z-4Ef" id="C3c-JO-eco"/>
                         <outlet property="dropDown" destination="ISr-Vs-pUL" id="4fO-xK-bJl"/>
+                        <outlet property="duration" destination="ikq-y3-98U" id="cuo-xe-M39"/>
                         <outlet property="kastTag" destination="0tU-fE-GnR" id="dtP-hz-Hif"/>
                         <outlet property="state" destination="lzE-Wx-k3q" id="T5I-vZ-0sN"/>
                         <outlet property="streetAdd1" destination="cOU-e0-JBR" id="7SA-2H-2fa"/>

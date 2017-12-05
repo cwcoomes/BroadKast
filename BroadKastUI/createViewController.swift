@@ -37,17 +37,17 @@ struct Kast{
     var longitude: Double
     var latitude: Double
     var kastTag: String
-    var timeStamp: NSDate
+    var expiration: Double
     let ref: DatabaseReference?
     
-    init( t: String,d:String ,lo:Double,la:Double, us: String, kt: String){
+    init( t: String,d:String ,lo:Double,la:Double, us: String, kt: String, ex: Double){
         self.title = t
         self.description = d
         self.longitude = lo
         self.latitude = la
         self.user = us
         self.kastTag = kt
-        self.timeStamp = NSDate()
+        self.expiration = ex
         self.ref = nil
     }
   
@@ -60,7 +60,7 @@ struct Kast{
         latitude = snapshotValue["latitude"] as! Double
         user = snapshotValue["user"] as! String
         kastTag = snapshotValue["kastTag"] as! String
-        timeStamp = snapshotValue["timeStamp"] as! NSDate
+        expiration = snapshotValue["timeStamp"] as! Double
         ref = snapshot.ref
     }
     
@@ -72,7 +72,7 @@ struct Kast{
             "latitude": latitude,
             "user": user,
             "kastTag": kastTag,
-            "timeStamp": ServerValue.timestamp()
+            "expiration": expiration
         ]
     }
 }
@@ -97,6 +97,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var state: UITextField!
     @IBOutlet weak var kastTag: UITextField!
     @IBOutlet weak var dropDown: UIPickerView!
+    @IBOutlet weak var duration: UITextField!
     
     @IBAction func pickLocationButton(_ sender: Any) {
         locationSelected = true
@@ -106,6 +107,8 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     @IBAction func createButton(_ sender: Any) {
       
+        //Need to do some error checking here
+        
         var long: Double = 0.0
         var lat: Double = 0.0
         
@@ -124,8 +127,12 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 
                 lat = location.coordinate.latitude
                 long = location.coordinate.longitude
+                var expirationTime = NSDate().addingTimeInterval(Double(self.duration.text!)!*60*60)
                 
-                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!)
+                var interval = expirationTime.timeIntervalSince1970
+                
+                
+                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval)
                 
                 
                 
@@ -143,7 +150,11 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
            
             
         } else {
-            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!, kt: kastTag.text!)
+             var expirationTime = NSDate().addingTimeInterval(Double(self.duration.text!)!*60*60)
+            
+            var interval = expirationTime.timeIntervalSince1970
+            
+            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!, kt: kastTag.text!,ex: interval)
             
             let kastItemRef = self.kastRef.child(kastItem.title)
             
