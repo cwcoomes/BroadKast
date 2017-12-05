@@ -38,9 +38,10 @@ struct Kast{
     var latitude: Double
     var kastTag: String
     var expiration: Double
+    var privacy: String
     let ref: DatabaseReference?
     
-    init( t: String,d:String ,lo:Double,la:Double, us: String, kt: String, ex: Double){
+    init( t: String,d:String ,lo:Double,la:Double, us: String, kt: String, ex: Double, pr: String){
         self.title = t
         self.description = d
         self.longitude = lo
@@ -48,6 +49,7 @@ struct Kast{
         self.user = us
         self.kastTag = kt
         self.expiration = ex
+        self.privacy = pr
         self.ref = nil
     }
   
@@ -60,6 +62,7 @@ struct Kast{
         latitude = snapshotValue["latitude"] as! Double
         user = snapshotValue["user"] as! String
         kastTag = snapshotValue["kastTag"] as! String
+        privacy = snapshotValue["privacy"] as! String
         expiration = snapshotValue["timeStamp"] as! Double
         ref = snapshot.ref
     }
@@ -72,7 +75,8 @@ struct Kast{
             "latitude": latitude,
             "user": user,
             "kastTag": kastTag,
-            "expiration": expiration
+            "expiration": expiration,
+            "privacy": privacy
         ]
     }
 }
@@ -86,7 +90,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var locationSelected = false
     var tags = ["Study","Sport","Food","Party",
                "Hang Out"]
-    
+    var privacy = "Public"
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
@@ -99,6 +103,17 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var dropDown: UIPickerView!
     @IBOutlet weak var duration: UITextField!
     
+    @IBAction func privacySetting(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0
+        {
+            privacy = "Public"
+        }
+        else if sender.selectedSegmentIndex == 1
+        {
+                privacy = "Private"
+        }
+        
+    }
     @IBAction func pickLocationButton(_ sender: Any) {
         locationSelected = true
         performSegue(withIdentifier: "create2drop", sender: self)
@@ -132,7 +147,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 var interval = expirationTime.timeIntervalSince1970
                 
                 
-                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval)
+                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy)
                 
                 
                 
@@ -149,7 +164,11 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             
             var interval = expirationTime.timeIntervalSince1970
             
+<<<<<<< HEAD
             let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.displayName)!, kt: kastTag.text!,ex: interval)
+=======
+            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!, kt: kastTag.text!,ex: interval, pr: self.privacy)
+>>>>>>> 7425b3c2dec4a881c247065583fbcc8e553acc11
             
             let kastItemRef = self.kastRef.child(kastItem.title)
             

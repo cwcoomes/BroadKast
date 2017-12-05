@@ -14,6 +14,10 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var tag: UILabel!
     
     @IBOutlet weak var eventDescription: UITextView!
+    @IBAction func followButton(_ sender: Any) {
+        
+        
+    }
     
     
     var eventToView = EventData()
