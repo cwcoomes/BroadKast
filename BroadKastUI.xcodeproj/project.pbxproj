@@ -25,6 +25,7 @@
 		DE78BD601F990EC800127778 /* createViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD5F1F990EC800127778 /* createViewController.swift */; };
 		DE78BD621F990F2300127778 /* landingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD611F990F2300127778 /* landingTableViewController.swift */; };
 		DE78BD641F990F6C00127778 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78BD631F990F6C00127778 /* MapViewController.swift */; };
+		DE8A3D691FD7373E004779D5 /* ContactKastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A3D681FD7373E004779D5 /* ContactKastsViewController.swift */; };
 		DEA014551FB225E000F474B0 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA014541FB225E000F474B0 /* ContactsViewController.swift */; };
 		DEA014571FB22A7500F474B0 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA014561FB22A7500F474B0 /* AddViewController.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		DE78BD5F1F990EC800127778 /* createViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createViewController.swift; sourceTree = "<group>"; };
 		DE78BD611F990F2300127778 /* landingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = landingTableViewController.swift; sourceTree = "<group>"; };
 		DE78BD631F990F6C00127778 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		DE8A3D681FD7373E004779D5 /* ContactKastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactKastsViewController.swift; sourceTree = "<group>"; };
 		DEA014541FB225E000F474B0 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		DEA014561FB22A7500F474B0 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +127,7 @@
 				DE2277A31F9E461B00558EB3 /* MyButton.swift */,
 				A6C3F1B91FA90920007BE355 /* FilterSelectionViewController.swift */,
 				DE1381461FAA5036007BD5EB /* EventDetailsViewController.swift */,
+				DE8A3D681FD7373E004779D5 /* ContactKastsViewController.swift */,
 				DE1F1E421FCDF54D00A2DC02 /* ContactDetailsViewController.swift */,
 				DEA014541FB225E000F474B0 /* ContactsViewController.swift */,
 				DEA014561FB22A7500F474B0 /* AddViewController.swift */,
@@ -278,6 +281,7 @@
 				A6C3F1BA1FA90920007BE355 /* FilterSelectionViewController.swift in Sources */,
 				DE2277A41F9E461B00558EB3 /* MyButton.swift in Sources */,
 				DE78BD601F990EC800127778 /* createViewController.swift in Sources */,
+				DE8A3D691FD7373E004779D5 /* ContactKastsViewController.swift in Sources */,
 				DE78BD4C1F990D6F00127778 /* ViewController.swift in Sources */,
 				DE1381471FAA5036007BD5EB /* EventDetailsViewController.swift in Sources */,
 				DE78BD641F990F6C00127778 /* MapViewController.swift in Sources */,

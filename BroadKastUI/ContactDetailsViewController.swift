@@ -18,6 +18,11 @@ class ContactDetailsViewController: UIViewController
     @IBOutlet weak var numberOfKastsLabel: UILabel!
     @IBOutlet weak var numberOfFriendsLabel: UILabel!
     
+    @IBAction func viewkasts(_ sender: Any)
+    {
+        self.performSegue(withIdentifier: "contactdetails2kastslist", sender: self)
+        print(user)
+    }
     
     override func viewDidLoad()
     {
@@ -61,16 +66,18 @@ class ContactDetailsViewController: UIViewController
         
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        
+        if(segue.identifier == "contactdetails2kastslist")
+        {
+            let dvc = segue.destination as! ContactKastsViewController
+            dvc.user = user
+        }
+
     }
-    */
 
 }

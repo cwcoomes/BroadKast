@@ -121,7 +121,7 @@ class ContactsViewController: UITableViewController
             }
         })
         let updatedUsers = users.filter{$0 != displayNameOfUserToRemove}
-        users = updatedUsers
+        users = updatedUsers.sorted()
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
     

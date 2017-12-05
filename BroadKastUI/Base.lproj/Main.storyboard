@@ -263,6 +263,14 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pce-5J-qy3">
+                                <rect key="frame" x="148" y="471" width="79" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="View Kasts"/>
+                                <connections>
+                                    <action selector="viewkasts:" destination="qMs-tn-lhN" eventType="touchUpInside" id="oOs-IV-U3Z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -281,11 +289,40 @@
                         <outlet property="contactNameLabel" destination="Ulh-4U-wWk" id="HjL-eg-knf"/>
                         <outlet property="numberOfFriendsLabel" destination="xf0-WE-5s6" id="Bwk-Ev-dJ9"/>
                         <outlet property="numberOfKastsLabel" destination="Snm-7G-A4d" id="CEi-Nv-JxL"/>
+                        <segue destination="q7D-jq-dPn" kind="show" identifier="contactdetails2kastslist" id="htf-xK-Npt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpe-J7-T6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3527.1999999999998" y="-2012.7436281859073"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="1hh-wF-3MM">
+            <objects>
+                <tableViewController id="q7D-jq-dPn" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Cy0-bx-Pud">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="LbV-3k-qna">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LbV-3k-qna" id="UaY-8r-Eis">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="q7D-jq-dPn" id="6Le-xj-tq9"/>
+                            <outlet property="delegate" destination="q7D-jq-dPn" id="PYP-Oq-dbP"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vlR-q1-ctN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4387" y="-2011"/>
         </scene>
         <!--Add View Controller-->
         <scene sceneID="Z8Q-1m-gGX">

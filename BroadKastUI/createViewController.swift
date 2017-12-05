@@ -144,17 +144,12 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                
             }
             
-            
-            
-            
-           
-            
         } else {
              var expirationTime = NSDate().addingTimeInterval(Double(self.duration.text!)!*60*60)
             
             var interval = expirationTime.timeIntervalSince1970
             
-            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!, kt: kastTag.text!,ex: interval)
+            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.displayName)!, kt: kastTag.text!,ex: interval)
             
             let kastItemRef = self.kastRef.child(kastItem.title)
             
