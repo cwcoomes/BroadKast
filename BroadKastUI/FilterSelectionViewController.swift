@@ -29,8 +29,17 @@ class FilterSelectionViewController: UIViewController {
     @IBAction func studyButton(_ sender: UIButton) {
     }
     
+    @IBAction func sportButton(_ sender: UIButton) {
+    }
     
+    @IBAction func foodButton(_ sender: UIButton) {
+    }
     
+    @IBAction func partyButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func hangoutButton(_ sender: UIButton) {
+    }
     
 
     /*

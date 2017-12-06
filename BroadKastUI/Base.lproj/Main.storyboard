@@ -778,21 +778,33 @@
                                 <rect key="frame" x="27" y="160" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sport"/>
+                                <connections>
+                                    <action selector="sportButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Mdd-EY-TkY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Tm-PG-Z33">
                                 <rect key="frame" x="27" y="215" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Food"/>
+                                <connections>
+                                    <action selector="foodButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="KBR-yj-26l"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSG-4q-55J">
                                 <rect key="frame" x="27" y="265" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Party"/>
+                                <connections>
+                                    <action selector="partyButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="P5w-09-EDv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdD-HE-AMU">
                                 <rect key="frame" x="27" y="327" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Hang Out"/>
+                                <connections>
+                                    <action selector="hangoutButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Ied-fT-kLW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
