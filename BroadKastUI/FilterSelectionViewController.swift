@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol FilterSelectionDelegate {
+    func didTapFilter(filter: String)
+    
+}
+
 class FilterSelectionViewController: UIViewController {
+    
+    var filterDelegate: FilterSelectionDelegate!
     
     // TODO: This class/view will show selectable filter options for the map.
     var tags = ["Study","Sport","Food","Party",
@@ -27,18 +34,23 @@ class FilterSelectionViewController: UIViewController {
     
     
     @IBAction func studyButton(_ sender: UIButton) {
+        filterDelegate.didTapFilter(filter: "Study")
     }
     
     @IBAction func sportButton(_ sender: UIButton) {
+        filterDelegate.didTapFilter(filter: "Sport")
     }
     
     @IBAction func foodButton(_ sender: UIButton) {
+        filterDelegate.didTapFilter(filter: "Food")
     }
     
     @IBAction func partyButton(_ sender: UIButton) {
+        filterDelegate.didTapFilter(filter: "Party")
     }
     
     @IBAction func hangoutButton(_ sender: UIButton) {
+        filterDelegate.didTapFilter(filter: "Hang Out")
     }
     
 

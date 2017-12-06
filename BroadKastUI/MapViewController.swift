@@ -89,7 +89,11 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     @objc func selectFilter() {
-        performSegue(withIdentifier: "map2filter", sender: self)
+        let filterVC = storyboard?.instantiateViewController(withIdentifier: "FilterSelectionViewController") as! FilterSelectionViewController
+        filterVC.filterDelegate = self
+        present(filterVC, animated: true, completion: nil)
+        
+        // performSegue(withIdentifier: "map2filter", sender: self)
     }
     
     
@@ -226,4 +230,14 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     */
 
+}
+
+extension mapViewController: FilterSelectionDelegate {
+    func didTapFilter(filter: String) {
+        // This needs to update the map with those events with only the filters selected.
+        // Unknown how to do to this. *** ATTN: JORGE ***
+        // - Cody
+    }
+    
+    
 }
