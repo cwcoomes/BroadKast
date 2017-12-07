@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -418,16 +418,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="h1m-aP-9KV">
-                                        <rect key="frame" x="123" y="174" width="114" height="88"/>
+                                        <rect key="frame" x="123" y="174" width="250" height="88"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="street address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cOU-e0-JBR">
-                                                <rect key="frame" x="0.0" y="0.0" width="114" height="48"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="250" height="48"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="street address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a1N-OY-BtK">
-                                                <rect key="frame" x="0.0" y="58" width="114" height="30"/>
+                                                <rect key="frame" x="0.0" y="58" width="250" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -631,6 +631,7 @@
                                     <constraint firstItem="Tr8-1n-P8h" firstAttribute="centerX" secondItem="H7T-kC-KPu" secondAttribute="centerX" constant="-1" id="asG-0Z-d4O"/>
                                     <constraint firstItem="cCt-1Z-4Ef" firstAttribute="top" secondItem="jHM-cj-Ah3" secondAttribute="bottom" constant="8" id="cBn-rU-CYe"/>
                                     <constraint firstItem="ikq-y3-98U" firstAttribute="top" secondItem="0tU-fE-GnR" secondAttribute="bottom" constant="40" id="dJ4-yo-hwj"/>
+                                    <constraint firstAttribute="trailing" secondItem="h1m-aP-9KV" secondAttribute="trailing" constant="12" id="djy-8I-8oi"/>
                                     <constraint firstItem="Tr8-1n-P8h" firstAttribute="top" secondItem="GUH-jj-Zdq" secondAttribute="bottom" constant="8" symbolic="YES" id="fuw-G6-rlp"/>
                                     <constraint firstItem="7Lg-fm-y7g" firstAttribute="top" secondItem="H7T-kC-KPu" secondAttribute="top" constant="514" id="g2D-av-kpi"/>
                                     <constraint firstItem="hhF-UY-uWY" firstAttribute="leading" secondItem="Tah-p4-QW9" secondAttribute="leading" id="hqY-2j-e2P"/>
@@ -683,12 +684,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OrT-Ht-vAy">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OrT-Ht-vAy">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OrT-Ht-vAy" firstAttribute="trailing" secondItem="Ybs-LW-Yxn" secondAttribute="trailing" id="P3Y-j6-JLN"/>
+                            <constraint firstItem="OrT-Ht-vAy" firstAttribute="leading" secondItem="Ybs-LW-Yxn" secondAttribute="leading" id="baI-MS-bvm"/>
+                            <constraint firstItem="OrT-Ht-vAy" firstAttribute="bottom" secondItem="Ybs-LW-Yxn" secondAttribute="bottom" id="dNm-Lu-1hL"/>
+                            <constraint firstItem="OrT-Ht-vAy" firstAttribute="top" secondItem="Ybs-LW-Yxn" secondAttribute="top" id="ie2-cL-Byi"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Ybs-LW-Yxn"/>
                     </view>
                     <connections>

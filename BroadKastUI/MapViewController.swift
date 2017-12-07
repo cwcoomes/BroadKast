@@ -21,6 +21,8 @@ struct EventData : Codable {
     var longitude : Double
     var title : String
     var user : String
+    var expiration: Double
+    var privacy: String
     
     var kastID : String
     
@@ -31,7 +33,8 @@ struct EventData : Codable {
         user = ""
         latitude = 0
         longitude = 0
-        
+        expiration = 0
+        privacy = ""
         kastID = ""
     }
 }
@@ -107,14 +110,30 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         print("size of events when adding annotations: \(events.count)")
         events.forEach
         { (event) in
+            
+//            The expiration date is stored as a time interval since 1970. when reading from firebase, can convert it back to NSDate by:
+//            var date = NSDate(timeIntervalSince1970: interval)
+//            where interval is what you pull from firebase
+            
+            
+            var currentTime = NSDate().timeIntervalSince1970
+            
+            
+            if(currentTime <= event.expiration)
+            {
+            
             let annotation = MKPointAnnotation()
             annotation.title = event.title
             annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+            
+            
+            
             
             DispatchQueue.main.async
             {
                 self.map.addAnnotation(annotation)
             }
+        }
         }
         
     }
@@ -165,6 +184,10 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                         temporaryLocation.user = item.value as! String
                     case "kastID":
                         temporaryLocation.kastID = item.value as! String
+                    case "expiration":
+                        temporaryLocation.expiration = item.value as! Double
+                    case "privacy":
+                        temporaryLocation.privacy = item.value as! String
                     default:
                         print(item.key + " does not contain anything ERROR")
                     }
