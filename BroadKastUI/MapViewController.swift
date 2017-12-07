@@ -21,6 +21,9 @@ struct EventData : Codable {
     var longitude : Double
     var title : String
     var user : String
+    
+    var kastID : String
+    
     init() {
         description = ""
         KastTag = ""
@@ -28,6 +31,8 @@ struct EventData : Codable {
         user = ""
         latitude = 0
         longitude = 0
+        
+        kastID = ""
     }
 }
 
@@ -158,10 +163,18 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                         temporaryLocation.title = item.value as! String
                     case "user":
                         temporaryLocation.user = item.value as! String
+                    case "kastID":
+                        temporaryLocation.kastID = item.value as! String
                     default:
                         print(item.key + " does not contain anything ERROR")
                     }
                 })
+                
+                
+                
+                
+                
+                
                 events.append(temporaryLocation)
                 print("events count: \(events.count)")
             })

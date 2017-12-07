@@ -7,15 +7,45 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import Firebase
+
+
+struct followedKast
+{
+    var kastID: String
+    let ref: DatabaseReference?
+    
+    init(kid:String)
+    {
+        self.kastID = kid
+        self.ref = nil
+    }
+    
+    init(snapshot: DataSnapshot)
+    {
+        kastID = snapshot.key
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        kastID = snapshotValue["kastID"] as! String
+        ref = snapshot.ref
+    }
+    
+    func toAnyObject() -> Any
+    {
+        return [kastID  : kastID]
+    }
+}
 
 class EventDetailsViewController: UIViewController {
    
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var tag: UILabel!
+    let userRef = Database.database().reference(withPath: "Users")
     
     @IBOutlet weak var eventDescription: UITextView!
     @IBAction func followButton(_ sender: Any) {
         
+  
         
     }
     

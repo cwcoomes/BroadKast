@@ -39,9 +39,10 @@ struct Kast{
     var kastTag: String
     var expiration: Double
     var privacy: String
+    var kastID: String
     let ref: DatabaseReference?
     
-    init( t: String,d:String ,lo:Double,la:Double, us: String, kt: String, ex: Double, pr: String){
+    init( t: String,d:String ,lo:Double,la:Double, us: String, kt: String, ex: Double, pr: String, kid: String){
         self.title = t
         self.description = d
         self.longitude = lo
@@ -50,6 +51,7 @@ struct Kast{
         self.kastTag = kt
         self.expiration = ex
         self.privacy = pr
+        self.kastID = kid
         self.ref = nil
     }
   
@@ -64,6 +66,7 @@ struct Kast{
         kastTag = snapshotValue["kastTag"] as! String
         privacy = snapshotValue["privacy"] as! String
         expiration = snapshotValue["timeStamp"] as! Double
+        kastID = snapshotValue["kastID"] as! String
         ref = snapshot.ref
     }
     
@@ -76,7 +79,8 @@ struct Kast{
             "user": user,
             "kastTag": kastTag,
             "expiration": expiration,
-            "privacy": privacy
+            "privacy": privacy,
+            "kastID" : kastID
         ]
     }
 }
@@ -197,12 +201,13 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 
                 var interval = expirationTime.timeIntervalSince1970
                 
+                let ref = self.kastRef.childByAutoId()
+                let createdId = ref.key
+                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy, kid: createdId)
                 
-                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy)
                 
                 
-                
-                self.kastRef.childByAutoId().setValue(kastItem.toAnyObject())
+                ref.setValue(kastItem.toAnyObject())
                 
                 
                 
@@ -214,13 +219,14 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
              var expirationTime = NSDate().addingTimeInterval(Double(self.duration.text!)!*60*60)
             
             var interval = expirationTime.timeIntervalSince1970
+            
+            let ref = kastRef.childByAutoId()
+            let createdId = ref.key
 
-            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!, kt: kastTag.text!,ex: interval, pr: self.privacy)
+            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!, kt: kastTag.text!,ex: interval, pr: self.privacy, kid: createdId)
 
             
-            let kastItemRef = self.kastRef.child(kastItem.title)
-            
-            kastItemRef.setValue(kastItem.toAnyObject())
+            ref.setValue(kastItem.toAnyObject())
             
             self.navigationController?.popViewController(animated: true)
         }
