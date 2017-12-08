@@ -39,10 +39,30 @@ struct EventData : Codable {
     }
 }
 
+struct filterInfo
+{
+    var studyFilter : Bool
+    var sportFilter : Bool
+    var foodFilter : Bool
+    var partyFilter : Bool
+    var hangOutFilter : Bool
+    var privacyFilter : Bool
+    init()
+    {
+        studyFilter = true
+        sportFilter = true
+        foodFilter = true
+        partyFilter = true
+        hangOutFilter = true
+        privacyFilter = true
+    }
+}
+
 var events = [EventData]()
 
 class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
 {
+    var filters = filterInfo()
     // Map
     
     @IBOutlet weak var map: MKMapView!
@@ -98,10 +118,16 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        map.removeAnnotations(self.map.annotations)
+        
+        addAnnotations()
+    }
+    
     @objc func selectFilter() {
         didSelectFilter = true
         performSegue(withIdentifier: "map2filter", sender: self)
-        self.viewDidLoad()
+       // self.viewDidLoad()
     }
     
     
@@ -118,20 +144,68 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             var currentTime = NSDate().timeIntervalSince1970
             
-            
+            ["Study","Sport","Food","Party",
+             "Hang Out"]
+
             // If a filter was selected.
             if (didSelectFilter == true)
             {
-                if (currentTime <= event.expiration && event.KastTag == filterSelection)
+                if (currentTime <= event.expiration )
                 {
-                    
-                    let annotation = MKPointAnnotation()
-                    annotation.title = event.title
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
-
-                    DispatchQueue.main.async
+                    if(filters.hangOutFilter && event.KastTag == "Hang Out")
                     {
-                        self.map.addAnnotation(annotation)
+                        let annotation = MKPointAnnotation()
+                        annotation.title = event.title
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                        
+                        DispatchQueue.main.async
+                            {
+                                self.map.addAnnotation(annotation)
+                        }
+                    }
+                    if(filters.partyFilter && event.KastTag == "Party")
+                    {
+                        let annotation = MKPointAnnotation()
+                        annotation.title = event.title
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                        
+                        DispatchQueue.main.async
+                            {
+                                self.map.addAnnotation(annotation)
+                        }
+                    }
+                    if(filters.studyFilter && event.KastTag == "Study")
+                    {
+                        let annotation = MKPointAnnotation()
+                        annotation.title = event.title
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+
+                        DispatchQueue.main.async
+                        {
+                            self.map.addAnnotation(annotation)
+                        }
+                    }
+                    if(filters.sportFilter && event.KastTag == "Sport")
+                    {
+                        let annotation = MKPointAnnotation()
+                        annotation.title = event.title
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                        
+                        DispatchQueue.main.async
+                            {
+                                self.map.addAnnotation(annotation)
+                        }
+                    }
+                    if(filters.foodFilter && event.KastTag == "Food")
+                    {
+                        let annotation = MKPointAnnotation()
+                        annotation.title = event.title
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                        
+                        DispatchQueue.main.async
+                            {
+                                self.map.addAnnotation(annotation)
+                        }
                     }
                 }
             }
@@ -272,6 +346,11 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         {
             let dvc = segue.destination as! EventDetailsViewController
             dvc.eventToView = clickedEvent
+        }
+        if(segue.identifier == "map2filter")
+        {
+            let dvc = segue.destination as! FilterSelectionViewController
+            dvc.filters = filters
         }
     }
     /*

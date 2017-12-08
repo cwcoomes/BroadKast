@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -780,9 +780,10 @@
                                     <action selector="studyButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="a4q-QJ-yN4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dux-ps-fvC">
-                                <rect key="frame" x="27" y="160" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dux-ps-fvC" customClass="RoundButton" customModule="BroadKastUI" customModuleProvider="target">
+                                <rect key="frame" x="27" y="160" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Sport"/>
                                 <connections>
                                     <action selector="sportButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Mdd-EY-TkY"/>
@@ -813,7 +814,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.79307466745376587" green="0.88495934009552002" blue="0.97664517164230347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="92T-2p-3zP"/>
                     </view>
                     <connections>
@@ -887,6 +888,7 @@
                     <connections>
                         <outlet property="eventDescription" destination="Bzn-sm-KDz" id="FE6-Qw-DoS"/>
                         <outlet property="eventTitle" destination="WpY-0c-cNB" id="ujg-Dd-odc"/>
+                        <outlet property="followButtonObject" destination="tc5-Mi-cZl" id="3XJ-E5-Us1"/>
                         <outlet property="tag" destination="aut-AK-HJa" id="FGc-Rb-CFY"/>
                     </connections>
                 </viewController>

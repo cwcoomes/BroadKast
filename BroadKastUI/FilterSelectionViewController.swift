@@ -8,8 +8,16 @@
 
 import UIKit
 
-class FilterSelectionViewController: UIViewController {
-    
+
+extension FilterSelectionViewController{
+    //data is passed to MapViewControllerfrom here
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        (viewController as? mapViewController)?.filters = filters
+    }
+}
+
+class FilterSelectionViewController: UIViewController , UINavigationControllerDelegate{
+    var filters = filterInfo()
     
     
     // TODO: This class/view will show selectable filter options for the map.
@@ -17,7 +25,7 @@ class FilterSelectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+            navigationController?.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -28,32 +36,66 @@ class FilterSelectionViewController: UIViewController {
     
     
     @IBAction func studyButton(_ sender: UIButton) {
-        tag = "Study"
-        performSegue(withIdentifier: "filter2map", sender: self)
+        if(filters.studyFilter == false)
+        {
+            filters.studyFilter = true
+            
+        }
+        else{
+            filters.studyFilter = false
+        }
+        
     }
     
     @IBAction func sportButton(_ sender: UIButton) {
-        tag = "Sport"
-        performSegue(withIdentifier: "filter2map", sender: self)
+        if(filters.sportFilter == false)
+        {
+            filters.sportFilter = true
+            
+        }
+        else{
+            filters.sportFilter = false
+        }
+        print("button pressed")
     }
     
     @IBAction func foodButton(_ sender: UIButton) {
-        tag = "Food"
-        performSegue(withIdentifier: "filter2map", sender: self)
+        if(filters.foodFilter == false)
+        {
+            filters.foodFilter = true
+            
+        }
+        else{
+            filters.foodFilter = false
+        }
     }
     
     @IBAction func partyButton(_ sender: UIButton) {
-        tag = "Party"
+        if(filters.partyFilter == false)
+        {
+            filters.partyFilter = true
+            
+        }
+        else{
+            filters.partyFilter = false
+        }
     }
     
     @IBAction func hangoutButton(_ sender: UIButton) {
-        tag = "Hang Out"
+        if(filters.hangOutFilter == false)
+        {
+            filters.hangOutFilter = true
+            
+        }
+        else{
+            filters.hangOutFilter = false
+        }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let mapController = segue.destination as! mapViewController
-        mapController.filterSelection = tag
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let mapController = segue.destination as! mapViewController
+//        mapController.filterSelection = tag
+//    }
     /*
     // MARK: - Navigation
 
