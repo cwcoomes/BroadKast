@@ -119,21 +119,39 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             var currentTime = NSDate().timeIntervalSince1970
             
             
-            if(currentTime <= event.expiration)
+            // If a filter was selected.
+            if (didSelectFilter == true)
             {
-            
-            let annotation = MKPointAnnotation()
-            annotation.title = event.title
-            annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
-            
-            
-            
-            
-            DispatchQueue.main.async
-            {
-                self.map.addAnnotation(annotation)
+                if (currentTime <= event.expiration && event.KastTag == filterSelection)
+                {
+                    
+                    let annotation = MKPointAnnotation()
+                    annotation.title = event.title
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+
+                    DispatchQueue.main.async
+                    {
+                        self.map.addAnnotation(annotation)
+                    }
+                }
             }
-        }
+                
+            // If no filter was selected.
+            else
+            {
+                if (currentTime <= event.expiration)
+                {
+                    
+                    let annotation = MKPointAnnotation()
+                    annotation.title = event.title
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                    
+                    DispatchQueue.main.async
+                    {
+                        self.map.addAnnotation(annotation)
+                    }
+                }
+            }
         }
         
     }
@@ -173,30 +191,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     case "description" :
                         temporaryLocation.description = item.value as! String
                     case "kastTag" :
-                       
-                            if filterSelection ==  "Study" {
-                                if temporaryLocation.KastTag == filterSelection {
-                                    temporaryLocation>kastTag == item.value as! String
-                               
-                                
-                            }
-                        }
-                        if temporaryLocation.KastTag == studyEvent {
-                            temporaryLocation.KastTag = item.value as! String
-                            return
-                        }
-                        else if temporaryLocation.KastTag == sportEvent {
-                            temporaryLocation.KastTag = item.value as! String
-                        }
-                        else if temporaryLocation.KastTag == foodEvent {
-                            temporaryLocation.KastTag = item.value as! String
-                        }
-                        else if temporaryLocation.KastTag == partyEvent {
-                            temporaryLocation.KastTag = item.value as! String
-                        }
-                        else if temporaryLocation.KastTag == hangoutEvent {
-                            temporaryLocation.KastTag = item.value as! String
-                        }
+                        temporaryLocation.KastTag = item.value as! String
                     case "latitude":
                         temporaryLocation.latitude = item.value as! Double
                     case "longitude":
@@ -291,12 +286,4 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
 }
 
-extension mapViewController: FilterSelectionDelegate {
-    func didTapFilter(filter: String) {
-        // This needs to update the map with those events with only the filters selected.
-        // Unknown how to do to this. *** ATTN: JORGE ***
-        // - Cody
-    }
-    
-    
-}
+
