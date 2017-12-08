@@ -99,9 +99,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @objc func selectFilter() {
         let filterVC = storyboard?.instantiateViewController(withIdentifier: "FilterSelectionViewController") as! FilterSelectionViewController
         filterVC.filterDelegate = self
-        present(filterVC, animated: true, completion: nil)
-        
-        // performSegue(withIdentifier: "map2filter", sender: self)
+        // present(filterVC, animated: true, completion: nil)
+        performSegue(withIdentifier: "map2filter", sender: self)
     }
     
     
@@ -173,7 +172,27 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     case "description" :
                         temporaryLocation.description = item.value as! String
                     case "kastTag" :
-                        temporaryLocation.KastTag = item.value as! String
+                        let studyEvent = "Study"
+                        let sportEvent = "Sport"
+                        let foodEvent = "Food"
+                        let partyEvent = "Party"
+                        let hangoutEvent = "Hang Out"
+                        if temporaryLocation.KastTag == studyEvent {
+                            temporaryLocation.KastTag = item.value as! String
+                            break
+                        }
+                        else if temporaryLocation.KastTag == sportEvent {
+                            temporaryLocation.KastTag = item.value as! String
+                        }
+                        else if temporaryLocation.KastTag == foodEvent {
+                            temporaryLocation.KastTag = item.value as! String
+                        }
+                        else if temporaryLocation.KastTag == partyEvent {
+                            temporaryLocation.KastTag = item.value as! String
+                        }
+                        else if temporaryLocation.KastTag == hangoutEvent {
+                            temporaryLocation.KastTag = item.value as! String
+                        }
                     case "latitude":
                         temporaryLocation.latitude = item.value as! Double
                     case "longitude":
