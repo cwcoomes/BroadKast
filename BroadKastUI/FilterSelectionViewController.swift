@@ -8,18 +8,12 @@
 
 import UIKit
 
-protocol FilterSelectionDelegate {
-    func didTapFilter(filter: String)
-    
-}
-
 class FilterSelectionViewController: UIViewController {
     
-    var filterDelegate: FilterSelectionDelegate!
+    
     
     // TODO: This class/view will show selectable filter options for the map.
-    var tags = ["Study","Sport","Food","Party",
-                "Hang Out"]
+    var tag: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,26 +28,32 @@ class FilterSelectionViewController: UIViewController {
     
     
     @IBAction func studyButton(_ sender: UIButton) {
-        filterDelegate.didTapFilter(filter: "Study")
+        tag = "Study"
+        performSegue(withIdentifier: "filter2map", sender: self)
     }
     
     @IBAction func sportButton(_ sender: UIButton) {
-        filterDelegate.didTapFilter(filter: "Sport")
+        tag = "Sport"
+        performSegue(withIdentifier: "filter2map", sender: self)
     }
     
     @IBAction func foodButton(_ sender: UIButton) {
-        filterDelegate.didTapFilter(filter: "Food")
+        tag = "Food"
+        performSegue(withIdentifier: "filter2map", sender: self)
     }
     
     @IBAction func partyButton(_ sender: UIButton) {
-        filterDelegate.didTapFilter(filter: "Party")
+        tag = "Party"
     }
     
     @IBAction func hangoutButton(_ sender: UIButton) {
-        filterDelegate.didTapFilter(filter: "Hang Out")
+        tag = "Hang Out"
     }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let mapController = segue.destination as! mapViewController
+        mapController.filterSelection = tag
+    }
     /*
     // MARK: - Navigation
 

@@ -49,6 +49,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     let manager = CLLocationManager()
     var clickedEvent = EventData()
+    var didSelectFilter = false
+    var filterSelection: String?
     
    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
@@ -97,10 +99,9 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     @objc func selectFilter() {
-        let filterVC = storyboard?.instantiateViewController(withIdentifier: "FilterSelectionViewController") as! FilterSelectionViewController
-        filterVC.filterDelegate = self
-        // present(filterVC, animated: true, completion: nil)
+        didSelectFilter = true
         performSegue(withIdentifier: "map2filter", sender: self)
+        self.viewDidLoad()
     }
     
     
@@ -172,14 +173,17 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     case "description" :
                         temporaryLocation.description = item.value as! String
                     case "kastTag" :
-                        let studyEvent = "Study"
-                        let sportEvent = "Sport"
-                        let foodEvent = "Food"
-                        let partyEvent = "Party"
-                        let hangoutEvent = "Hang Out"
+                       
+                            if filterSelection ==  "Study" {
+                                if temporaryLocation.KastTag == filterSelection {
+                                    temporaryLocation>kastTag == item.value as! String
+                               
+                                
+                            }
+                        }
                         if temporaryLocation.KastTag == studyEvent {
                             temporaryLocation.KastTag = item.value as! String
-                            break
+                            return
                         }
                         else if temporaryLocation.KastTag == sportEvent {
                             temporaryLocation.KastTag = item.value as! String
