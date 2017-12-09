@@ -54,14 +54,15 @@ class EventDetailsViewController: UIViewController {
         let currentUser = self.userRef.child(user.displayName!)
         let followedList = currentUser.child("followedKasts")
         let followedKastItem = followedKast(kid: eventToView.kastID)
-        
+        var flag = false
         followedList.observe(.value, with: { snapshot in
-            if snapshot.hasChild(followedKastItem.kastID)
+            flag = false
+            if snapshot.hasChild(self.eventToView.kastID)
             {
                 //code if kast is already followed
                 
                
-                followedList.child(followedKastItem.kastID).removeValue()
+                followedList.child(self.eventToView.kastID).removeValue()
                 
 //                followedList.child(followedKastItem.kastID).removeValue(completionBlock: { (error, refer) in
 //                    if error != nil { print(error as Any) }
@@ -71,6 +72,9 @@ class EventDetailsViewController: UIViewController {
 //                        print("Child Removed Correctly")
 //                    }
 //                })
+                flag = true
+                self.pullData()
+                followedList.removeAllObservers()
                 
             }
             else if (self.eventToView.user == user.displayName)
@@ -80,17 +84,24 @@ class EventDetailsViewController: UIViewController {
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
-            else
+            if(flag == false)
             {
                 //if not yet followed
                 let newFriend = followedList.child(self.eventToView.kastID)
                     newFriend.setValue(followedKastItem.toAnyObject())
-                
+                self.pullData()
+                followedList.removeAllObservers()
                 
             }
             
         })
   
+       // followedList.removeAllObservers()
+        
+    }
+    
+    func addToFirebase()
+    {
         
     }
     
@@ -108,10 +119,8 @@ class EventDetailsViewController: UIViewController {
         //pull followed kasts
         
         
-       
-        NotificationCenter.default.addObserver(self, selector: #selector(EventDetailsViewController.modifyButton), name: Notification.Name("weReady"), object: nil)
+       pullData()
         
-        createArray()
 //        kastArray.forEach { (kastid) in
 //
 //            if(kastid == eventToView.kastID)
@@ -125,11 +134,19 @@ class EventDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func pullData()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(EventDetailsViewController.modifyButton), name: Notification.Name("weReady"), object: nil)
+        
+        createArray()
+    }
+    
     func createArray()
     {
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
         let followedList = currentUser.child("followedKasts")
+        kastArray.removeAll()
         
         followedList.observe(.value, with: {snapshot in
             
@@ -142,13 +159,18 @@ class EventDetailsViewController: UIViewController {
                 self.kastArray.append(temp)
                 
             })
+            followedList.removeAllObservers()
+            print(self.kastArray)
+            print("Sending weReady")
              NotificationCenter.default.post(name: Notification.Name("weReady"), object: nil)
+            
         })
         
     }
     
     @objc func modifyButton()
     {
+        
         
         kastArray.forEach { (kastid) in
             

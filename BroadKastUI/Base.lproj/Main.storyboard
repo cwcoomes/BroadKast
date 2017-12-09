@@ -714,7 +714,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="BB0-ne-5K0">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="BB0-ne-5K0">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BB0-ne-5K0" id="3vu-d8-X49">
@@ -728,6 +728,9 @@
                             <outlet property="delegate" destination="Oq0-w6-q7R" id="MRZ-fY-cpd"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="gau-T6-aJo" kind="show" identifier="myKast2Details" id="aRf-Ac-nqE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDi-1A-ksW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -834,13 +837,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No Description Available" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzn-sm-KDz">
-                                <rect key="frame" x="20" y="116" width="335" height="531"/>
+                                <rect key="frame" x="20" y="160" width="335" height="487"/>
                                 <color key="backgroundColor" red="0.7930746675" green="0.88495934009999999" blue="0.97664517159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cYA-kw-wk3">
-                                <rect key="frame" x="20" y="40" width="335" height="50.5"/>
+                                <rect key="frame" x="20" y="84" width="335" height="50.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpY-0c-cNB">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="33.5"/>
@@ -1038,6 +1041,7 @@
         <image name="BroadKastBlueLogo1" width="634" height="642"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="aRf-Ac-nqE"/>
         <segue reference="1qO-yO-kd1"/>
         <segue reference="6TJ-h7-kFF"/>
     </inferredMetricsTieBreakers>

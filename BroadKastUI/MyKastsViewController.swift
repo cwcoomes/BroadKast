@@ -7,12 +7,25 @@
 //
 
 import UIKit
+import Firebase
+
 
 class MyKastsViewController: UITableViewController {
 
+    let userRef = Database.database().reference(withPath: "Users")
+    var kastArray = [String]()
+     var events = [EventData]()
+    var followedKasts = [EventData]()
+    var myKasts = [EventData]()
+    var clickedEvent = EventData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        retrieveDataEvents()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(createArray), name: Notification.Name("eventsReady"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(followedKastArray), name: Notification.Name("followsReady"), object: nil)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,19 +47,188 @@ class MyKastsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if(section == 0)
+        {
+            return myKasts.count
+        }
+        if(section == 1)
+        {
+            return followedKasts.count
+        }
         return 0
     }
 
-    /*
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if(section == 0)
+        {
+            return "My Kasts"
+        }
+        if(section == 1)
+        {
+            return "Followed Kasts"
+        }
+        return "error"
+    }
+    
+    func retrieveDataEvents()
+    {
+       
+        
+        //Declare/initialize the dictionary of data, essentially the bulk of the json
+        var dataDict:[String: Any] = [:]
+        
+        
+        //reference the database and start pulling individual kasts
+        Database.database().reference().child("Kast").observe(.value, with: { snapshot in
+            dataDict = snapshot.value as! [String: Any]
+            var temporaryLocation = EventData.init()
+            
+            //For every Kast, start extraction the information
+            dataDict.forEach({ (kast) in
+                
+                let kastOfInformation = kast.value as! [String:Any]
+                
+                
+                //Put every field of the kast into the struct
+                kastOfInformation.forEach({ (item) in
+                    
+                    
+                    //Place every member into the struct
+                    switch(item.key as String)
+                    {
+                    case "description" :
+                        temporaryLocation.description = item.value as! String
+                    case "kastTag" :
+                        temporaryLocation.KastTag = item.value as! String
+                    case "latitude":
+                        temporaryLocation.latitude = item.value as! Double
+                    case "longitude":
+                        temporaryLocation.longitude = item.value as! Double
+                    case "title" :
+                        temporaryLocation.title = item.value as! String
+                    case "user":
+                        temporaryLocation.user = item.value as! String
+                    case "kastID":
+                        temporaryLocation.kastID = item.value as! String
+                    case "expiration":
+                        temporaryLocation.expiration = item.value as! Double
+                    case "privacy":
+                        temporaryLocation.privacy = item.value as! String
+                    default:
+                        print(item.key + " does not contain anything ERROR")
+                    }
+                })
+                
+                
+                
+                
+                
+                
+                self.events.append(temporaryLocation)
+                print("events count: \(self.events.count)")
+            })
+            print("sending notification")
+            NotificationCenter.default.post(name: Notification.Name("eventsReady"), object: nil)
+        })
+        
+        
+        
+        
+        
+        
+    }
+    @objc func followedKastArray()
+    {
+        let user = Auth.auth().currentUser!
+        events.forEach { (kast) in
+            if(kast.user == user.displayName!)
+            {
+                print("user matched")
+                myKasts.append(kast)
+            }
+            kastArray.forEach({ (kid) in
+                if(kid == kast.kastID)
+                {
+                    print("followMatch")
+                    followedKasts.append(kast)
+                }
+            })
+            
+            
+            
+            
+            
+            
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+   @objc func createArray()
+    {
+        let user = Auth.auth().currentUser!
+        let currentUser = self.userRef.child(user.displayName!)
+        let followedList = currentUser.child("followedKasts")
+        
+        followedList.observe(.value, with: {snapshot in
+            
+            snapshot.children.forEach({ (kastID) in
+                
+                var temp = String()
+                
+                temp = (kastID as! DataSnapshot).key
+                
+                self.kastArray.append(temp)
+                
+            })
+            NotificationCenter.default.post(name: Notification.Name("followsReady"), object: nil)
+        })
+        
+    }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        if(indexPath.section == 0)
+        {
+            cell.textLabel?.text = myKasts[indexPath.row].title
+        }
+        if(indexPath.section == 1)
+        {
+            cell.textLabel?.text = followedKasts[indexPath.row].title
+        }
 
         // Configure the cell...
 
         return cell
     }
-    */
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(indexPath.section == 0)
+        {
+            clickedEvent = myKasts[indexPath.row]
+            performSegue(withIdentifier: "myKast2Details", sender: self)
+        }
+        if(indexPath.section == 1)
+        {
+            clickedEvent = followedKasts[indexPath.row]
+            performSegue(withIdentifier: "myKast2Details", sender: self)
+        }
+        
+        
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if(segue.identifier == "myKast2Details")
+        {
+            let dvc = segue.destination as! EventDetailsViewController
+            dvc.eventToView = clickedEvent
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

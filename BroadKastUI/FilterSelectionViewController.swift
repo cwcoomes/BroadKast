@@ -25,7 +25,9 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-            navigationController?.delegate = self
+        navigationController?.delegate = self
+        
+        print(filters)
         // Do any additional setup after loading the view.
     }
 
