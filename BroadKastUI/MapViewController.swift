@@ -6,6 +6,14 @@
 //  Copyright © 2017 Ubicomp4. All rights reserved.
 //
 
+/* Cody's TODO 12/10/17:
+     1. Back button on navbar should go to the main menu.
+     2. Privacy Button needs functionality
+     3. Should receive filter selections from filter selection view controller and apply them
+     4. Active Filter button should change color when filter is active
+     5. Map UI needs to be adjusted for buttons
+ */
+
 import UIKit
 import MapKit
 import CoreLocation

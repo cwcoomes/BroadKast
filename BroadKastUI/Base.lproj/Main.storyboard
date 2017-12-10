@@ -808,7 +808,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkw-0v-HN2">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkw-0v-HN2" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
                                 <rect key="frame" x="27" y="95" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Study"/>
@@ -816,7 +816,7 @@
                                     <action selector="studyButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="a4q-QJ-yN4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dux-ps-fvC" customClass="RoundButton" customModule="BroadKastUI" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dux-ps-fvC" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
                                 <rect key="frame" x="27" y="160" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -825,7 +825,7 @@
                                     <action selector="sportButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Mdd-EY-TkY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Tm-PG-Z33">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Tm-PG-Z33" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
                                 <rect key="frame" x="27" y="215" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Food"/>
@@ -833,7 +833,7 @@
                                     <action selector="foodButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="KBR-yj-26l"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSG-4q-55J">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSG-4q-55J" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
                                 <rect key="frame" x="27" y="265" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Party"/>
@@ -841,12 +841,20 @@
                                     <action selector="partyButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="P5w-09-EDv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdD-HE-AMU">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdD-HE-AMU" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
                                 <rect key="frame" x="27" y="327" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Hang Out"/>
                                 <connections>
                                     <action selector="hangoutButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Ied-fT-kLW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KJ-9j-ZDc">
+                                <rect key="frame" x="128" y="442" width="118" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Apply"/>
+                                <connections>
+                                    <action selector="applyButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Aec-ay-BnE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -859,7 +867,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wa-C5-BVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3321" y="960"/>
+            <point key="canvasLocation" x="3320.8000000000002" y="959.37031484257875"/>
         </scene>
         <!--Event Details View Controller-->
         <scene sceneID="drZ-CA-iHi">
@@ -1074,7 +1082,6 @@
         <image name="BroadKastBlueLogo1" width="634" height="642"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U2b-dy-HXX"/>
         <segue reference="U5e-I4-TSc"/>
         <segue reference="1qO-yO-kd1"/>
         <segue reference="6TJ-h7-kFF"/>

@@ -6,6 +6,13 @@
 //  Copyright © 2017 Ubicomp4. All rights reserved.
 //
 
+/* Cody's TODO 12/10/17:
+ 1. Apply button should pop the view from navbar stack
+ 2. Filters should change colors when active
+ 3. Each filter should have a variable
+ 4. Apply button should send those variables back to the map to apply filters
+ */
+
 import UIKit
 
 
@@ -37,7 +44,7 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
     }
     
     
-    @IBAction func studyButton(_ sender: UIButton) {
+    @IBAction func studyButton(_ sender: ToggleButton) {
         if(filters.studyFilter == false)
         {
             filters.studyFilter = true
@@ -49,7 +56,7 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
         
     }
     
-    @IBAction func sportButton(_ sender: UIButton) {
+    @IBAction func sportButton(_ sender: ToggleButton) {
         if(filters.sportFilter == false)
         {
             filters.sportFilter = true
@@ -61,7 +68,7 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
         print("button pressed")
     }
     
-    @IBAction func foodButton(_ sender: UIButton) {
+    @IBAction func foodButton(_ sender: ToggleButton) {
         if(filters.foodFilter == false)
         {
             filters.foodFilter = true
@@ -72,7 +79,7 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
         }
     }
     
-    @IBAction func partyButton(_ sender: UIButton) {
+    @IBAction func partyButton(_ sender: ToggleButton) {
         if(filters.partyFilter == false)
         {
             filters.partyFilter = true
@@ -83,7 +90,7 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
         }
     }
     
-    @IBAction func hangoutButton(_ sender: UIButton) {
+    @IBAction func hangoutButton(_ sender: ToggleButton) {
         if(filters.hangOutFilter == false)
         {
             filters.hangOutFilter = true
@@ -92,6 +99,10 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
         else{
             filters.hangOutFilter = false
         }
+    }
+    
+    @IBAction func applyButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "filter2map", sender: self)
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
