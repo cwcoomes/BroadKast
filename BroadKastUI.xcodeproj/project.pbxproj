@@ -14,6 +14,7 @@
 		A6AE6C5D1F9B42DB0065200A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6AE6C5C1F9B42C50065200A /* CoreLocation.framework */; };
 		A6C3F1BA1FA90920007BE355 /* FilterSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C3F1B91FA90920007BE355 /* FilterSelectionViewController.swift */; };
 		BCCB3BD61F9A03EE007DB995 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCCB3BD51F9A03EE007DB995 /* GoogleService-Info.plist */; };
+		BCE0E0B61FDDABCA00F55EAB /* PicturesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE0E0B51FDDABCA00F55EAB /* PicturesCollectionViewController.swift */; };
 		DE1381471FAA5036007BD5EB /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1381461FAA5036007BD5EB /* EventDetailsViewController.swift */; };
 		DE1F1E431FCDF54D00A2DC02 /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F1E421FCDF54D00A2DC02 /* ContactDetailsViewController.swift */; };
 		DE2277A41F9E461B00558EB3 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2277A31F9E461B00558EB3 /* MyButton.swift */; };
@@ -43,6 +44,7 @@
 		A6AE6C5C1F9B42C50065200A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A6C3F1B91FA90920007BE355 /* FilterSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectionViewController.swift; sourceTree = "<group>"; };
 		BCCB3BD51F9A03EE007DB995 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BCE0E0B51FDDABCA00F55EAB /* PicturesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturesCollectionViewController.swift; sourceTree = "<group>"; };
 		CFC548A91FA519F200C8A986 /* BroadKastTestLogo 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BroadKastTestLogo 2.png"; path = "../../../../Downloads/BroadKastTestLogo 2.png"; sourceTree = "<group>"; };
 		DE1381461FAA5036007BD5EB /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		DE1F1E421FCDF54D00A2DC02 /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				DE78BD5B1F990E9B00127778 /* registerViewController.swift */,
 				DE78BD5F1F990EC800127778 /* createViewController.swift */,
 				DE78BD611F990F2300127778 /* landingTableViewController.swift */,
+				BCE0E0B51FDDABCA00F55EAB /* PicturesCollectionViewController.swift */,
 				DE78BD631F990F6C00127778 /* MapViewController.swift */,
 				DE2277A51F9E486B00558EB3 /* DropPinViewController.swift */,
 				DE2277A31F9E461B00558EB3 /* MyButton.swift */,
@@ -295,6 +298,7 @@
 				A66A6D1A1FDD0178009A986B /* PrivacyButton.swift in Sources */,
 				DE1381471FAA5036007BD5EB /* EventDetailsViewController.swift in Sources */,
 				DE78BD641F990F6C00127778 /* MapViewController.swift in Sources */,
+				BCE0E0B61FDDABCA00F55EAB /* PicturesCollectionViewController.swift in Sources */,
 				DE8A3D6D1FD75575004779D5 /* ContactsKastsTableViewController.swift in Sources */,
 				A66A6D201FDD1047009A986B /* ToggleButton.swift in Sources */,
 				DE68689F1FD081CA006F2A3E /* MyKastsViewController.swift in Sources */,

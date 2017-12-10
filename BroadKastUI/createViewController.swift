@@ -41,9 +41,10 @@ struct Kast{
     var expiration: Double
     var privacy: String
     var kastID: String
+    var dlURL: String
     let ref: DatabaseReference?
     
-    init( t: String,d:String ,lo:Double,la:Double, us: String, kt: String, ex: Double, pr: String, kid: String){
+    init( t: String,d:String ,lo:Double,la:Double, us: String, kt: String, ex: Double, pr: String, kid: String, dl: String){
         self.title = t
         self.description = d
         self.longitude = lo
@@ -53,11 +54,12 @@ struct Kast{
         self.expiration = ex
         self.privacy = pr
         self.kastID = kid
+        self.dlURL = dl
         self.ref = nil
     }
-  
+    
     init(snapshot: DataSnapshot) {
-      //  title = snapshot.key
+        //  title = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
         title = snapshotValue["title"] as! String
         description = snapshotValue["description"] as! String
@@ -68,6 +70,7 @@ struct Kast{
         privacy = snapshotValue["privacy"] as! String
         expiration = snapshotValue["timeStamp"] as! Double
         kastID = snapshotValue["kastID"] as! String
+        dlURL = snapshotValue["dlURL"] as! String
         ref = snapshot.ref
     }
     
@@ -81,10 +84,13 @@ struct Kast{
             "kastTag": kastTag,
             "expiration": expiration,
             "privacy": privacy,
-            "kastID" : kastID
+            "kastID" : kastID,
+            "dlURL" : dlURL
         ]
     }
 }
+
+
 
 class createViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -94,11 +100,15 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     let user = Auth.auth().currentUser
     var locationSelected = false
     var tags = ["Study","Sport","Food","Party",
-               "Hang Out"]
+                "Hang Out"]
     var privacy = "Public"
     let imagePick = UIImagePickerController()
+    //add later
     var lclImage = UIImage()
-    var lclImgURL = NSURL()
+    //may be needed later?
+    //var lclImgURL : String = ""
+    var lclDLURL : String = ""
+    var lclImgData = UIImagePNGRepresentation(UIImage())
     let storeRef = Storage.storage().reference(withPath: "Pictures")
     
     @IBOutlet weak var titleField: UITextField!
@@ -119,7 +129,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
         else if sender.selectedSegmentIndex == 1
         {
-                privacy = "Private"
+            privacy = "Private"
         }
         
     }
@@ -128,11 +138,12 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         performSegue(withIdentifier: "create2drop", sender: self)
         
     }
-    
+    //when add picture button is pressed first and image is selected, then address is filled and event is
+    //created, everything works
+    //when add pictures button is pressed after address is filled, address disappears, so must add again
     @IBAction func addPictures(_ sender: Any) {
         
         imageActionSheet()
-        
     }
     
     func imageActionSheet() {
@@ -144,7 +155,8 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             self.loadImageFromGallery()
         }))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Default action"), style: .cancel, handler: { _ in
-            self.dismiss(animated: true, completion: nil)
+            //remove the statement below to stop cancel from sending user to login page
+            //self.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
         
@@ -179,13 +191,16 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         //let imageURL = info[UIImagePickerControllerPHAsset] as? NSURL
-        
+        let imageData = UIImagePNGRepresentation(chosenImage!)!
         lclImage = chosenImage!
-        //lclImgURL = imageURL!
+        lclImgData = imageData
+        //may not be needed, but it's here just in case
+        //lclImgURL = (imageURL?.absoluteString!)!
         
         dismiss(animated: true, completion: nil)
     }
@@ -196,12 +211,15 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     @IBAction func createButton(_ sender: Any) {
-      
+        
         //Need to do some error checking here
         
         var long: Double = 0.0
         var lat: Double = 0.0
         let imageName = NSUUID().uuidString
+        
+        //let storeImage = Storage.storage().reference().child("Pictures").child("\(imageName).png")
+        
         
         if(locationSelected == false)
         {
@@ -224,91 +242,63 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 
                 let ref = self.kastRef.childByAutoId()
                 let createdId = ref.key
-                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy, kid: createdId)
-                
-                
-                ref.setValue(kastItem.toAnyObject())
-                
+                //change to current username and pull all images for each user
                 let kastStoreRef = self.storeRef.child(createdId)
-                
                 let picRef = kastStoreRef.child("\(imageName).png")
-                
+                //guard statement is needed to prevent error of imageData is nil
+                guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
+                self.lclImgData = imageData
                 let metadata = StorageMetadata()
-                
                 metadata.contentType = "image/png"
                 
-                if let uploadData = UIImagePNGRepresentation(self.lclImage){
+                //need to setValue for all objects inside picRef.putData otherwise dlURL does not write to DB
+                picRef.putData(self.lclImgData!, metadata: metadata).observe(.success){(snapshot) in
+                    let dlURL = snapshot.metadata?.downloadURL()?.absoluteString
+                    //will this allow adding multiple dlURLs
+                    let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy, kid: createdId, dl: dlURL!)
                     
-                    picRef.putData(uploadData, metadata: metadata, completion: {(metadata, error) in
-                        
-                        if let error = error{
-                            print(error)
-                            return
-                        }
-                        
-                        //let imgURL = snapshot.metadata?.downloadURL()?.absoluteString
-                        
-                        /*
-                         if let imageURL = metadata?.downloadURL()?.absoluteString{
-                         let value = ["imageURL": imageURL]
-                         //ref.setValue(value)
-                         }
-                         */
-                    })
+                    
+                    ref.setValue(kastItem.toAnyObject())
                     
                 }
                 
-                
                 self.navigationController?.popViewController(animated: true)
-               
+                
             }
             
         } else {
-             var expirationTime = NSDate().addingTimeInterval(Double(self.duration.text!)!*60*60)
+            var expirationTime = NSDate().addingTimeInterval(Double(self.duration.text!)!*60*60)
             
             var interval = expirationTime.timeIntervalSince1970
             
             let ref = kastRef.childByAutoId()
             let createdId = ref.key
-
-            let kastItem = Kast(t: titleField.text!, d: descriptionField.text!, lo: data.long, la: data.lat, us: (user?.uid)!, kt: kastTag.text!,ex: interval, pr: self.privacy, kid: createdId)
-
-            
-            ref.setValue(kastItem.toAnyObject())
-            
             let kastStoreRef = self.storeRef.child(createdId)
-            
             let picRef = kastStoreRef.child("\(imageName).png")
+            guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
+            self.lclImgData = imageData
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/png"
             
-            if let uploadData = UIImagePNGRepresentation(self.lclImage){
+            picRef.putData(self.lclImgData!, metadata: metadata).observe(.success){(snapshot) in
+                let dlURL = snapshot.metadata?.downloadURL()?.absoluteString
                 
-                picRef.putData(uploadData, metadata: nil, completion: {(metadata, error) in
-                    
-                    if let error = error{
-                        print(error)
-                        return
-                    }
-                    /*
-                     if let imageURL = metadata?.downloadURL()?.absoluteString{
-                     let value = ["imageURL": imageURL]
-                     //ref.setValue(value)
-                     }
-                     */
-                })
+                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: self.data.long, la: self.data.lat, us: (self.user?.uid)!, kt: self.kastTag.text!,ex: interval, pr: self.privacy, kid: createdId, dl: dlURL!)
                 
+                ref.setValue(kastItem.toAnyObject())
             }
             
             self.navigationController?.popViewController(animated: true)
         }
     }
     /*
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let maxtext: Int = 140
-        
-        return descriptionField.text.characters.count + (text.characters.count - range.length) <= maxtext
-
-    }
- */
+     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+     let maxtext: Int = 140
+     
+     return descriptionField.text.characters.count + (text.characters.count - range.length) <= maxtext
+     
+     }
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -318,13 +308,14 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         city.delegate = self
         zip.delegate = self
         state.delegate = self
+        //add later
         imagePick.delegate = self
-      
+        
         
         //descriptionField.delegate = self
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -376,15 +367,15 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 // Ensures that pressing "Return" closes keyboard
@@ -394,3 +385,4 @@ extension createViewController {
         return true
     }
 }
+

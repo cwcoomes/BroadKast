@@ -103,6 +103,10 @@ class landingTableViewController: UITableViewController {
         {
             performSegue(withIdentifier: "landing2contacts", sender: self)
         }
+        else if(indexPath.row == 4)
+        {
+            performSegue(withIdentifier: "landing2pictures", sender: self)
+        }
         else if(indexPath.row == 6)
         {
             let firebaseAuth = Auth.auth()
