@@ -270,6 +270,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                         temporaryLocation.expiration = item.value as! Double
                     case "privacy":
                         temporaryLocation.privacy = item.value as! String
+                    case "dlURL":
+                        temporaryLocation.dlURL = item.value as! String
                     default:
                         print(item.key + " does not contain anything ERROR")
                     }

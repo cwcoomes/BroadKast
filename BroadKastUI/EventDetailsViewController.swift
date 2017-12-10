@@ -26,16 +26,7 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var eventDescription: UITextView!
    
     @IBAction func followButton(_ sender: Any) {
-        if(followButtonObject.titleLabel!.text == "Unfollow")
-        {
-            followButtonObject.titleLabel!.text = "Follow"
-            followButtonObject.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
-        }
-        if(followButtonObject.titleLabel!.text == "Follow")
-        {
-            followButtonObject.titleLabel!.text = "Unfollow"
-            followButtonObject.backgroundColor = UIColor.gray
-        }
+        
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
         var followedList = currentUser.child("followedKasts")
@@ -49,7 +40,7 @@ class EventDetailsViewController: UIViewController {
             if snapshot.hasChild(self.eventToView.kastID)
             {
                 //code if kast is already followed
-                print("trying to remove")
+                
                
                 //followedList.child(self.eventToView.kastID).removeValue()
                 
@@ -79,7 +70,7 @@ class EventDetailsViewController: UIViewController {
             }
             else
             {
-                print("trying to add")
+               
                 //if not yet followed
                 let newFriend = followedList.child(self.eventToView.kastID)
                 newFriend.setValue(self.eventToView.kastID)
@@ -91,14 +82,11 @@ class EventDetailsViewController: UIViewController {
             
         })
   
+        navigationController?.popViewController(animated: true)
        // followedList.removeAllObservers()
         
     }
     
-    func addToFirebase()
-    {
-        
-    }
     
     
     var eventToView = EventData()
@@ -169,7 +157,7 @@ class EventDetailsViewController: UIViewController {
     @objc func modifyButton()
     {
         var bool = false
-        
+        print("modifying button")
         kastArray.forEach { (kastid) in
             
             if(kastid == eventToView.kastID)
