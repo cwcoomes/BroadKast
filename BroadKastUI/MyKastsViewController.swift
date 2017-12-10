@@ -140,11 +140,6 @@ class MyKastsViewController: UITableViewController {
                     }
                 })
                 
-                
-                
-                
-                
-                
                 self.events.append(temporaryLocation)
                
             })

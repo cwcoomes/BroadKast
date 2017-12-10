@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6V-db-lai">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6V-db-lai">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -322,10 +322,13 @@
                             <outlet property="delegate" destination="q7D-jq-dPn" id="PYP-Oq-dbP"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="gau-T6-aJo" kind="show" identifier="contacts2details" id="3Hf-82-NQT"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vlR-q1-ctN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4387" y="-2011"/>
+            <point key="canvasLocation" x="5137" y="-1194"/>
         </scene>
         <!--Add View Controller-->
         <scene sceneID="Z8Q-1m-gGX">
@@ -921,7 +924,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No Description Available" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzn-sm-KDz">
-                                <rect key="frame" x="20" y="159.5" width="335" height="487.5"/>
+                                <rect key="frame" x="20" y="159.5" width="335" height="443.5"/>
                                 <color key="backgroundColor" red="0.7930746675" green="0.88495934009999999" blue="0.97664517159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -959,7 +962,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GPb-A8-YnQ">
-                                <rect key="frame" x="87" y="462" width="200" height="150"/>
+                                <rect key="frame" x="87" y="418" width="200" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="L7W-Tx-QNb"/>
                                     <constraint firstAttribute="height" constant="150" id="thU-Bi-7TG"/>
@@ -1136,7 +1139,7 @@
         <image name="BroadKastBlueLogo1" width="634" height="642"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aRf-Ac-nqE"/>
+        <segue reference="3Hf-82-NQT"/>
         <segue reference="4BU-gV-7x0"/>
         <segue reference="L76-bw-aA8"/>
     </inferredMetricsTieBreakers>

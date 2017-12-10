@@ -13,7 +13,9 @@ import SwipeCellKit
 class ContactKastsTableViewController: UITableViewController {
     
     var user = String()
-    var kasts = [String]()
+    var kasts = [EventData]()
+    
+    var clickedEvent = EventData()
     
     override func viewDidLoad()
     {
@@ -34,7 +36,19 @@ class ContactKastsTableViewController: UITableViewController {
                         {
                             if (NSDate().timeIntervalSince1970 <= (kast as! DataSnapshot).childSnapshot(forPath: "expiration").value as! Double)
                             {
-                                self.kasts.append((kast as! DataSnapshot).childSnapshot(forPath: "title").value as! String)
+                                var temporaryKast = EventData()
+                                temporaryKast.title = (kast as! DataSnapshot).childSnapshot(forPath: "title").value as! String
+                                temporaryKast.description = (kast as! DataSnapshot).childSnapshot(forPath: "description").value as! String
+                                temporaryKast.KastTag = (kast as! DataSnapshot).childSnapshot(forPath: "kastTag").value as! String
+                                temporaryKast.latitude = (kast as! DataSnapshot).childSnapshot(forPath: "latitude").value as! Double
+                                temporaryKast.longitude = (kast as! DataSnapshot).childSnapshot(forPath: "longitude").value as! Double
+                                temporaryKast.user = (kast as! DataSnapshot).childSnapshot(forPath: "user").value as! String
+                                temporaryKast.kastID = (kast as! DataSnapshot).childSnapshot(forPath: "kastID").value as! String
+                                temporaryKast.expiration = (kast as! DataSnapshot).childSnapshot(forPath: "expiration").value as! Double
+                                temporaryKast.privacy = (kast as! DataSnapshot).childSnapshot(forPath: "privacy").value as! String
+                                temporaryKast.dlURL = (kast as! DataSnapshot).childSnapshot(forPath: "dlURL").value as! String
+
+                                self.kasts.append(temporaryKast)
                                 print(self.kasts)
                                 DispatchQueue.main.async { self.tableView.reloadData() }
                             }
@@ -48,7 +62,10 @@ class ContactKastsTableViewController: UITableViewController {
         })
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        clickedEvent = kasts[indexPath.row]
+        performSegue(withIdentifier: "contacts2details", sender: self)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -70,11 +87,18 @@ class ContactKastsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "kastCell", for: indexPath)
-        cell.textLabel?.text = kasts[indexPath.row]
+        cell.textLabel?.text = kasts[indexPath.row].title
         
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "contacts2details")
+        {
+            let dvc = segue.destination as! EventDetailsViewController
+            dvc.eventToView = clickedEvent
+        }
+    }
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
