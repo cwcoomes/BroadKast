@@ -12,7 +12,7 @@ import FirebaseAuth
 import SwipeCellKit
 
 class landingTableViewController: UITableViewController {
-    var options = ["CreateKast", "MyKasts","Map", "People", "Pictures", "Settings", "Logout"]
+    var options = ["CreateKast", "MyKasts","Map", "People",  "Logout"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,10 +63,6 @@ class landingTableViewController: UITableViewController {
         case 3:
             cell.cellImage.image = UIImage(named: "сontacts")
         case 4:
-            cell.cellImage.image = UIImage(named: "icons8-camera")
-        case 5:
-            cell.cellImage.image = UIImage(named: "icons8-settings")
-        case 6:
             cell.cellImage.image = UIImage(named: "exit")
         default:
             break
@@ -105,11 +101,7 @@ class landingTableViewController: UITableViewController {
         }
         else if(indexPath.row == 4)
         {
-            performSegue(withIdentifier: "landing2pictures", sender: self)
-        }
-        else if(indexPath.row == 6)
-        {
-            let firebaseAuth = Auth.auth()
+             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
             } catch let signOutError as NSError {
