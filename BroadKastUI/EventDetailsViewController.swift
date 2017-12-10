@@ -8,18 +8,21 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseStorage
 import Firebase
 
 
 
-
 class EventDetailsViewController: UIViewController {
-   
+    var eventToView = EventData()
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var tag: UILabel!
     let userRef = Database.database().reference(withPath: "Users")
+    let dlRef = Database.database().reference(withPath: "Kast")
+    let imgRef = Storage.storage().reference(withPath: "Pictures")
     var kastArray = [String]()
     
+    @IBOutlet weak var imgView: UIImageView!
     
     
     @IBOutlet weak var followButtonObject: RoundButton!
@@ -88,8 +91,31 @@ class EventDetailsViewController: UIViewController {
     }
     
     
+    func writeToImgView(){
+        print("Function called")
+        let curDBRef = self.dlRef.child(eventToView.kastID).child("dlURL")
+        print(curDBRef)
+        let curSTRef = self.imgRef.child(eventToView.kastID).child("\(eventToView.kastID).png")
+        print(curSTRef)
+        curDBRef.observe(.value, with: { (snapshot) in
+            
+            let curDLURL = snapshot.value as! String
+            //print(curDLURL)
+            let curIMG = Storage.storage().reference(forURL: curDLURL)
+            
+            //curIMG.getdata
+            
+            curIMG.getData(maxSize: 1 * 5000 * 5000 ) {(data,error) -> Void in
+                //print("error: \(error!)")
+                let dlPIC = UIImage(data: data!)
+                self.imgView.contentMode = UIViewContentMode.scaleAspectFit
+                self.imgView.image = dlPIC
+                print("setting image")
+            }
+            
+        })
+    }
     
-    var eventToView = EventData()
     
     
     override func viewDidLoad() {
@@ -98,7 +124,7 @@ class EventDetailsViewController: UIViewController {
         eventTitle.text = eventToView.title
         eventDescription.text = eventToView.description
         tag.text = eventToView.KastTag
-        
+        writeToImgView()
         //pull followed kasts
         
         

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6V-db-lai">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6V-db-lai">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -921,7 +921,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No Description Available" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzn-sm-KDz">
-                                <rect key="frame" x="20" y="160" width="335" height="487"/>
+                                <rect key="frame" x="20" y="159.5" width="335" height="487.5"/>
                                 <color key="backgroundColor" red="0.7930746675" green="0.88495934009999999" blue="0.97664517159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -943,9 +943,8 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tc5-Mi-cZl" customClass="RoundButton" customModule="BroadKastUI" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tc5-Mi-cZl" customClass="RoundButton" customModule="BroadKastUI" customModuleProvider="target">
                                 <rect key="frame" x="138" y="388" width="99" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.00092412997037172318" green="0.22254270315170288" blue="0.2935011088848114" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Follow">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -959,16 +958,27 @@
                                     <action selector="followButton:" destination="gau-T6-aJo" eventType="touchUpInside" id="uH8-KU-HOu"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GPb-A8-YnQ">
+                                <rect key="frame" x="87" y="462" width="200" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="L7W-Tx-QNb"/>
+                                    <constraint firstAttribute="height" constant="150" id="thU-Bi-7TG"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.7930746675" green="0.88495934009999999" blue="0.97664517159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="cYA-kw-wk3" firstAttribute="leading" secondItem="Dwa-NX-h7s" secondAttribute="leading" constant="20" id="53x-br-V6H"/>
+                            <constraint firstItem="Dwa-NX-h7s" firstAttribute="bottom" secondItem="GPb-A8-YnQ" secondAttribute="bottom" constant="55" id="6zZ-2j-HAR"/>
                             <constraint firstItem="Dwa-NX-h7s" firstAttribute="trailing" secondItem="cYA-kw-wk3" secondAttribute="trailing" constant="20" id="I2t-Ax-uJA"/>
+                            <constraint firstItem="GPb-A8-YnQ" firstAttribute="centerX" secondItem="Bzn-sm-KDz" secondAttribute="centerX" id="PZs-yx-tA1"/>
                             <constraint firstItem="Bzn-sm-KDz" firstAttribute="leading" secondItem="Dwa-NX-h7s" secondAttribute="leading" constant="20" id="Wqj-cz-rlc"/>
+                            <constraint firstItem="GPb-A8-YnQ" firstAttribute="top" secondItem="tc5-Mi-cZl" secondAttribute="bottom" constant="44" id="dAN-qy-d4s"/>
                             <constraint firstItem="Bzn-sm-KDz" firstAttribute="top" secondItem="cYA-kw-wk3" secondAttribute="bottom" constant="25.5" id="fwo-Z6-uO5"/>
                             <constraint firstItem="Dwa-NX-h7s" firstAttribute="bottom" secondItem="Bzn-sm-KDz" secondAttribute="bottom" constant="20" id="jJ7-iF-yfa"/>
                             <constraint firstItem="cYA-kw-wk3" firstAttribute="top" secondItem="Dwa-NX-h7s" secondAttribute="top" constant="20" id="koV-iK-MjU"/>
                             <constraint firstItem="Dwa-NX-h7s" firstAttribute="trailing" secondItem="Bzn-sm-KDz" secondAttribute="trailing" constant="20" id="tpx-Vb-CQ6"/>
+                            <constraint firstItem="GPb-A8-YnQ" firstAttribute="centerX" secondItem="tc5-Mi-cZl" secondAttribute="centerX" id="vGD-hg-nl8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Dwa-NX-h7s"/>
                     </view>
@@ -976,6 +986,7 @@
                         <outlet property="eventDescription" destination="Bzn-sm-KDz" id="FE6-Qw-DoS"/>
                         <outlet property="eventTitle" destination="WpY-0c-cNB" id="ujg-Dd-odc"/>
                         <outlet property="followButtonObject" destination="tc5-Mi-cZl" id="3XJ-E5-Us1"/>
+                        <outlet property="imgView" destination="GPb-A8-YnQ" id="cDD-T3-YkJ"/>
                         <outlet property="tag" destination="aut-AK-HJa" id="FGc-Rb-CFY"/>
                     </connections>
                 </viewController>
