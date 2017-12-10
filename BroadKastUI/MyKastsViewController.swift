@@ -21,7 +21,10 @@ class MyKastsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        events.removeAll()
+        followedKasts.removeAll()
+        myKasts.removeAll()
+        kastArray.removeAll()
         retrieveDataEvents()
         
         NotificationCenter.default.addObserver(self, selector: #selector(createArray), name: Notification.Name("eventsReady"), object: nil)
@@ -31,6 +34,16 @@ class MyKastsViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        events.removeAll()
+        followedKasts.removeAll()
+        myKasts.removeAll()
+        kastArray.removeAll()
+        retrieveDataEvents()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(createArray), name: Notification.Name("eventsReady"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(followedKastArray), name: Notification.Name("followsReady"), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,7 +87,10 @@ class MyKastsViewController: UITableViewController {
     func retrieveDataEvents()
     {
        
-        
+        events.removeAll()
+        myKasts.removeAll()
+        followedKasts.removeAll()
+        kastArray.removeAll()
         //Declare/initialize the dictionary of data, essentially the bulk of the json
         var dataDict:[String: Any] = [:]
         
@@ -126,9 +142,9 @@ class MyKastsViewController: UITableViewController {
                 
                 
                 self.events.append(temporaryLocation)
-                print("events count: \(self.events.count)")
+               
             })
-            print("sending notification")
+            
             NotificationCenter.default.post(name: Notification.Name("eventsReady"), object: nil)
         })
         
@@ -141,12 +157,15 @@ class MyKastsViewController: UITableViewController {
     @objc func followedKastArray()
     {
         let user = Auth.auth().currentUser!
+        myKasts.removeAll()
+        followedKasts.removeAll()
         events.forEach { (kast) in
             if(kast.user == user.displayName!)
             {
                 print("user matched")
                 myKasts.append(kast)
             }
+            print(kastArray)
             kastArray.forEach({ (kid) in
                 if(kid == kast.kastID)
                 {
@@ -170,7 +189,7 @@ class MyKastsViewController: UITableViewController {
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
         let followedList = currentUser.child("followedKasts")
-        
+        kastArray.removeAll()
         followedList.observe(.value, with: {snapshot in
             
             snapshot.children.forEach({ (kastID) in
@@ -180,6 +199,7 @@ class MyKastsViewController: UITableViewController {
                 temp = (kastID as! DataSnapshot).key
                 
                 self.kastArray.append(temp)
+                print("new kast array \(self.kastArray)")
                 
             })
             NotificationCenter.default.post(name: Notification.Name("followsReady"), object: nil)
