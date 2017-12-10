@@ -26,21 +26,30 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var eventDescription: UITextView!
    
     @IBAction func followButton(_ sender: Any) {
-        
+        if(followButtonObject.titleLabel!.text == "Unfollow")
+        {
+            followButtonObject.titleLabel!.text = "Follow"
+            followButtonObject.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        }
+        if(followButtonObject.titleLabel!.text == "Follow")
+        {
+            followButtonObject.titleLabel!.text = "Unfollow"
+            followButtonObject.backgroundColor = UIColor.gray
+        }
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
         var followedList = currentUser.child("followedKasts")
         
         
-        var flag = false
+       
         
         followedList.observe(.value, with: { snapshot in
-            flag = false
+            
             
             if snapshot.hasChild(self.eventToView.kastID)
             {
                 //code if kast is already followed
-                
+                print("trying to remove")
                
                 //followedList.child(self.eventToView.kastID).removeValue()
                 
@@ -53,11 +62,11 @@ class EventDetailsViewController: UIViewController {
                     }
                 })
                 
-                flag = true
+                
                 self.pullData()
                 
-                currentUser.removeAllObservers()
-                followedList.removeAllObservers()
+//                currentUser.removeAllObservers()
+//                followedList.removeAllObservers()
                 
             }
             else if (self.eventToView.user == user.displayName)
@@ -66,16 +75,18 @@ class EventDetailsViewController: UIViewController {
                 let alert = UIAlertController(title: "Oh no! " , message: "You cannot follow your own Kast.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+                self.pullData()
             }
             else
             {
+                print("trying to add")
                 //if not yet followed
                 let newFriend = followedList.child(self.eventToView.kastID)
                 newFriend.setValue(self.eventToView.kastID)
                 self.pullData()
-                followedList.removeAllObservers()
-                currentUser.removeAllObservers()
-                
+//                followedList.removeAllObservers()
+//                currentUser.removeAllObservers()
+//
             }
             
         })
@@ -147,6 +158,8 @@ class EventDetailsViewController: UIViewController {
                 //print("new kast array \(self.kastArray)")
                 
             })
+            followedList.removeAllObservers()
+            currentUser.removeAllObservers()
             //print("KastArrayAfterCreatingArray \(self.kastArray)")
             NotificationCenter.default.post(name: Notification.Name("followArrayComplete"), object: nil)
         })
@@ -155,12 +168,13 @@ class EventDetailsViewController: UIViewController {
     
     @objc func modifyButton()
     {
-        
+        var bool = false
         
         kastArray.forEach { (kastid) in
             
             if(kastid == eventToView.kastID)
             {
+                bool = true
                 //modify button
                 print("should change to unfollow")
                 followButtonObject.titleLabel!.text = "Unfollow"
@@ -168,6 +182,11 @@ class EventDetailsViewController: UIViewController {
             }
             
         }
+//        if(!bool)
+//        {
+//            followButtonObject.titleLabel!.text = "Follow"
+//            followButtonObject.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+//        }
         
     }
     override func didReceiveMemoryWarning() {
