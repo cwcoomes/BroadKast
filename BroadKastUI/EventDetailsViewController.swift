@@ -11,30 +11,7 @@ import FirebaseDatabase
 import Firebase
 
 
-struct followedKast
-{
-    var kastID: String
-    let ref: DatabaseReference?
-    
-    init(kid:String)
-    {
-        self.kastID = kid
-        self.ref = nil
-    }
-    
-    init(snapshot: DataSnapshot)
-    {
-        kastID = snapshot.key
-        let snapshotValue = snapshot.value as! [String: AnyObject]
-        kastID = snapshotValue["kastID"] as! String
-        ref = snapshot.ref
-    }
-    
-    func toAnyObject() -> Any
-    {
-        return [kastID  : kastID]
-    }
-}
+
 
 class EventDetailsViewController: UIViewController {
    
@@ -49,25 +26,34 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var eventDescription: UITextView!
    
     @IBAction func followButton(_ sender: Any) {
-        
+        if(followButtonObject.titleLabel!.text == "Unfollow")
+        {
+            followButtonObject.titleLabel!.text = "Follow"
+            followButtonObject.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+        }
+        if(followButtonObject.titleLabel!.text == "Follow")
+        {
+            followButtonObject.titleLabel!.text = "Unfollow"
+            followButtonObject.backgroundColor = UIColor.gray
+        }
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
         var followedList = currentUser.child("followedKasts")
-        var followedKastItem = followedKast(kid: eventToView.kastID)
         
-        var flag = false
+        
+       
         
         followedList.observe(.value, with: { snapshot in
-            flag = false
+            
             
             if snapshot.hasChild(self.eventToView.kastID)
             {
                 //code if kast is already followed
-                
+                print("trying to remove")
                
                 //followedList.child(self.eventToView.kastID).removeValue()
                 
-                followedList.child(followedKastItem.kastID).removeValue(completionBlock: { (error, refer) in
+                followedList.child(self.eventToView.kastID).removeValue(completionBlock: { (error, refer) in
                     if error != nil { print(error as Any) }
                     else
                     {
@@ -76,11 +62,11 @@ class EventDetailsViewController: UIViewController {
                     }
                 })
                 
-                flag = true
+                
                 self.pullData()
                 
-                currentUser.removeAllObservers()
-                followedList.removeAllObservers()
+//                currentUser.removeAllObservers()
+//                followedList.removeAllObservers()
                 
             }
             else if (self.eventToView.user == user.displayName)
@@ -89,16 +75,18 @@ class EventDetailsViewController: UIViewController {
                 let alert = UIAlertController(title: "Oh no! " , message: "You cannot follow your own Kast.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+                self.pullData()
             }
-            if(flag == false)
+            else
             {
+                print("trying to add")
                 //if not yet followed
                 let newFriend = followedList.child(self.eventToView.kastID)
-                    newFriend.setValue(followedKastItem.toAnyObject())
+                newFriend.setValue(self.eventToView.kastID)
                 self.pullData()
-                followedList.removeAllObservers()
-                currentUser.removeAllObservers()
-                
+//                followedList.removeAllObservers()
+//                currentUser.removeAllObservers()
+//
             }
             
         })
@@ -143,19 +131,17 @@ class EventDetailsViewController: UIViewController {
     
     func pullData()
     {
-        NotificationCenter.default.addObserver(self, selector: #selector(EventDetailsViewController.modifyButton), name: Notification.Name("weReady"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(EventDetailsViewController.modifyButton), name: Notification.Name("followArrayComplete"), object: nil)
         
         createArray()
     }
     
-    func createArray()
+    @objc func createArray()
     {
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
         let followedList = currentUser.child("followedKasts")
-        
         kastArray.removeAll()
-        
         followedList.observe(.value, with: {snapshot in
             
             snapshot.children.forEach({ (kastID) in
@@ -164,26 +150,31 @@ class EventDetailsViewController: UIViewController {
                 
                 temp = (kastID as! DataSnapshot).key
                 
-                self.kastArray.append(temp)
+                if(!self.kastArray.contains(temp))
+                {
+                    self.kastArray.append(temp)
+                    
+                }
+                //print("new kast array \(self.kastArray)")
                 
             })
             followedList.removeAllObservers()
-            print(self.kastArray)
-            print("Sending weReady")
-             NotificationCenter.default.post(name: Notification.Name("weReady"), object: nil)
-            
+            currentUser.removeAllObservers()
+            //print("KastArrayAfterCreatingArray \(self.kastArray)")
+            NotificationCenter.default.post(name: Notification.Name("followArrayComplete"), object: nil)
         })
         
     }
     
     @objc func modifyButton()
     {
-        
+        var bool = false
         
         kastArray.forEach { (kastid) in
             
             if(kastid == eventToView.kastID)
             {
+                bool = true
                 //modify button
                 print("should change to unfollow")
                 followButtonObject.titleLabel!.text = "Unfollow"
@@ -191,6 +182,11 @@ class EventDetailsViewController: UIViewController {
             }
             
         }
+//        if(!bool)
+//        {
+//            followButtonObject.titleLabel!.text = "Follow"
+//            followButtonObject.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
+//        }
         
     }
     override func didReceiveMemoryWarning() {

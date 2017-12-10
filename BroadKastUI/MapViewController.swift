@@ -29,7 +29,7 @@ struct EventData : Codable {
     var user : String
     var expiration: Double
     var privacy: String
-    
+    var dlURL: String
     var kastID : String
     
     init() {
@@ -42,6 +42,7 @@ struct EventData : Codable {
         expiration = 0
         privacy = ""
         kastID = ""
+        dlURL = ""
     }
 }
 

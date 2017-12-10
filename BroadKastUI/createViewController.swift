@@ -105,6 +105,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     let imagePick = UIImagePickerController()
     //add later
     var lclImage = UIImage()
+    var picSelected = false
     //may be needed later?
     //var lclImgURL : String = ""
     var lclDLURL : String = ""
@@ -142,7 +143,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     //created, everything works
     //when add pictures button is pressed after address is filled, address disappears, so must add again
     @IBAction func addPictures(_ sender: Any) {
-        
+        picSelected = true
         imageActionSheet()
     }
     
@@ -216,7 +217,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         var long: Double = 0.0
         var lat: Double = 0.0
-        let imageName = NSUUID().uuidString
+        //let imageName = NSUUID().uuidString
         
         //let storeImage = Storage.storage().reference().child("Pictures").child("\(imageName).png")
         
@@ -242,25 +243,42 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 
                 let ref = self.kastRef.childByAutoId()
                 let createdId = ref.key
-                //change to current username and pull all images for each user
-                let kastStoreRef = self.storeRef.child(createdId)
-                let picRef = kastStoreRef.child("\(imageName).png")
-                //guard statement is needed to prevent error of imageData is nil
-                guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
-                self.lclImgData = imageData
-                let metadata = StorageMetadata()
-                metadata.contentType = "image/png"
+//                //change to current username and pull all images for each user
+//                let kastStoreRef = self.storeRef.child(createdId)
+//                let picRef = kastStoreRef.child("\(createdId).png")
+//                //guard statement is needed to prevent error of imageData is nil
+//                guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
+//                self.lclImgData = imageData
+//                let metadata = StorageMetadata()
+//                metadata.contentType = "image/png"
                 
                 //need to setValue for all objects inside picRef.putData otherwise dlURL does not write to DB
-                picRef.putData(self.lclImgData!, metadata: metadata).observe(.success){(snapshot) in
-                    let dlURL = snapshot.metadata?.downloadURL()?.absoluteString
-                    //will this allow adding multiple dlURLs
-                    let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy, kid: createdId, dl: dlURL!)
-                    
-                    
-                    ref.setValue(kastItem.toAnyObject())
-                    
+                if(self.picSelected)
+                {
+                    //change to current username and pull all images for each user
+                    let kastStoreRef = self.storeRef.child(createdId)
+                    let picRef = kastStoreRef.child("\(createdId).png")
+                    //guard statement is needed to prevent error of imageData is nil
+                    guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
+                    self.lclImgData = imageData
+                    let metadata = StorageMetadata()
+                    metadata.contentType = "image/png"
+                    picRef.putData(self.lclImgData!, metadata: metadata).observe(.success){(snapshot) in
+                        let dlURL = snapshot.metadata?.downloadURL()?.absoluteString
+                        //will this allow adding multiple dlURLs
+                        
+                        let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy, kid: createdId, dl: dlURL!)
+                        
+                        
+                        ref.setValue(kastItem.toAnyObject())
+                        
+                    }
                 }
+                else{
+                    let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy, kid: createdId, dl: "")
+                    ref.setValue(kastItem.toAnyObject())
+                }
+                
                 
                 self.navigationController?.popViewController(animated: true)
                 
@@ -273,21 +291,32 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             
             let ref = kastRef.childByAutoId()
             let createdId = ref.key
-            let kastStoreRef = self.storeRef.child(createdId)
-            let picRef = kastStoreRef.child("\(imageName).png")
-            guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
-            self.lclImgData = imageData
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/png"
-            
-            picRef.putData(self.lclImgData!, metadata: metadata).observe(.success){(snapshot) in
-                let dlURL = snapshot.metadata?.downloadURL()?.absoluteString
+//            let kastStoreRef = self.storeRef.child(createdId)
+//            let picRef = kastStoreRef.child("\(createdId).png")
+//            guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
+//            self.lclImgData = imageData
+//            let metadata = StorageMetadata()
+//            metadata.contentType = "image/png"
+            if(self.picSelected)
+            {
+                let kastStoreRef = self.storeRef.child(createdId)
+                let picRef = kastStoreRef.child("\(createdId).png")
+                guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
+                self.lclImgData = imageData
+                let metadata = StorageMetadata()
+                metadata.contentType = "image/png"
                 
-                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: self.data.long, la: self.data.lat, us: (self.user?.uid)!, kt: self.kastTag.text!,ex: interval, pr: self.privacy, kid: createdId, dl: dlURL!)
-                
+                picRef.putData(self.lclImgData!, metadata: metadata).observe(.success){(snapshot) in
+                    let dlURL = snapshot.metadata?.downloadURL()?.absoluteString
+                    
+                    let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: self.data.long, la: self.data.lat, us: (self.user?.uid)!, kt: self.kastTag.text!,ex: interval, pr: self.privacy, kid: createdId, dl: dlURL!)
+                    
+                    ref.setValue(kastItem.toAnyObject())
+                }
+            }else{
+                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy, kid: createdId, dl: "")
                 ref.setValue(kastItem.toAnyObject())
             }
-            
             self.navigationController?.popViewController(animated: true)
         }
     }
