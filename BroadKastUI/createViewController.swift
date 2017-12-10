@@ -217,7 +217,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         var long: Double = 0.0
         var lat: Double = 0.0
-        let imageName = NSUUID().uuidString
+        //let imageName = NSUUID().uuidString
         
         //let storeImage = Storage.storage().reference().child("Pictures").child("\(imageName).png")
         
@@ -245,7 +245,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 let createdId = ref.key
 //                //change to current username and pull all images for each user
 //                let kastStoreRef = self.storeRef.child(createdId)
-//                let picRef = kastStoreRef.child("\(imageName).png")
+//                let picRef = kastStoreRef.child("\(createdId).png")
 //                //guard statement is needed to prevent error of imageData is nil
 //                guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
 //                self.lclImgData = imageData
@@ -257,7 +257,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 {
                     //change to current username and pull all images for each user
                     let kastStoreRef = self.storeRef.child(createdId)
-                    let picRef = kastStoreRef.child("\(imageName).png")
+                    let picRef = kastStoreRef.child("\(createdId).png")
                     //guard statement is needed to prevent error of imageData is nil
                     guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
                     self.lclImgData = imageData
@@ -292,7 +292,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             let ref = kastRef.childByAutoId()
             let createdId = ref.key
 //            let kastStoreRef = self.storeRef.child(createdId)
-//            let picRef = kastStoreRef.child("\(imageName).png")
+//            let picRef = kastStoreRef.child("\(createdId).png")
 //            guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
 //            self.lclImgData = imageData
 //            let metadata = StorageMetadata()
@@ -300,7 +300,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             if(self.picSelected)
             {
                 let kastStoreRef = self.storeRef.child(createdId)
-                let picRef = kastStoreRef.child("\(imageName).png")
+                let picRef = kastStoreRef.child("\(createdId).png")
                 guard let imageData = UIImagePNGRepresentation(self.lclImage) else {return}
                 self.lclImgData = imageData
                 let metadata = StorageMetadata()
