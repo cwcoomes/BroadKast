@@ -52,28 +52,34 @@ class EventDetailsViewController: UIViewController {
         
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
-        let followedList = currentUser.child("followedKasts")
-        let followedKastItem = followedKast(kid: eventToView.kastID)
+        var followedList = currentUser.child("followedKasts")
+        var followedKastItem = followedKast(kid: eventToView.kastID)
+        
         var flag = false
+        
         followedList.observe(.value, with: { snapshot in
             flag = false
+            
             if snapshot.hasChild(self.eventToView.kastID)
             {
                 //code if kast is already followed
                 
                
-                followedList.child(self.eventToView.kastID).removeValue()
+                //followedList.child(self.eventToView.kastID).removeValue()
                 
-//                followedList.child(followedKastItem.kastID).removeValue(completionBlock: { (error, refer) in
-//                    if error != nil { print(error as Any) }
-//                    else
-//                    {
-//                        print(refer)
-//                        print("Child Removed Correctly")
-//                    }
-//                })
+                followedList.child(followedKastItem.kastID).removeValue(completionBlock: { (error, refer) in
+                    if error != nil { print(error as Any) }
+                    else
+                    {
+                        print(refer)
+                        print("Child Removed Correctly")
+                    }
+                })
+                
                 flag = true
                 self.pullData()
+                
+                currentUser.removeAllObservers()
                 followedList.removeAllObservers()
                 
             }
@@ -91,6 +97,7 @@ class EventDetailsViewController: UIViewController {
                     newFriend.setValue(followedKastItem.toAnyObject())
                 self.pullData()
                 followedList.removeAllObservers()
+                currentUser.removeAllObservers()
                 
             }
             
@@ -146,6 +153,7 @@ class EventDetailsViewController: UIViewController {
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
         let followedList = currentUser.child("followedKasts")
+        
         kastArray.removeAll()
         
         followedList.observe(.value, with: {snapshot in

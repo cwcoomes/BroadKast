@@ -182,10 +182,10 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        let imageURL = info[UIImagePickerControllerPHAsset] as? NSURL
+        //let imageURL = info[UIImagePickerControllerPHAsset] as? NSURL
         
         lclImage = chosenImage!
-        lclImgURL = imageURL!
+        //lclImgURL = imageURL!
         
         dismiss(animated: true, completion: nil)
     }
