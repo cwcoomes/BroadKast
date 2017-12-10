@@ -23,6 +23,7 @@ class ContactsViewController: UITableViewController
     {
         super.viewDidLoad()
         users.removeAll()
+        
 
         self.title = "Following"
         let rightButtonItem = UIBarButtonItem.init(
@@ -34,6 +35,10 @@ class ContactsViewController: UITableViewController
         self.navigationItem.rightBarButtonItem = rightButtonItem
         
         retrieveDataEvents()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewDidLoad()
     }
     
     func retrieveDataEvents()
@@ -52,6 +57,7 @@ class ContactsViewController: UITableViewController
                         dataDict = snapshot.value as! [String: Any]
                         dataDict.forEach({ (user) in
                             self.users.append(user.key)
+                            self.users.sort()
                             print("user count: \(self.users.count)")
                         })
                         
@@ -60,15 +66,19 @@ class ContactsViewController: UITableViewController
                     else
                     {
                         self.users.append("Not following anyone.")
+                        self.users.sort()
                         DispatchQueue.main.async { self.tableView.reloadData() }
                     }
+                    Database.database().reference().child("Users").child(userID!).child("contacts").removeAllObservers()
                 })
             }
             else
             {
                 self.users.append("Not following anyone.")
+                self.users.sort()
                 DispatchQueue.main.async { self.tableView.reloadData() }
             }
+            Database.database().reference().child("Users").removeAllObservers()
         })
         
     }
@@ -120,6 +130,7 @@ class ContactsViewController: UITableViewController
                 print("Child Removed Correctly")
             }
         })
+        userRef.child(user.displayName!).child("contacts").child(displayNameOfUserToRemove).removeAllObservers()
         let updatedUsers = users.filter{$0 != displayNameOfUserToRemove}
         users = updatedUsers.sorted()
         DispatchQueue.main.async { self.tableView.reloadData() }

@@ -6,19 +6,47 @@
 //
 
 import UIKit
+import Firebase
+import SwipeCellKit
+
 
 class ContactKastsTableViewController: UITableViewController {
     
     var user = String()
+    var kasts = [String]()
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        retrieveDataEvents()
+    }
+    
+    func retrieveDataEvents()
+    {
+        Database.database().reference().child("Kast").observe(.value, with: {
+            snapshot in
+            snapshot.children.forEach({ (kast) in
+                (kast as! DataSnapshot).children.forEach({ (kastKey) in
+                    if ( (kastKey as! DataSnapshot).key == "user")
+                    {
+                        if ((kastKey as! DataSnapshot).value as! String == self.user)
+                        {
+                            if (NSDate().timeIntervalSince1970 <= (kast as! DataSnapshot).childSnapshot(forPath: "expiration").value as! Double)
+                            {
+                                self.kasts.append((kast as! DataSnapshot).childSnapshot(forPath: "title").value as! String)
+                                print(self.kasts)
+                                DispatchQueue.main.async { self.tableView.reloadData() }
+                            }
+                        }
+                    }
+                })
+                DispatchQueue.main.async { self.tableView.reloadData() }
+            })
+            DispatchQueue.main.async { self.tableView.reloadData() }
+            Database.database().reference().child("Kast").removeAllObservers()
+        })
+        DispatchQueue.main.async { self.tableView.reloadData() }
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,23 +58,22 @@ class ContactKastsTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        print(kasts.count)
+        return kasts.count
     }
     
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "kastCell", for: indexPath)
+        cell.textLabel?.text = kasts[indexPath.row]
+        
+        return cell
+    }
     
     /*
      // Override to support conditional editing of the table view.
