@@ -102,8 +102,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     {
         super.viewDidLoad()
        
-        // Filter option in navigation bar
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(selectFilter))
+        /* Filter option in navigation bar
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(selectFilter)) */
         
         map.delegate = self
         manager.delegate = self
@@ -144,8 +144,6 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             var currentTime = NSDate().timeIntervalSince1970
             
-            ["Study","Sport","Food","Party",
-             "Hang Out"]
 
             // If a filter was selected.
             if (didSelectFilter == true)
@@ -353,16 +351,16 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             dvc.filters = filters
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    @IBAction func PrivateButton(_ sender: PrivacyButton) {
+        
     }
-    */
+    
+    @IBAction func ActivateFilters(_ sender: FilterButton) {
+        didSelectFilter = true
+        performSegue(withIdentifier: "map2filter", sender: self)
+    }
 
 }
-
 

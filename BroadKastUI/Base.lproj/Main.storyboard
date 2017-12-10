@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -744,15 +744,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4EV-rj-57h">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4EV-rj-57h">
+                                <rect key="frame" x="0.0" y="20" width="375" height="583"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtD-7h-05N" customClass="PrivacyButton" customModule="BroadKastUI" customModuleProvider="target">
+                                <rect key="frame" x="16" y="611" width="167" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.00092412997040000004" green="0.2225427032" blue="0.29350110889999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Show Private Events">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="PrivateButton:" destination="p4N-N7-PJt" eventType="touchUpInside" id="ok6-Y2-dvf"/>
+                                    <action selector="followButton:" destination="gau-T6-aJo" eventType="touchUpInside" id="jYz-W4-uMX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGF-zA-hgV" customClass="FilterButton" customModule="BroadKastUI" customModuleProvider="target">
+                                <rect key="frame" x="200" y="611" width="159" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.00092412997040000004" green="0.2225427032" blue="0.29350110889999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Edit Filters">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="ActivateFilters:" destination="p4N-N7-PJt" eventType="touchUpInside" id="5Sx-xy-7Fv"/>
+                                    <action selector="followButton:" destination="gau-T6-aJo" eventType="touchUpInside" id="cll-R0-c7T"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4EV-rj-57h" firstAttribute="top" secondItem="wq2-Mi-wSG" secondAttribute="top" id="7iK-Jo-mub"/>
                             <constraint firstItem="4EV-rj-57h" firstAttribute="leading" secondItem="wq2-Mi-wSG" secondAttribute="leading" id="GeK-TR-eeV"/>
-                            <constraint firstItem="4EV-rj-57h" firstAttribute="bottom" secondItem="wq2-Mi-wSG" secondAttribute="bottom" id="QXW-jA-p54"/>
                             <constraint firstItem="4EV-rj-57h" firstAttribute="trailing" secondItem="wq2-Mi-wSG" secondAttribute="trailing" id="gOk-p3-4Nf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wq2-Mi-wSG"/>
@@ -826,7 +859,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wa-C5-BVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3981.5999999999999" y="884.70764617691157"/>
+            <point key="canvasLocation" x="3321" y="960"/>
         </scene>
         <!--Event Details View Controller-->
         <scene sceneID="drZ-CA-iHi">
@@ -837,13 +870,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No Description Available" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzn-sm-KDz">
-                                <rect key="frame" x="20" y="160" width="335" height="487"/>
+                                <rect key="frame" x="20" y="116" width="335" height="531"/>
                                 <color key="backgroundColor" red="0.7930746675" green="0.88495934009999999" blue="0.97664517159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cYA-kw-wk3">
-                                <rect key="frame" x="20" y="84" width="335" height="50.5"/>
+                                <rect key="frame" x="20" y="40" width="335" height="50.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpY-0c-cNB">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="33.5"/>
@@ -1041,7 +1074,8 @@
         <image name="BroadKastBlueLogo1" width="634" height="642"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aRf-Ac-nqE"/>
+        <segue reference="U2b-dy-HXX"/>
+        <segue reference="U5e-I4-TSc"/>
         <segue reference="1qO-yO-kd1"/>
         <segue reference="6TJ-h7-kFF"/>
     </inferredMetricsTieBreakers>

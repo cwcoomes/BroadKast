@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8A681529D7C5F3768907684D /* Pods_BroadKastUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4906F48E33D9D8A7539097 /* Pods_BroadKastUI.framework */; };
+		A66A6D1A1FDD0178009A986B /* PrivacyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A6D191FDD0178009A986B /* PrivacyButton.swift */; };
+		A66A6D1C1FDD078C009A986B /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A6D1B1FDD078C009A986B /* FilterButton.swift */; };
 		A6AE6C5D1F9B42DB0065200A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6AE6C5C1F9B42C50065200A /* CoreLocation.framework */; };
 		A6C3F1BA1FA90920007BE355 /* FilterSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C3F1B91FA90920007BE355 /* FilterSelectionViewController.swift */; };
 		BCCB3BD61F9A03EE007DB995 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCCB3BD51F9A03EE007DB995 /* GoogleService-Info.plist */; };
@@ -34,6 +36,8 @@
 		2C29721BE6682190523A022A /* Pods-BroadKastUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BroadKastUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-BroadKastUI/Pods-BroadKastUI.release.xcconfig"; sourceTree = "<group>"; };
 		3CEB989D2A6FFE0EDAEF1620 /* Pods-BroadKastUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BroadKastUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BroadKastUI/Pods-BroadKastUI.debug.xcconfig"; sourceTree = "<group>"; };
 		3D4906F48E33D9D8A7539097 /* Pods_BroadKastUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BroadKastUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A66A6D191FDD0178009A986B /* PrivacyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyButton.swift; sourceTree = "<group>"; };
+		A66A6D1B1FDD078C009A986B /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		A6AE6C5C1F9B42C50065200A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A6C3F1B91FA90920007BE355 /* FilterSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectionViewController.swift; sourceTree = "<group>"; };
 		BCCB3BD51F9A03EE007DB995 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				DEA014541FB225E000F474B0 /* ContactsViewController.swift */,
 				DE68689E1FD081CA006F2A3E /* MyKastsViewController.swift */,
 				DEA014561FB22A7500F474B0 /* AddViewController.swift */,
+				A66A6D191FDD0178009A986B /* PrivacyButton.swift */,
+				A66A6D1B1FDD078C009A986B /* FilterButton.swift */,
 			);
 			path = BroadKastUI;
 			sourceTree = "<group>";
@@ -282,6 +288,8 @@
 				DE2277A41F9E461B00558EB3 /* MyButton.swift in Sources */,
 				DE78BD601F990EC800127778 /* createViewController.swift in Sources */,
 				DE78BD4C1F990D6F00127778 /* ViewController.swift in Sources */,
+				A66A6D1C1FDD078C009A986B /* FilterButton.swift in Sources */,
+				A66A6D1A1FDD0178009A986B /* PrivacyButton.swift in Sources */,
 				DE1381471FAA5036007BD5EB /* EventDetailsViewController.swift in Sources */,
 				DE78BD641F990F6C00127778 /* MapViewController.swift in Sources */,
 				DE8A3D6D1FD75575004779D5 /* ContactsKastsTableViewController.swift in Sources */,
