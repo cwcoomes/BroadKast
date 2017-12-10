@@ -58,6 +58,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var hangoutFilter : Bool = true
     
     var privacyFilter : Bool?
+    var users = [String]()
     
     @IBOutlet weak var map: MKMapView!
     
@@ -89,6 +90,39 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         manager.stopUpdatingLocation()
       
     }
+    func retrieveContacts()
+    {
+        var dataDict:[String: Any] = [:]
+        let userID = Auth.auth().currentUser!.displayName
+        users.removeAll()
+        
+        Database.database().reference().child("Users").observe(.value, with: { snapshot in
+            self.users.removeAll()
+            if (snapshot.hasChild(userID!))
+            {
+                Database.database().reference().child("Users").child(userID!).child("contacts").observe(.value, with: { snapshot in
+                    if (snapshot.hasChildren())
+                    {
+                        dataDict = snapshot.value as! [String: Any]
+                        dataDict.forEach({ (user) in
+                            self.users.append(user.key)
+                            self.users.sort()
+                            print("user count: \(self.users.count)")
+                        })
+                        
+                        
+                    }
+                   
+                    Database.database().reference().child("Users").child(userID!).child("contacts").removeAllObservers()
+                })
+            }
+//            NotificationCenter.default.post(name: Notification.Name("contactsReady"), object: nil)
+//            print("sending notification")
+            Database.database().reference().child("Users").removeAllObservers()
+            
+        })
+        
+    }
     
     // viewDidLoad function
     override func viewDidLoad()
@@ -108,6 +142,8 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         NotificationCenter.default.addObserver(self, selector: #selector(mapViewController.addAnnotations), name: Notification.Name("weDone"), object: nil)
         
         retrieveDataEvents()
+        retrieveContacts()
+        
         //adding an oberserver to wait until the retrieveDataEvents finishes
         
     }
@@ -285,9 +321,9 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 events.append(temporaryLocation)
                 print("events count: \(events.count)")
             })
-            print("sending notification")
+           //print("sending notification")
             NotificationCenter.default.post(name: Notification.Name("weDone"), object: nil)
-        })
+       })
         
        
        
@@ -364,8 +400,11 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     @IBAction func PrivateButton(_ sender: PrivacyButton) {
+        //so contact list of the current user is stored in the array of strings named users
         
     }
+    
+
     
     @IBAction func ActivateFilters(_ sender: FilterButton) {
         map.removeAnnotations(self.map.annotations)
