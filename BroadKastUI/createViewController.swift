@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseStorage
 import CoreLocation
 import AddressBookUI
 
@@ -85,7 +86,7 @@ struct Kast{
     }
 }
 
-class createViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class createViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var data = Data()
     let rootRef = Database.database().reference()
@@ -96,6 +97,9 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                "Hang Out"]
     var privacy = "Public"
     let imagePick = UIImagePickerController()
+    var lclImage = UIImage()
+    var lclImgURL = NSURL()
+    let storeRef = Storage.storage().reference(withPath: "Pictures")
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
@@ -175,12 +179,29 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        let imageURL = info[UIImagePickerControllerPHAsset] as? NSURL
+        
+        lclImage = chosenImage!
+        lclImgURL = imageURL!
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func createButton(_ sender: Any) {
       
         //Need to do some error checking here
         
         var long: Double = 0.0
         var lat: Double = 0.0
+        let imageName = NSUUID().uuidString
         
         if(locationSelected == false)
         {
@@ -206,11 +227,36 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy, kid: createdId)
                 
                 
-                
-                
-                
                 ref.setValue(kastItem.toAnyObject())
                 
+                let kastStoreRef = self.storeRef.child(createdId)
+                
+                let picRef = kastStoreRef.child("\(imageName).png")
+                
+                let metadata = StorageMetadata()
+                
+                metadata.contentType = "image/png"
+                
+                if let uploadData = UIImagePNGRepresentation(self.lclImage){
+                    
+                    picRef.putData(uploadData, metadata: metadata, completion: {(metadata, error) in
+                        
+                        if let error = error{
+                            print(error)
+                            return
+                        }
+                        
+                        //let imgURL = snapshot.metadata?.downloadURL()?.absoluteString
+                        
+                        /*
+                         if let imageURL = metadata?.downloadURL()?.absoluteString{
+                         let value = ["imageURL": imageURL]
+                         //ref.setValue(value)
+                         }
+                         */
+                    })
+                    
+                }
                 
                 
                 self.navigationController?.popViewController(animated: true)
@@ -229,6 +275,28 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
             
             ref.setValue(kastItem.toAnyObject())
+            
+            let kastStoreRef = self.storeRef.child(createdId)
+            
+            let picRef = kastStoreRef.child("\(imageName).png")
+            
+            if let uploadData = UIImagePNGRepresentation(self.lclImage){
+                
+                picRef.putData(uploadData, metadata: nil, completion: {(metadata, error) in
+                    
+                    if let error = error{
+                        print(error)
+                        return
+                    }
+                    /*
+                     if let imageURL = metadata?.downloadURL()?.absoluteString{
+                     let value = ["imageURL": imageURL]
+                     //ref.setValue(value)
+                     }
+                     */
+                })
+                
+            }
             
             self.navigationController?.popViewController(animated: true)
         }
@@ -250,6 +318,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         city.delegate = self
         zip.delegate = self
         state.delegate = self
+        imagePick.delegate = self
       
         
         //descriptionField.delegate = self
