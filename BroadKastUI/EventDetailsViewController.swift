@@ -11,30 +11,7 @@ import FirebaseDatabase
 import Firebase
 
 
-struct followedKast
-{
-    var kastID: String
-    let ref: DatabaseReference?
-    
-    init(kid:String)
-    {
-        self.kastID = kid
-        self.ref = nil
-    }
-    
-    init(snapshot: DataSnapshot)
-    {
-        kastID = snapshot.key
-        let snapshotValue = snapshot.value as! [String: AnyObject]
-        kastID = snapshotValue["kastID"] as! String
-        ref = snapshot.ref
-    }
-    
-    func toAnyObject() -> Any
-    {
-        return [kastID  : kastID]
-    }
-}
+
 
 class EventDetailsViewController: UIViewController {
    
@@ -53,7 +30,7 @@ class EventDetailsViewController: UIViewController {
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
         var followedList = currentUser.child("followedKasts")
-        var followedKastItem = followedKast(kid: eventToView.kastID)
+        
         
         var flag = false
         
@@ -67,7 +44,7 @@ class EventDetailsViewController: UIViewController {
                
                 //followedList.child(self.eventToView.kastID).removeValue()
                 
-                followedList.child(followedKastItem.kastID).removeValue(completionBlock: { (error, refer) in
+                followedList.child(self.eventToView.kastID).removeValue(completionBlock: { (error, refer) in
                     if error != nil { print(error as Any) }
                     else
                     {
@@ -90,11 +67,11 @@ class EventDetailsViewController: UIViewController {
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
-            if(flag == false)
+            else
             {
                 //if not yet followed
                 let newFriend = followedList.child(self.eventToView.kastID)
-                    newFriend.setValue(followedKastItem.toAnyObject())
+                newFriend.setValue(self.eventToView.kastID)
                 self.pullData()
                 followedList.removeAllObservers()
                 currentUser.removeAllObservers()
@@ -143,19 +120,17 @@ class EventDetailsViewController: UIViewController {
     
     func pullData()
     {
-        NotificationCenter.default.addObserver(self, selector: #selector(EventDetailsViewController.modifyButton), name: Notification.Name("weReady"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(EventDetailsViewController.modifyButton), name: Notification.Name("followArrayComplete"), object: nil)
         
         createArray()
     }
     
-    func createArray()
+    @objc func createArray()
     {
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
         let followedList = currentUser.child("followedKasts")
-        
         kastArray.removeAll()
-        
         followedList.observe(.value, with: {snapshot in
             
             snapshot.children.forEach({ (kastID) in
@@ -164,14 +139,16 @@ class EventDetailsViewController: UIViewController {
                 
                 temp = (kastID as! DataSnapshot).key
                 
-                self.kastArray.append(temp)
+                if(!self.kastArray.contains(temp))
+                {
+                    self.kastArray.append(temp)
+                    
+                }
+                //print("new kast array \(self.kastArray)")
                 
             })
-            followedList.removeAllObservers()
-            print(self.kastArray)
-            print("Sending weReady")
-             NotificationCenter.default.post(name: Notification.Name("weReady"), object: nil)
-            
+            //print("KastArrayAfterCreatingArray \(self.kastArray)")
+            NotificationCenter.default.post(name: Notification.Name("followArrayComplete"), object: nil)
         })
         
     }

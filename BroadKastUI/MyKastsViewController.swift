@@ -21,14 +21,14 @@ class MyKastsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        events.removeAll()
-        followedKasts.removeAll()
-        myKasts.removeAll()
-        kastArray.removeAll()
-        retrieveDataEvents()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(createArray), name: Notification.Name("eventsReady"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(followedKastArray), name: Notification.Name("followsReady"), object: nil)
+//        events.removeAll()
+//        followedKasts.removeAll()
+//        myKasts.removeAll()
+//        kastArray.removeAll()
+//        retrieveDataEvents()
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(createArray), name: Notification.Name("eventsReady"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(followedKastArray), name: Notification.Name("followsReady"), object: nil)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -39,11 +39,13 @@ class MyKastsViewController: UITableViewController {
         events.removeAll()
         followedKasts.removeAll()
         myKasts.removeAll()
+        //print("mykasts upon loading \(myKasts)")
         kastArray.removeAll()
         retrieveDataEvents()
         
         NotificationCenter.default.addObserver(self, selector: #selector(createArray), name: Notification.Name("eventsReady"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(followedKastArray), name: Notification.Name("followsReady"), object: nil)
+         self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -131,6 +133,8 @@ class MyKastsViewController: UITableViewController {
                         temporaryLocation.expiration = item.value as! Double
                     case "privacy":
                         temporaryLocation.privacy = item.value as! String
+                    case "dlURL":
+                        temporaryLocation.dlURL = item.value as! String
                     default:
                         print(item.key + " does not contain anything ERROR")
                     }
@@ -162,15 +166,18 @@ class MyKastsViewController: UITableViewController {
         events.forEach { (kast) in
             if(kast.user == user.displayName!)
             {
-                print("user matched")
+                //print("user matched")
                 myKasts.append(kast)
             }
-            print(kastArray)
+            //print(kastArray)
             kastArray.forEach({ (kid) in
                 if(kid == kast.kastID)
                 {
-                    print("followMatch")
-                    followedKasts.append(kast)
+                    //print("followMatch")
+                    
+                        followedKasts.append(kast)
+                        
+                    
                 }
             })
             
@@ -198,10 +205,15 @@ class MyKastsViewController: UITableViewController {
                 
                 temp = (kastID as! DataSnapshot).key
                 
-                self.kastArray.append(temp)
-                print("new kast array \(self.kastArray)")
+                if(!self.kastArray.contains(temp))
+                {
+                    self.kastArray.append(temp)
+                    
+                }
+                //print("new kast array \(self.kastArray)")
                 
             })
+            //print("KastArrayAfterCreatingArray \(self.kastArray)")
             NotificationCenter.default.post(name: Notification.Name("followsReady"), object: nil)
         })
         
