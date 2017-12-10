@@ -126,7 +126,7 @@
         <!--Landing Table View Controller-->
         <scene sceneID="5im-2W-loZ">
             <objects>
-                <tableViewController id="uZD-W9-gsi" customClass="landingTableViewController" customModule="BroadKastUI" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LandingTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uZD-W9-gsi" customClass="landingTableViewController" customModule="BroadKastUI" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" id="24l-uc-swb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -744,49 +744,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4EV-rj-57h">
-                                <rect key="frame" x="0.0" y="20" width="375" height="583"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4EV-rj-57h">
+                                <rect key="frame" x="0.0" y="64" width="375" height="546"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtD-7h-05N" customClass="PrivacyButton" customModule="BroadKastUI" customModuleProvider="target">
-                                <rect key="frame" x="16" y="611" width="167" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.00092412997040000004" green="0.2225427032" blue="0.29350110889999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Show Private Events">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="PrivateButton:" destination="p4N-N7-PJt" eventType="touchUpInside" id="ok6-Y2-dvf"/>
-                                    <action selector="followButton:" destination="gau-T6-aJo" eventType="touchUpInside" id="jYz-W4-uMX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGF-zA-hgV" customClass="FilterButton" customModule="BroadKastUI" customModuleProvider="target">
-                                <rect key="frame" x="200" y="611" width="159" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.00092412997040000004" green="0.2225427032" blue="0.29350110889999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Edit Filters">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="ActivateFilters:" destination="p4N-N7-PJt" eventType="touchUpInside" id="5Sx-xy-7Fv"/>
-                                    <action selector="followButton:" destination="gau-T6-aJo" eventType="touchUpInside" id="cll-R0-c7T"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="akd-gf-ydb">
+                                <rect key="frame" x="2" y="622" width="371" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtD-7h-05N" customClass="PrivacyButton" customModule="BroadKastUI" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="180.5" height="30"/>
+                                        <color key="backgroundColor" red="0.00092412997040000004" green="0.2225427032" blue="0.29350110889999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Show Private Events">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="PrivateButton:" destination="p4N-N7-PJt" eventType="touchUpInside" id="ok6-Y2-dvf"/>
+                                            <action selector="followButton:" destination="gau-T6-aJo" eventType="touchUpInside" id="jYz-W4-uMX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGF-zA-hgV" customClass="FilterButton" customModule="BroadKastUI" customModuleProvider="target">
+                                        <rect key="frame" x="190.5" y="0.0" width="180.5" height="30"/>
+                                        <color key="backgroundColor" red="0.00092412997040000004" green="0.2225427032" blue="0.29350110889999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Edit Filters">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="ActivateFilters:" destination="p4N-N7-PJt" eventType="touchUpInside" id="5Sx-xy-7Fv"/>
+                                            <action selector="followButton:" destination="gau-T6-aJo" eventType="touchUpInside" id="cll-R0-c7T"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4EV-rj-57h" firstAttribute="top" secondItem="wq2-Mi-wSG" secondAttribute="top" id="7iK-Jo-mub"/>
-                            <constraint firstItem="4EV-rj-57h" firstAttribute="leading" secondItem="wq2-Mi-wSG" secondAttribute="leading" id="GeK-TR-eeV"/>
-                            <constraint firstItem="4EV-rj-57h" firstAttribute="trailing" secondItem="wq2-Mi-wSG" secondAttribute="trailing" id="gOk-p3-4Nf"/>
+                            <constraint firstItem="4EV-rj-57h" firstAttribute="top" secondItem="wq2-Mi-wSG" secondAttribute="top" id="6PY-w4-laX"/>
+                            <constraint firstItem="wq2-Mi-wSG" firstAttribute="bottom" secondItem="akd-gf-ydb" secondAttribute="bottom" constant="15" id="7tq-9I-oOA"/>
+                            <constraint firstItem="akd-gf-ydb" firstAttribute="leading" secondItem="wq2-Mi-wSG" secondAttribute="leading" constant="2" id="8DE-vy-FWh"/>
+                            <constraint firstItem="4EV-rj-57h" firstAttribute="trailing" secondItem="wq2-Mi-wSG" secondAttribute="trailing" id="UWp-1s-dL1"/>
+                            <constraint firstItem="4EV-rj-57h" firstAttribute="leading" secondItem="wq2-Mi-wSG" secondAttribute="leading" id="XTq-ZW-KiO"/>
+                            <constraint firstItem="wq2-Mi-wSG" firstAttribute="trailing" secondItem="akd-gf-ydb" secondAttribute="trailing" constant="2" id="oKr-m6-tga"/>
+                            <constraint firstItem="akd-gf-ydb" firstAttribute="top" secondItem="4EV-rj-57h" secondAttribute="bottom" constant="12" id="ywd-SX-S2J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wq2-Mi-wSG"/>
                     </view>
@@ -878,13 +885,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No Description Available" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzn-sm-KDz">
-                                <rect key="frame" x="20" y="116" width="335" height="531"/>
+                                <rect key="frame" x="20" y="160" width="335" height="487"/>
                                 <color key="backgroundColor" red="0.7930746675" green="0.88495934009999999" blue="0.97664517159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cYA-kw-wk3">
-                                <rect key="frame" x="20" y="40" width="335" height="50.5"/>
+                                <rect key="frame" x="20" y="84" width="335" height="50.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpY-0c-cNB">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="33.5"/>
@@ -1083,7 +1090,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="U5e-I4-TSc"/>
-        <segue reference="1qO-yO-kd1"/>
-        <segue reference="6TJ-h7-kFF"/>
+        <segue reference="4BU-gV-7x0"/>
+        <segue reference="L76-bw-aA8"/>
     </inferredMetricsTieBreakers>
 </document>

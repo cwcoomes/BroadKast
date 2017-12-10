@@ -6,117 +6,91 @@
 //  Copyright © 2017 Ubicomp4. All rights reserved.
 //
 
-/* Cody's TODO 12/10/17:
- 1. Apply button should pop the view from navbar stack
- 2. Filters should change colors when active
- 3. Each filter should have a variable
- 4. Apply button should send those variables back to the map to apply filters
+/* TODO 12/10/17:
+ 1. Filters should change colors when active
  */
 
 import UIKit
 
-
-extension FilterSelectionViewController{
-    //data is passed to MapViewControllerfrom here
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        (viewController as? mapViewController)?.filters = filters
-    }
-}
-
 class FilterSelectionViewController: UIViewController , UINavigationControllerDelegate{
-    var filters = filterInfo()
-    
-    
-    // TODO: This class/view will show selectable filter options for the map.
-    var tag: String?
+   
+    var studyTag: Bool = false
+    var sportTag: Bool = false
+    var foodTag: Bool = false
+    var partyTag: Bool = false
+    var hangoutTag: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.delegate = self
-        
-        print(filters)
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
     @IBAction func studyButton(_ sender: ToggleButton) {
-        if(filters.studyFilter == false)
-        {
-            filters.studyFilter = true
-            
-        }
-        else{
-            filters.studyFilter = false
-        }
-        
+        studyTag = !studyTag
     }
     
     @IBAction func sportButton(_ sender: ToggleButton) {
-        if(filters.sportFilter == false)
-        {
-            filters.sportFilter = true
-            
-        }
-        else{
-            filters.sportFilter = false
-        }
-        print("button pressed")
+        sportTag = !sportTag
     }
     
     @IBAction func foodButton(_ sender: ToggleButton) {
-        if(filters.foodFilter == false)
-        {
-            filters.foodFilter = true
-            
-        }
-        else{
-            filters.foodFilter = false
-        }
+        foodTag = !foodTag
     }
     
     @IBAction func partyButton(_ sender: ToggleButton) {
-        if(filters.partyFilter == false)
-        {
-            filters.partyFilter = true
-            
-        }
-        else{
-            filters.partyFilter = false
-        }
+        partyTag = !partyTag
     }
     
     @IBAction func hangoutButton(_ sender: ToggleButton) {
-        if(filters.hangOutFilter == false)
-        {
-            filters.hangOutFilter = true
-            
-        }
-        else{
-            filters.hangOutFilter = false
-        }
+        hangoutTag = !hangoutTag
     }
     
     @IBAction func applyButton(_ sender: UIButton) {
         performSegue(withIdentifier: "filter2map", sender: self)
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let mapController = segue.destination as! mapViewController
-//        mapController.filterSelection = tag
-//    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let mapvc = segue.destination as! mapViewController
+        
+        if studyTag == true {
+            mapvc.studyFilter = studyTag
+        }
+        else {
+            mapvc.studyFilter = false
+        }
+        
+        if sportTag == true {
+            mapvc.sportFilter = sportTag
+        }
+        else {
+            mapvc.sportFilter = false
+        }
+        
+        if foodTag == true {
+            mapvc.foodFilter = foodTag
+        }
+        else {
+            mapvc.foodFilter = false
+        }
+        
+        if partyTag == true {
+            mapvc.partyFilter = partyTag
+        }
+        else {
+            mapvc.partyFilter = false
+        }
+        
+        if hangoutTag == true {
+            mapvc.hangoutFilter = hangoutTag
+        }
+        else {
+            mapvc.hangoutFilter = false
+        }
+        
+        mapvc.didSelectFilter = true
     }
-    */
-
 }

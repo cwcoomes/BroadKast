@@ -6,12 +6,10 @@
 //  Copyright © 2017 Ubicomp4. All rights reserved.
 //
 
-/* Cody's TODO 12/10/17:
-     1. Back button on navbar should go to the main menu.
-     2. Privacy Button needs functionality
-     3. Should receive filter selections from filter selection view controller and apply them
-     4. Active Filter button should change color when filter is active
-     5. Map UI needs to be adjusted for buttons
+/* TODO 12/10/17:
+     1. Privacy Button needs functionality
+     2. Active Filter button should change color when filter is active
+     3. Map UI needs to be adjusted for buttons
  */
 
 import UIKit
@@ -47,31 +45,18 @@ struct EventData : Codable {
     }
 }
 
-struct filterInfo
-{
-    var studyFilter : Bool
-    var sportFilter : Bool
-    var foodFilter : Bool
-    var partyFilter : Bool
-    var hangOutFilter : Bool
-    var privacyFilter : Bool
-    init()
-    {
-        studyFilter = true
-        sportFilter = true
-        foodFilter = true
-        partyFilter = true
-        hangOutFilter = true
-        privacyFilter = true
-    }
-}
-
 var events = [EventData]()
 
 class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
 {
-    var filters = filterInfo()
-    // Map
+    
+    var studyFilter : Bool = true
+    var sportFilter : Bool = true
+    var foodFilter : Bool = true
+    var partyFilter : Bool = true
+    var hangoutFilter : Bool = true
+    
+    var privacyFilter : Bool?
     
     @IBOutlet weak var map: MKMapView!
     
@@ -97,27 +82,27 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         map.setRegion(region, animated: true)
         
         // Shows blue dot on map
-        self.map.showsUserLocation = true
+        // self.map.showsUserLocation = true
         
         //stop updating location
         manager.stopUpdatingLocation()
       
     }
     
-
     // viewDidLoad function
     override func viewDidLoad()
     {
         super.viewDidLoad()
        
-        /* Filter option in navigation bar
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .done, target: self, action: #selector(selectFilter)) */
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Main Menu", style: .done, target: self, action: #selector(mainMenuButtonTapped))
         
         map.delegate = self
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+        self.map.showsUserLocation = true
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(mapViewController.addAnnotations), name: Notification.Name("weDone"), object: nil)
         
@@ -127,15 +112,13 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        map.removeAnnotations(self.map.annotations)
-        
         addAnnotations()
     }
     
     @objc func selectFilter() {
         didSelectFilter = true
         performSegue(withIdentifier: "map2filter", sender: self)
-       // self.viewDidLoad()
+        self.viewDidLoad()
     }
     
     
@@ -158,7 +141,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             {
                 if (currentTime <= event.expiration )
                 {
-                    if(filters.hangOutFilter && event.KastTag == "Hang Out")
+                    if(hangoutFilter == true && event.KastTag == "Hang Out")
                     {
                         let annotation = MKPointAnnotation()
                         annotation.title = event.title
@@ -169,7 +152,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                                 self.map.addAnnotation(annotation)
                         }
                     }
-                    if(filters.partyFilter && event.KastTag == "Party")
+                    if(partyFilter == true && event.KastTag == "Party")
                     {
                         let annotation = MKPointAnnotation()
                         annotation.title = event.title
@@ -180,7 +163,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                                 self.map.addAnnotation(annotation)
                         }
                     }
-                    if(filters.studyFilter && event.KastTag == "Study")
+                    if(studyFilter == true && event.KastTag == "Study")
                     {
                         let annotation = MKPointAnnotation()
                         annotation.title = event.title
@@ -191,7 +174,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                             self.map.addAnnotation(annotation)
                         }
                     }
-                    if(filters.sportFilter && event.KastTag == "Sport")
+                    if(sportFilter == true && event.KastTag == "Sport")
                     {
                         let annotation = MKPointAnnotation()
                         annotation.title = event.title
@@ -202,7 +185,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                                 self.map.addAnnotation(annotation)
                         }
                     }
-                    if(filters.foodFilter && event.KastTag == "Food")
+                    if(foodFilter == true && event.KastTag == "Food")
                     {
                         let annotation = MKPointAnnotation()
                         annotation.title = event.title
@@ -355,18 +338,34 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         if(segue.identifier == "map2filter")
         {
-            let dvc = segue.destination as! FilterSelectionViewController
-            dvc.filters = filters
+            let filtervc = segue.destination as! FilterSelectionViewController
+            if didSelectFilter == true {
+                filtervc.studyTag = studyFilter
+                filtervc.sportTag = sportFilter
+                filtervc.foodTag = foodFilter
+                filtervc.partyTag = partyFilter
+                filtervc.hangoutTag = hangoutFilter
+            }
+            else {
+                filtervc.studyTag = false
+                filtervc.sportTag = false
+                filtervc.foodTag = false
+                filtervc.partyTag = false
+                filtervc.hangoutTag = false
+            }
         }
     }
     
+    @objc func mainMenuButtonTapped() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
     
     @IBAction func PrivateButton(_ sender: PrivacyButton) {
         
     }
     
     @IBAction func ActivateFilters(_ sender: FilterButton) {
-        didSelectFilter = true
+        map.removeAnnotations(self.map.annotations)
         performSegue(withIdentifier: "map2filter", sender: self)
     }
 
