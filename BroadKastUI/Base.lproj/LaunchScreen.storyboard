@@ -4,7 +4,9 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,15 +20,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BroadKastBlueLogo1" translatesAutoresizingMaskIntoConstraints="NO" id="MLA-iU-Bx2">
-                                <rect key="frame" x="80" y="220" width="215" height="147"/>
+                                <rect key="frame" x="50" y="145" width="275" height="322"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="MLA-iU-Bx2" secondAttribute="height" multiplier="275:322" id="lHW-C6-lrL"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.7930746675" green="0.88495934009999999" blue="0.97664517159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MLA-iU-Bx2" secondAttribute="trailing" constant="80" id="0AF-gw-TzW"/>
-                            <constraint firstItem="MLA-iU-Bx2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="oAV-DL-ytw"/>
-                            <constraint firstItem="MLA-iU-Bx2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="pgb-sB-vio"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MLA-iU-Bx2" secondAttribute="bottom" constant="300" id="sur-Yj-bFN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MLA-iU-Bx2" secondAttribute="trailing" constant="50" id="0AF-gw-TzW"/>
+                            <constraint firstItem="MLA-iU-Bx2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="125" id="oAV-DL-ytw"/>
+                            <constraint firstItem="MLA-iU-Bx2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="pgb-sB-vio"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MLA-iU-Bx2" secondAttribute="bottom" constant="200" id="sur-Yj-bFN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

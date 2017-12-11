@@ -120,7 +120,8 @@ class EventDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        followButtonObject.titleLabel?.minimumScaleFactor = 0.5
+        followButtonObject.titleLabel?.adjustsFontSizeToFitWidth = true
         eventTitle.text = eventToView.title
         eventDescription.text = eventToView.description
         tag.text = eventToView.KastTag
