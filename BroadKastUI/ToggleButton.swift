@@ -12,6 +12,7 @@ class ToggleButton: UIButton {
 
     var toggle = false
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initButton()
@@ -24,6 +25,11 @@ class ToggleButton: UIButton {
     
     func initButton() {
         addTarget(self, action: #selector(ToggleButton.buttonPressed), for: .touchUpInside)
+        let defaultTitle = toggle ? "On" : "Off"
+        let defaultColor = toggle ? UIColor(hex: "00394b") : UIColor.white
+        
+        setTitle(defaultTitle, for: .normal)
+        backgroundColor = defaultColor
     }
     
     @objc func buttonPressed() {
@@ -33,15 +39,34 @@ class ToggleButton: UIButton {
     func activateToggle(bool: Bool) {
         toggle = bool
         
-        // Dummie functionality for testing
         let title = bool ? "On" : "Off"
-        setTitle(title, for: .normal)
+        let color = bool ? UIColor(hex: "00394b") : UIColor.white
         
-        // Actual functionality. Needs to change color if it's true.
-        /*
-        let color = bool ? .blue : .clear
+        setTitle(title, for: .normal)
         backgroundColor = color
-        */
         
     }
 }
+
+extension UIColor {
+    convenience init(hex: String) {
+        let scanner = Scanner(string: hex)
+        scanner.scanLocation = 0
+        
+        var rgbValue: UInt64 = 0
+        
+        scanner.scanHexInt64(&rgbValue)
+        
+        let r = (rgbValue & 0xff0000) >> 16
+        let g = (rgbValue & 0xff00) >> 8
+        let b = rgbValue & 0xff
+        
+        self.init(
+            red: CGFloat(r) / 0xff,
+            green: CGFloat(g) / 0xff,
+            blue: CGFloat(b) / 0xff, alpha: 1
+        )
+    }
+}
+
+

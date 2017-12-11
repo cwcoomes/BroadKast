@@ -6,12 +6,6 @@
 //  Copyright © 2017 Ubicomp4. All rights reserved.
 //
 
-/* TODO 12/10/17:
-     1. Privacy Button needs functionality
-     2. Active Filter button should change color when filter is active
-     3. Map UI needs to be adjusted for buttons
- */
-
 import UIKit
 import MapKit
 import CoreLocation
@@ -64,6 +58,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @IBOutlet weak var map: MKMapView!
     
+    var myLocation: CLLocationCoordinate2D?
     let manager = CLLocationManager()
     var clickedEvent = EventData()
     var didSelectFilter = false
@@ -85,10 +80,14 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // Sets the map region
         map.setRegion(region, animated: true)
         
+        self.map.showsUserLocation = true
+        
         //stop updating location
         manager.stopUpdatingLocation()
       
     }
+    
+    
     func retrieveContacts()
     {
         var dataDict:[String: Any] = [:]
@@ -135,7 +134,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
-        self.map.showsUserLocation = true
+
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(mapViewController.addAnnotations), name: Notification.Name("weDone"), object: nil)
@@ -418,9 +417,6 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             NotificationCenter.default.post(name: Notification.Name("weDone"), object: nil)
        })
         
-       
-       
-        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -493,8 +489,6 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     @IBAction func PrivateButton(_ sender: PrivacyButton) {
-        //so contact list of the current user is stored in the array of strings named users
-        // no idea why you would put that here but k
         map.removeAnnotations(self.map.annotations)
         showPrivate = !showPrivate
         addAnnotations()

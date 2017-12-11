@@ -6,10 +6,6 @@
 //  Copyright © 2017 Ubicomp4. All rights reserved.
 //
 
-/* TODO 12/10/17:
- 1. Filters should change colors when active
- */
-
 import UIKit
 
 class FilterSelectionViewController: UIViewController , UINavigationControllerDelegate{
@@ -19,9 +15,19 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
     var foodTag: Bool = false
     var partyTag: Bool = false
     var hangoutTag: Bool = false
+    var selectedAFilter: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        studyTag = false
+        sportTag = false
+        foodTag = false
+        partyTag = false
+        hangoutTag = false
+        selectedAFilter = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,6 +63,7 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
         let mapvc = segue.destination as! mapViewController
         
         if studyTag == true {
+            selectedAFilter = true
             mapvc.studyFilter = studyTag
         }
         else {
@@ -64,6 +71,7 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
         }
         
         if sportTag == true {
+            selectedAFilter = true
             mapvc.sportFilter = sportTag
         }
         else {
@@ -71,6 +79,7 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
         }
         
         if foodTag == true {
+            selectedAFilter = true
             mapvc.foodFilter = foodTag
         }
         else {
@@ -78,6 +87,7 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
         }
         
         if partyTag == true {
+            selectedAFilter = true
             mapvc.partyFilter = partyTag
         }
         else {
@@ -85,12 +95,17 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
         }
         
         if hangoutTag == true {
+            selectedAFilter = true
             mapvc.hangoutFilter = hangoutTag
         }
         else {
             mapvc.hangoutFilter = false
         }
         
-        mapvc.didSelectFilter = true
+        if selectedAFilter == true {
+            mapvc.didSelectFilter = true
+        } else {
+            mapvc.didSelectFilter = false
+        }
     }
 }

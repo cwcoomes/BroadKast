@@ -816,61 +816,142 @@
         <scene sceneID="XX6-H2-apE">
             <objects>
                 <viewController id="pUG-Hc-6D6" userLabel="Filter Selection View Controller" customClass="FilterSelectionViewController" customModule="BroadKastUI" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sYa-WE-iRl">
+                    <view key="view" tag="20" contentMode="center" id="sYa-WE-iRl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkw-0v-HN2" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
-                                <rect key="frame" x="27" y="95" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Study"/>
-                                <connections>
-                                    <action selector="studyButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="a4q-QJ-yN4"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dux-ps-fvC" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
-                                <rect key="frame" x="27" y="160" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Sport"/>
-                                <connections>
-                                    <action selector="sportButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Mdd-EY-TkY"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Tm-PG-Z33" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
-                                <rect key="frame" x="27" y="215" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Food"/>
-                                <connections>
-                                    <action selector="foodButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="KBR-yj-26l"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSG-4q-55J" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
-                                <rect key="frame" x="27" y="265" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Party"/>
-                                <connections>
-                                    <action selector="partyButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="P5w-09-EDv"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdD-HE-AMU" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
-                                <rect key="frame" x="27" y="327" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Hang Out"/>
-                                <connections>
-                                    <action selector="hangoutButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Ied-fT-kLW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KJ-9j-ZDc">
-                                <rect key="frame" x="128" y="442" width="118" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Apply"/>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalCentering" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="xv7-Mm-teZ" userLabel="Filter Buttons Stack View">
+                                <rect key="frame" x="0.0" y="95" width="414" height="271"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="wVg-Qb-8Xb" userLabel="Study Stack View">
+                                        <rect key="frame" x="92" y="0.0" width="230" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Study Events:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-ze-grc">
+                                                <rect key="frame" x="0.0" y="5" width="105" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkw-0v-HN2" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
+                                                <rect key="frame" x="125" y="0.0" width="105" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="Off">
+                                                    <color key="titleColor" red="0.92461335659999999" green="0.92463499309999997" blue="0.92462331060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="studyButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="a4q-QJ-yN4"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OeT-Pf-kOj" userLabel="Sport Stack View">
+                                        <rect key="frame" x="94" y="60.333333333333343" width="226" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport Events:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKc-YO-kCo">
+                                                <rect key="frame" x="0.0" y="0.0" width="103" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dux-ps-fvC" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
+                                                <rect key="frame" x="123" y="0.0" width="103" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="Off">
+                                                    <color key="titleColor" red="0.92461335659999999" green="0.92463499309999997" blue="0.92462331060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="sportButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Mdd-EY-TkY"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="l5P-lc-yG3" userLabel="Food Stack View">
+                                        <rect key="frame" x="98" y="120.66666666666666" width="218" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Events:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOl-4b-Z5h">
+                                                <rect key="frame" x="0.0" y="0.0" width="99" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Tm-PG-Z33" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
+                                                <rect key="frame" x="119" y="0.0" width="99" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="Off">
+                                                    <color key="titleColor" red="0.92461335659999999" green="0.92463499309999997" blue="0.92462331060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="foodButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="KBR-yj-26l"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="SYl-xM-LTg" userLabel="Party Stack View">
+                                        <rect key="frame" x="96.333333333333329" y="180.66666666666669" width="221.33333333333337" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Party Events:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvp-33-Ngh">
+                                                <rect key="frame" x="0.0" y="0.0" width="100.66666666666667" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSG-4q-55J" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
+                                                <rect key="frame" x="120.66666666666666" y="0.0" width="100.66666666666666" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="Off">
+                                                    <color key="titleColor" red="0.92461335659999999" green="0.92463499309999997" blue="0.92462331060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="partyButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="P5w-09-EDv"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kiw-zf-dO3" userLabel="Hang Out Stack View">
+                                        <rect key="frame" x="49.333333333333343" y="241" width="315.33333333333326" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Hang Out&quot; Events:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmO-nv-qP7">
+                                                <rect key="frame" x="0.0" y="0.0" width="147.66666666666666" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdD-HE-AMU" customClass="ToggleButton" customModule="BroadKastUI" customModuleProvider="target">
+                                                <rect key="frame" x="167.66666666666669" y="0.0" width="147.66666666666669" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="Off">
+                                                    <color key="titleColor" red="0.92461335659999999" green="0.92463499309999997" blue="0.92462331060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="hangoutButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Ied-fT-kLW"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KJ-9j-ZDc">
+                                <rect key="frame" x="37" y="441" width="340" height="30"/>
+                                <color key="backgroundColor" red="0.00092412997040000004" green="0.2225427032" blue="0.29350110889999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Apply">
+                                    <color key="titleColor" red="0.92461335659999999" green="0.92463499309999997" blue="0.92462331060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="applyButton:" destination="pUG-Hc-6D6" eventType="touchUpInside" id="Aec-ay-BnE"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.79307466745376587" green="0.88495934009552002" blue="0.97664517164230347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="92T-2p-3zP" firstAttribute="trailing" secondItem="4KJ-9j-ZDc" secondAttribute="trailing" constant="37" id="1Z4-HK-gqB"/>
+                            <constraint firstItem="4KJ-9j-ZDc" firstAttribute="top" secondItem="xv7-Mm-teZ" secondAttribute="bottom" constant="75" id="4Oj-L3-R1N"/>
+                            <constraint firstItem="92T-2p-3zP" firstAttribute="trailing" secondItem="xv7-Mm-teZ" secondAttribute="trailing" id="Bmy-OW-WIQ"/>
+                            <constraint firstItem="4KJ-9j-ZDc" firstAttribute="top" secondItem="xv7-Mm-teZ" secondAttribute="bottom" constant="75" id="GEN-Qt-TLT"/>
+                            <constraint firstItem="4KJ-9j-ZDc" firstAttribute="leading" secondItem="92T-2p-3zP" secondAttribute="leading" constant="37" id="XdD-Ps-Ssi"/>
+                            <constraint firstItem="xv7-Mm-teZ" firstAttribute="leading" secondItem="92T-2p-3zP" secondAttribute="leading" id="Ztc-MD-uen"/>
+                            <constraint firstItem="92T-2p-3zP" firstAttribute="bottom" secondItem="4KJ-9j-ZDc" secondAttribute="bottom" constant="265" id="bXu-3O-Gpn"/>
+                            <constraint firstItem="xv7-Mm-teZ" firstAttribute="top" secondItem="92T-2p-3zP" secondAttribute="top" constant="75" id="rYi-Dq-Fre"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="92T-2p-3zP"/>
                     </view>
                     <connections>
@@ -879,7 +960,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wa-C5-BVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3320.8000000000002" y="959.37031484257875"/>
+            <point key="canvasLocation" x="3320.289855072464" y="958.69565217391312"/>
         </scene>
         <!--Event Details View Controller-->
         <scene sceneID="drZ-CA-iHi">
@@ -890,7 +971,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No Description Available" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzn-sm-KDz">
-                                <rect key="frame" x="20" y="409" width="374" height="168"/>
+                                <rect key="frame" x="20" y="453" width="374" height="168"/>
                                 <color key="backgroundColor" red="0.7930746675" green="0.88495934009999999" blue="0.97664517159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Bzn-sm-KDz" secondAttribute="height" multiplier="187:84" id="Tex-yh-vgm"/>
@@ -899,7 +980,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cYA-kw-wk3">
-                                <rect key="frame" x="25" y="84" width="364" height="50"/>
+                                <rect key="frame" x="25" y="40" width="364" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpY-0c-cNB">
                                         <rect key="frame" x="0.0" y="0.0" width="364" height="33"/>
@@ -919,13 +1000,13 @@
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GPb-A8-YnQ">
-                                <rect key="frame" x="50" y="163" width="314" height="236"/>
+                                <rect key="frame" x="50" y="119" width="314" height="324"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GPb-A8-YnQ" secondAttribute="height" multiplier="4:3" id="ZdR-Ze-FNp"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tc5-Mi-cZl" customClass="RoundButton" customModule="BroadKastUI" customModuleProvider="target">
-                                <rect key="frame" x="50" y="597" width="314" height="45"/>
+                                <rect key="frame" x="50" y="641" width="314" height="45"/>
                                 <color key="backgroundColor" red="0.00092412997037172318" green="0.22254270315170288" blue="0.2935011088848114" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="tc5-Mi-cZl" secondAttribute="height" multiplier="314:45" id="0LS-61-TJJ"/>
@@ -1119,7 +1200,7 @@
         <image name="BroadKastBlueLogo1" width="634" height="642"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3Hf-82-NQT"/>
+        <segue reference="U5e-I4-TSc"/>
         <segue reference="1qO-yO-kd1"/>
         <segue reference="L76-bw-aA8"/>
     </inferredMetricsTieBreakers>
