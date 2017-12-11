@@ -430,6 +430,10 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             annotationView!.annotation = annotation
         }
         
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
         annotationView?.canShowCallout = true
         annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         
