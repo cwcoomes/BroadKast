@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -239,7 +239,7 @@
                                 <rect key="frame" x="50" y="186" width="314" height="20.666666666666657"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulh-4U-wWk">
-                                        <rect key="frame" x="0.0" y="0.0" width="314" height="20.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="314" height="20.666666666666668"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -253,13 +253,13 @@
                                 <rect key="frame" x="50" y="367" width="314" height="60.666666666666686"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Kasts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Snm-7G-A4d">
-                                        <rect key="frame" x="0.0" y="0.0" width="314" height="20.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="314" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Friends Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xf0-WE-5s6">
-                                        <rect key="frame" x="0.0" y="40.333333333333314" width="314" height="20.333333333333371"/>
+                                        <rect key="frame" x="0.0" y="40.333333333333314" width="314" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -511,7 +511,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tr8-1n-P8h" customClass="RoundButton" customModule="BroadKastUI" customModuleProvider="target">
-                                        <rect key="frame" x="136.66666666666669" y="588" width="141.00000000000006" height="30"/>
+                                        <rect key="frame" x="136.66666666666666" y="588" width="140.99999999999997" height="30"/>
                                         <color key="backgroundColor" red="0.0078431372550000003" green="0.16862745100000001" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="141" id="Yw4-sV-Maj"/>
@@ -533,7 +533,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VqX-cI-Y1J" customClass="RoundButton" customModule="BroadKastUI" customModuleProvider="target">
-                                        <rect key="frame" x="136.66666666666669" y="339" width="141.00000000000006" height="30"/>
+                                        <rect key="frame" x="136.66666666666666" y="339" width="140.99999999999997" height="30"/>
                                         <color key="backgroundColor" red="0.0078431372550000003" green="0.16862745100000001" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="141" id="3zc-bZ-nrs"/>
@@ -561,7 +561,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEd-f6-BLO">
-                                        <rect key="frame" x="22" y="438" width="93" height="20.333333333333371"/>
+                                        <rect key="frame" x="22" y="438" width="93" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -590,7 +590,7 @@
                                         </connections>
                                     </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7Lg-fm-y7g">
-                                        <rect key="frame" x="147.66666666666669" y="514" width="121.00000000000006" height="29"/>
+                                        <rect key="frame" x="147.66666666666666" y="514" width="120.99999999999997" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="121" id="IwR-xf-YU3"/>
                                         </constraints>
@@ -750,7 +750,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4EV-rj-57h">
-                                <rect key="frame" x="0.0" y="64" width="414" height="615"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="659"/>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="akd-gf-ydb">
                                 <rect key="frame" x="2" y="691" width="410" height="30"/>
@@ -1120,7 +1120,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3Hf-82-NQT"/>
-        <segue reference="4BU-gV-7x0"/>
+        <segue reference="1qO-yO-kd1"/>
         <segue reference="L76-bw-aA8"/>
     </inferredMetricsTieBreakers>
 </document>

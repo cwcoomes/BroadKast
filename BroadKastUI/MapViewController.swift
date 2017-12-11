@@ -57,7 +57,9 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var partyFilter : Bool = true
     var hangoutFilter : Bool = true
     
-    var privacyFilter : Bool?
+    // var privacyFilter : Bool = false
+    var showPrivate = false
+    var isFriend: Bool?
     var users = [String]()
     
     @IBOutlet weak var map: MKMapView!
@@ -82,9 +84,6 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         // Sets the map region
         map.setRegion(region, animated: true)
-        
-        // Shows blue dot on map
-        // self.map.showsUserLocation = true
         
         //stop updating location
         manager.stopUpdatingLocation()
@@ -152,13 +151,6 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         addAnnotations()
     }
     
-    @objc func selectFilter() {
-        didSelectFilter = true
-        performSegue(withIdentifier: "map2filter", sender: self)
-        self.viewDidLoad()
-    }
-    
-    
     @objc func addAnnotations()
     {
         print("size of events when adding annotations: \(events.count)")
@@ -172,88 +164,189 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             var currentTime = NSDate().timeIntervalSince1970
             
-
-            // If a filter was selected.
-            if (didSelectFilter == true)
+            
+            if event.privacy == "Public"
             {
-                if (currentTime <= event.expiration )
+                // For a public event, if a filter was selected.
+                if (didSelectFilter == true)
                 {
-                    if(hangoutFilter == true && event.KastTag == "Hang Out")
+                    if (currentTime <= event.expiration )
                     {
-                        let annotation = MKPointAnnotation()
-                        annotation.title = event.title
-                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
-                        
-                        DispatchQueue.main.async
+                        if(hangoutFilter == true && event.KastTag == "Hang Out")
+                        {
+                            let annotation = MKPointAnnotation()
+                            annotation.title = event.title
+                            annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                            
+                            DispatchQueue.main.async
                             {
                                 self.map.addAnnotation(annotation)
+                            }
                         }
-                    }
-                    if(partyFilter == true && event.KastTag == "Party")
-                    {
-                        let annotation = MKPointAnnotation()
-                        annotation.title = event.title
-                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
-                        
-                        DispatchQueue.main.async
+                        if(partyFilter == true && event.KastTag == "Party")
+                        {
+                            let annotation = MKPointAnnotation()
+                            annotation.title = event.title
+                            annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                            
+                            DispatchQueue.main.async
                             {
                                 self.map.addAnnotation(annotation)
+                            }
                         }
-                    }
-                    if(studyFilter == true && event.KastTag == "Study")
-                    {
-                        let annotation = MKPointAnnotation()
-                        annotation.title = event.title
-                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                        if(studyFilter == true && event.KastTag == "Study")
+                        {
+                            let annotation = MKPointAnnotation()
+                            annotation.title = event.title
+                            annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
 
+                            DispatchQueue.main.async
+                            {
+                                self.map.addAnnotation(annotation)
+                            }
+                        }
+                        if(sportFilter == true && event.KastTag == "Sport")
+                        {
+                            let annotation = MKPointAnnotation()
+                            annotation.title = event.title
+                            annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                            
+                            DispatchQueue.main.async
+                            {
+                                self.map.addAnnotation(annotation)
+                            }
+                        }
+                        if(foodFilter == true && event.KastTag == "Food")
+                        {
+                            let annotation = MKPointAnnotation()
+                            annotation.title = event.title
+                            annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                            
+                            DispatchQueue.main.async
+                            {
+                                self.map.addAnnotation(annotation)
+                            }
+                        }
+                    }
+                }
+                // For public event, if no filter was selected.
+                else
+                {
+                    if (currentTime <= event.expiration)
+                    {
+                        
+                        let annotation = MKPointAnnotation()
+                        annotation.title = event.title
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                        
                         DispatchQueue.main.async
                         {
                             self.map.addAnnotation(annotation)
                         }
                     }
-                    if(sportFilter == true && event.KastTag == "Sport")
-                    {
-                        let annotation = MKPointAnnotation()
-                        annotation.title = event.title
-                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
-                        
-                        DispatchQueue.main.async
-                            {
-                                self.map.addAnnotation(annotation)
-                        }
+                }
+            
+            } // End of 'Public Event' statement
+            
+            // If event is "Private"
+            if event.privacy == "Private"
+            {
+                users.forEach
+                { (creator) in
+                    if event.user == creator {
+                        isFriend = true
                     }
-                    if(foodFilter == true && event.KastTag == "Food")
-                    {
-                        let annotation = MKPointAnnotation()
-                        annotation.title = event.title
-                        annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
-                        
-                        DispatchQueue.main.async
-                            {
-                                self.map.addAnnotation(annotation)
-                        }
+                    else {
+                        isFriend = false
                     }
                 }
-            }
                 
-            // If no filter was selected.
-            else
-            {
-                if (currentTime <= event.expiration)
+                if showPrivate == true && isFriend == true
                 {
                     
-                    let annotation = MKPointAnnotation()
-                    annotation.title = event.title
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
-                    
-                    DispatchQueue.main.async
+                    // For a private event, if a filter was selected.
+                    if (didSelectFilter == true)
                     {
-                        self.map.addAnnotation(annotation)
+                        if (currentTime <= event.expiration )
+                        {
+                            if(hangoutFilter == true && event.KastTag == "Hang Out")
+                            {
+                                let annotation = MKPointAnnotation()
+                                annotation.title = event.title
+                                annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                                    
+                                DispatchQueue.main.async
+                                {
+                                    self.map.addAnnotation(annotation)
+                                }
+                            }
+                            if(partyFilter == true && event.KastTag == "Party")
+                            {
+                                let annotation = MKPointAnnotation()
+                                annotation.title = event.title
+                                annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                                    
+                                DispatchQueue.main.async
+                                {
+                                    self.map.addAnnotation(annotation)
+                                }
+                            }
+                            if(studyFilter == true && event.KastTag == "Study")
+                            {
+                                let annotation = MKPointAnnotation()
+                                annotation.title = event.title
+                                annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                                    
+                                DispatchQueue.main.async
+                                {
+                                    self.map.addAnnotation(annotation)
+                                }
+                            }
+                            if(sportFilter == true && event.KastTag == "Sport")
+                            {
+                                let annotation = MKPointAnnotation()
+                                annotation.title = event.title
+                                annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                                    
+                                DispatchQueue.main.async
+                                {
+                                    self.map.addAnnotation(annotation)
+                                }
+                            }
+                            if(foodFilter == true && event.KastTag == "Food")
+                            {
+                                let annotation = MKPointAnnotation()
+                                annotation.title = event.title
+                                annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                                    
+                                DispatchQueue.main.async
+                                {
+                                    self.map.addAnnotation(annotation)
+                                }
+                            }
+                        }
+                    }
+    
+                    // For private event, if no filter was selected.
+                    else
+                    {
+                        if (currentTime <= event.expiration)
+                        {
+                                
+                            let annotation = MKPointAnnotation()
+                            annotation.title = event.title
+                            annotation.coordinate = CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude)
+                                
+                            DispatchQueue.main.async
+                            {
+                                self.map.addAnnotation(annotation)
+                            }
+                        }
                     }
                 }
             }
         }
-        
+                
     }
     // didReceiveMemoryWarning function
     override func didReceiveMemoryWarning()
@@ -401,6 +494,10 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @IBAction func PrivateButton(_ sender: PrivacyButton) {
         //so contact list of the current user is stored in the array of strings named users
+        // no idea why you would put that here but k
+        map.removeAnnotations(self.map.annotations)
+        showPrivate = !showPrivate
+        addAnnotations()
         
     }
     
