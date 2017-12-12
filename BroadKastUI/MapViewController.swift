@@ -51,7 +51,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var partyFilter : Bool = true
     var hangoutFilter : Bool = true
     
-    // var privacyFilter : Bool = false
+    
     var showPrivate = false
     var isFriend: Bool?
     var users = [String]()

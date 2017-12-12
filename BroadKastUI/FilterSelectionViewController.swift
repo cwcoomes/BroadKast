@@ -18,6 +18,7 @@ class FilterSelectionViewController: UIViewController , UINavigationControllerDe
     var selectedAFilter: Bool = false
 
     override func viewDidLoad() {
+        self.navigationItem.title = "Filters"
         super.viewDidLoad()
     }
     
