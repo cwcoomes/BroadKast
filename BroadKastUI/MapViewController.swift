@@ -126,7 +126,7 @@ class mapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad()
     {
         super.viewDidLoad()
-       
+        self.navigationItem.title = "Map"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Main Menu", style: .done, target: self, action: #selector(mainMenuButtonTapped))
         
         map.delegate = self

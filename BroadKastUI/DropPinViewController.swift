@@ -65,7 +65,7 @@ class DropPinViewController: UIViewController, UINavigationControllerDelegate, C
         
         
         self.map.addAnnotation(annot)
-       
+       data.locationSelected = true
         data.lat = annot.coordinate.latitude
         data.long = annot.coordinate.longitude
         

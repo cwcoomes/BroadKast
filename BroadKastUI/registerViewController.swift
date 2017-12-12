@@ -162,6 +162,7 @@ class registerViewController: UIViewController {
         super.viewDidLoad()
         emailField.delegate = self
         passwordField.delegate = self
+        self.navigationItem.title = "Registration"
 
         // Do any additional setup after loading the view.
     }

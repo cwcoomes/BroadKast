@@ -16,7 +16,7 @@ class landingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.title = "Main Menu"
         
         if let user = Auth.auth().currentUser
         {

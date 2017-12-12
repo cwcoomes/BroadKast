@@ -21,6 +21,7 @@ class MyKastsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "My Kasts"
 //        events.removeAll()
 //        followedKasts.removeAll()
 //        myKasts.removeAll()

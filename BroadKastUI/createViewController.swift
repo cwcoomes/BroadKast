@@ -21,6 +21,7 @@ struct Data{
     var city: String
     var zip: String
     var stateCode: String
+    var locationSelected: Bool
     init(){
         long = 50
         lat = 50
@@ -28,6 +29,7 @@ struct Data{
         city = ""
         zip = ""
         stateCode = ""
+        locationSelected = false
     }
 }
 
@@ -112,6 +114,8 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var lclImgData = UIImagePNGRepresentation(UIImage())
     let storeRef = Storage.storage().reference(withPath: "Pictures")
     
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
     @IBOutlet weak var streetAdd2: UITextField!
@@ -309,7 +313,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 picRef.putData(self.lclImgData!, metadata: metadata).observe(.success){(snapshot) in
                     let dlURL = snapshot.metadata?.downloadURL()?.absoluteString
                     
-                    let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: self.data.long, la: self.data.lat, us: (self.user?.uid)!, kt: self.kastTag.text!,ex: interval, pr: self.privacy, kid: createdId, dl: dlURL!)
+                    let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: self.data.long, la: self.data.lat, us: (self.user?.displayName)!, kt: self.kastTag.text!,ex: interval, pr: self.privacy, kid: createdId, dl: dlURL!)
                     
                     ref.setValue(kastItem.toAnyObject())
                 }
@@ -339,10 +343,25 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         state.delegate = self
         //add later
         imagePick.delegate = self
-        
+        self.navigationItem.title = "Create Kast"
+        super.viewDidLoad()        
+
         
         //descriptionField.delegate = self
         // Do any additional setup after loading the view.
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField.tag {
+        case 2...12:
+            scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
+        default:
+            scrollView.setContentOffset(CGPoint(x: 0, y: 300), animated: true)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -351,10 +370,13 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        streetAdd1.text = data.streetAddress
-        city.text = data.city
-        state.text = data.stateCode
-        zip.text = data.zip
+        if(data.locationSelected)
+        {
+            streetAdd1.text = data.streetAddress
+            city.text = data.city
+            state.text = data.stateCode
+            zip.text = data.zip
+        }
     }
     
     
@@ -382,7 +404,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         self.dropDown.isHidden = true
         
     }
-    
+    /*
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField == self.kastTag {
@@ -393,6 +415,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
         
     }
+ */
     
     
     /*
