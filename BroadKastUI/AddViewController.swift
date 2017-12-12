@@ -45,44 +45,54 @@ class AddViewController: UIViewController {
         let user = Auth.auth().currentUser!
         let currentUser = self.userRef.child(user.displayName!)
         let contactList = currentUser.child("contacts")
-        let contactItem = contact(cn: self.friendsUsernameField.text!)
         
-        contactList.observe(.value, with: { snapshot in
-            if snapshot.hasChild(contactItem.contactName)
-            {
-                let alert = UIAlertController(title: "You're Already Friends! " , message: "Username is currently in your list of friends.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-            else if (contactItem.contactName == user.displayName)
-            {
-                let alert = UIAlertController(title: "Oh no! " , message: "You cannot add yourself.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-            else
-            {
-                self.userRef.observe(.value, with: { snapshot in
-                    if snapshot.hasChild(contactItem.contactName)
-                    {
-                        let newFriend = contactList.child(contactItem.contactName)
-                        newFriend.setValue(contactItem.toAnyObject())
-                        let alert = UIAlertController(title: "Added Friend" , message: "\(contactItem.contactName) has been added successfully!", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                    else
-                    {
-                        let alert = UIAlertController(title: "Adding Friend Failed " , message: "Username does not exist in the database.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                })
-            }
-
-        })
+        if (friendsUsernameField.text?.isEmpty)!
+        {
+            let alert = UIAlertController(title: "Username Field Blank" , message: "Please enter a username", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            let contactItem = contact(cn: self.friendsUsernameField.text!)
+            
+            contactList.observe(.value, with: { snapshot in
+                if snapshot.hasChild(contactItem.contactName)
+                {
+                    let alert = UIAlertController(title: "You're Already Friends! " , message: "Username is currently in your list of friends.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else if (contactItem.contactName == user.displayName)
+                {
+                    let alert = UIAlertController(title: "Oh no! " , message: "You cannot add yourself.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else
+                {
+                    self.userRef.observe(.value, with: { snapshot in
+                        if snapshot.hasChild(contactItem.contactName)
+                        {
+                            let newFriend = contactList.child(contactItem.contactName)
+                            newFriend.setValue(contactItem.toAnyObject())
+                            let alert = UIAlertController(title: "Added Friend" , message: "\(contactItem.contactName) has been added successfully!", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        else
+                        {
+                            let alert = UIAlertController(title: "Adding Friend Failed " , message: "Username does not exist in the database.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    })
+                }
+                
+            })
+            
+            self.navigationController?.popViewController(animated: true)
+        }
         
-        self.navigationController?.popViewController(animated: true)
     }
 
 

@@ -318,7 +318,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                     ref.setValue(kastItem.toAnyObject())
                 }
             }else{
-                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy, kid: createdId, dl: "")
+                let kastItem = Kast(t: self.titleField.text!, d: self.descriptionField.text!, lo: long, la: lat, us: (self.user?.displayName)!, kt: self.kastTag.text!, ex: interval, pr: self.privacy, kid: createdId, dl: "gs://broadkast-a88bb.appspot.com/Pictures/2000px-No_image_available.svg.png")
                 ref.setValue(kastItem.toAnyObject())
             }
             self.navigationController?.popViewController(animated: true)
@@ -356,7 +356,7 @@ class createViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         case 2...12:
             scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
         default:
-            scrollView.setContentOffset(CGPoint(x: 0, y: 300), animated: true)
+            scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
         }
     }
     

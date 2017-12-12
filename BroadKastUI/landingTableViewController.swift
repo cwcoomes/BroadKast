@@ -71,7 +71,7 @@ class landingTableViewController: UITableViewController {
         cell.delegate = self
         
         switch indexPath.row {
-        case 0, 1, 2, 3:
+        case 3:
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         default:
             break
@@ -197,12 +197,6 @@ extension landingTableViewController : SwipeTableViewCellDelegate {
         FavoriteButton.backgroundColor = #colorLiteral(red: 0, green: 0.2240427732, blue: 0.2944218516, alpha: 1)
         
         switch indexPath.row {
-        case 0:
-            return [QuickMapButton]
-        case 1:
-            return [RecentButton]
-        case 2:
-            return [FilterButton]
         case 3:
             return [AddFriendsButton]
         case 4:

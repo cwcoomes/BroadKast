@@ -127,7 +127,9 @@ class EventDetailsViewController: UIViewController {
         tag.text = eventToView.KastTag
         writeToImgView()
         //pull followed kasts
-        
+        if(Auth.auth().currentUser!.displayName == eventToView.user){
+            followButtonObject.isHidden = true
+        }
         
        pullData()
         
